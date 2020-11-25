@@ -9,7 +9,11 @@ Enzyme.configure({ adapter: new Adapter() });
 const setup = () => shallow(<Layout/>);
 
 describe('Layout.js', ()=>{
-    test('The Layout component is rendered.', ()=>{
+    test('The Layout component rendered renders without error.', ()=>{
+        const wrapper = setup();
+        expect(wrapper.length).toBe(1);
+    });
+    test('The overview text is rendered.', ()=>{
         const wrapper = setup();
         const component = findByTestAttr(wrapper, 'layout-overview');
         expect(component.length).toBe(1);
