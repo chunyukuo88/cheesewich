@@ -11,16 +11,10 @@ class Ingredient extends Component {
 };
 
 export const _buildIngredientDisplay = (ingredient) => {
-    if (ingredient === 'bread-top')
-        return (
-            <div className={classes[ingredient]}>
-                <div className={classes.seeds1}></div>
-                <div className={classes.seeds2}></div>
-            </div>
-        );
     if (ingredient) return <div className={classes[ingredient]}></div>;
     return null;
 }
+
 
 Ingredient.propTypes = {
     type: PropTypes.string.isRequired
