@@ -14,6 +14,4 @@ const Cheesewich = props => {
     );
 };
 
-
-
 export default Cheesewich;
