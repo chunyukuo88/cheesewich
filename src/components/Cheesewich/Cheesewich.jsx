@@ -1,10 +1,13 @@
 import React from 'react';
 import classes from './Cheesewich.css';
 import Ingredient from '../Cheesewich/Ingredients/Ingredients.jsx';
-import { OptionalIngredients } from './OptionalIngredients';
+import { OptionalIngredients, checkForIngredients, reduceIngredients } from './OptionalIngredients';
 
 const Cheesewich = props => {
-    const transformedIngredients = OptionalIngredients(props.ingredients);
+    let transformedIngredients = OptionalIngredients(props.ingredients);
+    const reducedIngredients = reduceIngredients(transformedIngredients);
+    transformedIngredients = checkForIngredients(reducedIngredients, transformedIngredients);
+
     return (
         <div className={classes.Cheesewich}>
             <Ingredient type="bread-top"/>

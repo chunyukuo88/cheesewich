@@ -12,3 +12,15 @@ export const _buildArrayOfSingleIngredient = (ingredients, key) => {
 };
 
 export const _buildIngredient = (key, i) => <Ingredient key={key + i} type={key}/>;
+
+export const checkForIngredients = (ingredientsArray, ingredients) => {
+    if(ingredientsArray.length === 0)
+        ingredients = <div>Start adding the good stuff!</div>;
+    return ingredients;
+}
+
+export const reduceIngredients = (ingredients) => {
+    return ingredients.reduce((array, element)=>{
+        return array.concat(element);
+    }, []);
+};
