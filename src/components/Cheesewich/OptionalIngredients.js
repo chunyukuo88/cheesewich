@@ -1,26 +1,24 @@
 import React from 'react';
 import Ingredient from './Ingredients/Ingredients.jsx';
 
-const OptionalIngredients = (ingredientsObject) => {
-    console.log('OptionalIngredients()');
-    return Object.keys(ingredientsObject)
+export const OptionalIngredients = (ingredientsObject) => {
+    const result = Object.keys(ingredientsObject)
         .map(ingredientKey => {
-            return _getIngredientsPerQuantity(ingredientsObject, ingredientKey);
+            return _buildArrayOfSingleIngredient(ingredientsObject, ingredientKey);
         });
-};
-
-export const _getIngredientsPerQuantity = (ingredients, key) => {
-    console.log('_getIngredientsPerQuantity()');
-    return [...Array(ingredients[key])]
-        .map((_, i) => {
-            return _buildIngredients(key, i);
-        });
-};
-
-export const _buildIngredients = (key, i) => {
-    const result = <Ingredient key={key + i} type={key}/>;
-    console.log('result', result);
+    console.log('result: ', result);
     return result;
-}
+};
 
-export default OptionalIngredients;
+export const _buildArrayOfSingleIngredient = (ingredients, key) => {
+    const result = [...Array(ingredients[key])]
+        .map((_, i) => {
+            return _buildIngredient(key, i);
+        });
+    return result;
+};
+
+export const _buildIngredient = (key, i) => {
+    const result = <Ingredient key={key + i} type={key}/>;
+    return result;
+};

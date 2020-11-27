@@ -5,9 +5,9 @@ import Cheesewich from '../../components/Cheesewich/Cheesewich.jsx';
 class CheesewichBuilder extends Component {
     state = {
         ingredients: {
-            bacon: 0,
+            bacon: 1,
             cheese: 0,
-            meat: 0,
+            meat: 3,
             salad: 0,
         },
     };

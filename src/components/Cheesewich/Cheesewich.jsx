@@ -1,7 +1,7 @@
 import React from 'react';
 import classes from './Cheesewich.css';
 import Ingredient from '../Cheesewich/Ingredients/Ingredients.jsx';
-import OptionalIngredients from './OptionalIngredients';
+import { OptionalIngredients } from './OptionalIngredients';
 
 const Cheesewich = (props) => {
     const transformedIngredients = OptionalIngredients(props.ingredients);
