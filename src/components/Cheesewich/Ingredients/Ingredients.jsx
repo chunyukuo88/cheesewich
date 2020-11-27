@@ -4,30 +4,23 @@ import PropTypes from 'prop-types';
 
 class Ingredient extends Component {
     render() {
-        let ingredient = null;
-        switch (this.props.type) {
-            case ('bread-bottom'): ingredient = BreadBottom(); break;
-            case ('bread-top'): ingredient = BreadTop(); break;
-            case ('meat'): ingredient = Meat(); break;
-            case ('cheese'): ingredient = Cheese(); break;
-            case ('salad'): ingredient = Salad(); break;
-            default: ingredient = null;
-        }
+        console.log(this.props.type);
+        const ingredient = _buildIngredientDisplay(this.props.type);
         return ingredient;
     }
 };
 
-const BreadTop = () => (
-    <div className={classes.BreadTop}>
-        <div className={classes.Seeds1}></div>
-        <div className={classes.Seeds2}></div>
-    </div>
-);   
-
-const Meat = () => <div className={classes.Meat}></div>;
-const BreadBottom = () => <div className={classes.BreadBottom}></div>
-const Cheese = () => <div className={classes.Cheese}></div>;
-const Salad = () => <div className={classes.Salad}></div>;
+export const _buildIngredientDisplay = (ingredient) => {
+    if (ingredient === 'bread-top')
+        return (
+            <div className={classes[ingredient]}>
+                <div className={classes.seeds1}></div>
+                <div className={classes.seeds2}></div>
+            </div>
+        );
+    if (ingredient) return <div className={classes[ingredient]}></div>;
+    return null;
+}
 
 Ingredient.propTypes = {
     type: PropTypes.string.isRequired
