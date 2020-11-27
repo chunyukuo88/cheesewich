@@ -4,20 +4,17 @@ import PropTypes from 'prop-types';
 
 class Ingredient extends Component {
     render() {
-        console.log(this.props.type);
-        const ingredient = _buildIngredientDisplay(this.props.type);
-        return ingredient;
+        return _buildIngredientDisplay(this.props.type);
     }
 };
 
 export const _buildIngredientDisplay = (ingredient) => {
-    if (ingredient) return <div className={classes[ingredient]}></div>;
-    return null;
+    return (ingredient) 
+        ? <div data-test="ingredient" 
+               className={classes[ingredient]}/> 
+        : null;
 }
 
-
-Ingredient.propTypes = {
-    type: PropTypes.string.isRequired
-};
+Ingredient.propTypes = { type: PropTypes.string.isRequired };
 
 export default Ingredient;
