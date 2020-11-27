@@ -2,7 +2,7 @@ import React from 'react';
 import Aux from '../../hoc/auxilliary';
 import classes from './Layout.css';
 
-const Layout = (props) => (
+const Layout = props => (
     <Aux>
         <div data-test="layout-overview">
             Toolbar, Sidebar, Backdrop

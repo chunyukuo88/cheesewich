@@ -3,7 +3,7 @@ import classes from './Cheesewich.css';
 import Ingredient from '../Cheesewich/Ingredients/Ingredients.jsx';
 import { OptionalIngredients } from './OptionalIngredients';
 
-const Cheesewich = (props) => {
+const Cheesewich = props => {
     const transformedIngredients = OptionalIngredients(props.ingredients);
     return (
         <div className={classes.Cheesewich}>
