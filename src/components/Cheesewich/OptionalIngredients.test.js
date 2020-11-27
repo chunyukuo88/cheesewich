@@ -39,4 +39,40 @@ describe('OptionalIngredients.js', ()=>{
             })
         });
     });
+    describe('checkForIngredients()', ()=>{
+        describe('WHEN: Given an empty ingredientsArray and an ingredients variable,', ()=>{
+            test('THEN: It sets the ingredients variable to the call-to-action string.', ()=>{
+                const ingredientsArray = [];
+                let ingredients;
+                const result = OI.checkForIngredients(ingredientsArray, ingredients);
+                const expectedResult = <div>Start adding the good stuff!</div>;
+                expect(result).toEqual(expectedResult);
+            })
+        });
+        describe('WHEN: Given an non-empty ingredientsArray and an ingredients variable,', ()=>{
+            test('THEN: It sets the ingredients variable to the call-to-action string.', ()=>{
+                const ingredientsArray = [['test', 'test']];
+                let ingredients = 'test';
+                const result = OI.checkForIngredients(ingredientsArray, ingredients);
+                expect(result).toEqual(ingredients);
+            })
+        });
+    });
+    describe('reduceIngredients()', ()=>{
+        describe('WHEN: Given an empty ingredientsArray,', ()=>{
+            test('THEN: It returns an empty array.', ()=>{
+                const ingredientsArray = [];
+                const result = OI.reduceIngredients(ingredientsArray);
+                expect(result).toEqual(ingredientsArray);
+            });
+        });
+        describe('WHEN: Given a non-empty ingredientsArray,', ()=>{
+            test('THEN: It returns a single, one-dimensional array of all ingredients.', ()=>{
+                const ingredientsArray = [['foo', 'foo'], ['bar', 'bar']];
+                const result = OI.reduceIngredients(ingredientsArray);
+                const expectedResult = ['foo', 'foo', 'bar', 'bar'];
+                expect(result).toEqual(expectedResult);
+            });
+        });
+    });
 });

@@ -5,8 +5,8 @@ import { OptionalIngredients, checkForIngredients, reduceIngredients } from './O
 
 const Cheesewich = props => {
     let transformedIngredients = OptionalIngredients(props.ingredients);
-    const reducedIngredients = reduceIngredients(transformedIngredients);
-    transformedIngredients = checkForIngredients(reducedIngredients, transformedIngredients);
+    const reduced = reduceIngredients(transformedIngredients);
+    transformedIngredients = checkForIngredients(reduced, transformedIngredients);
 
     return (
         <div className={classes.Cheesewich}>
