@@ -15,7 +15,7 @@ class CheesewichBuilder extends Component {
     render(){
         return (
             <Aux>
-                <Cheesewich />
+                <Cheesewich ingredients={this.state.ingredients} />
                 <div>Control Panel</div>
             </Aux>
         );
