@@ -19,9 +19,9 @@ describe('Ingredient.jsx', ()=>{
     describe('_buildIngredientDisplay()', ()=>{
         describe('WHEN: given a valid (string) prop, ', ()=>{
         test('THEN: It returns an ingredient corresponding to that string.', ()=>{
-            //TODO: mock out the _buildIngredientDisplay function.
-            const wrapper = shallow(<Ingredient {...props}/>);
-            expect(wrapper.hasClass('cheese')).toBe(true);
+            const wrapper = render(<Ingredient {...props}/>);
+            const cheese = <div className="cheese"/>;
+            expect(wrapper).toEqual(cheese);
         });
     });
 });

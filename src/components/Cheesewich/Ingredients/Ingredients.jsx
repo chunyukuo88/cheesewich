@@ -10,8 +10,7 @@ class Ingredient extends Component {
 
 export const _buildIngredientDisplay = (ingredient) => {
     return (ingredient) 
-        ? <div data-test="ingredient" 
-               className={classes[ingredient]}/> 
+        ? <div className={classes[ingredient]}/> 
         : null;
 }
 

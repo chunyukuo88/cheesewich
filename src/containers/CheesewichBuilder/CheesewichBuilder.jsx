@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Aux from '../../hoc/auxilliary';
 import Cheesewich from '../../components/Cheesewich/Cheesewich.jsx';
+import UserControls from '../../components/Cheesewich/UserControls/UserControls.jsx';
+
 
 class CheesewichBuilder extends Component {
     state = {
@@ -16,7 +18,7 @@ class CheesewichBuilder extends Component {
         return (
             <Aux>
                 <Cheesewich ingredients={this.state.ingredients} />
-                <div>Control Panel</div>
+                <UserControls {...this.state.ingredients} />
             </Aux>
         );
     }
