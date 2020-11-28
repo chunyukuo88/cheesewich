@@ -39,6 +39,7 @@ class CheesewichBuilder extends Component {
 
     removeIngredient = (type) => {
         const oldCount = this.state.ingredients[type];
+        if (oldCount === 0) return;
         const updatedCount = oldCount - 1;
         const updatedIngredients = {
             ...this.state.ingredients
@@ -54,10 +55,16 @@ class CheesewichBuilder extends Component {
     };
 
     render(){
+        const disabledInfo = {...this.state.ingredients};
+        for (let key in disabledInfo) {
+            disabledInfo[key] = disabledInfo[key] <= 0;
+        }
         return (
             <Aux>
                 <Cheesewich ingredients={this.state.ingredients} />
-                <UserControls addIngredient={this.addIngredient} removeIngredient={this.removeIngredient}/>
+                <UserControls addIngredient={this.addIngredient} 
+                              removeIngredient={this.removeIngredient}
+                              disabled={disabledInfo}/>
             </Aux>
         );
     }

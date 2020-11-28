@@ -16,9 +16,10 @@ const UserControls = (props) => {
         <div className={classes['user-control']}>
             {ingredients.map(ingredient => (
                 <QuantityAdjuster key={ingredient.label} 
-                             label={ingredient.label} 
-                             added={()=> props.addIngredient(ingredient.type)}
-                             removed={()=> props.removeIngredient(ingredient.type)}/>
+                                  label={ingredient.label} 
+                                  added={()=> props.addIngredient(ingredient.type)}
+                                  removed={()=> props.removeIngredient(ingredient.type)}
+                                  disabled={props.disabled[ingredient.type]}/>
             ))}
         </div>
     );
