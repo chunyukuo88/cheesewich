@@ -14,7 +14,7 @@ class CheesewichBuilder extends Component {
     state = {
         ingredients: {
             bacon: 0,
-            cheese: 1,
+            cheese: 0,
             meat: 0,
             salad: 0,
         },
@@ -36,6 +36,7 @@ class CheesewichBuilder extends Component {
             totalPrice: newPrice
         });    
     };
+
     removeIngredient = (type) => {
         const oldCount = this.state.ingredients[type];
         const updatedCount = oldCount - 1;
@@ -56,8 +57,7 @@ class CheesewichBuilder extends Component {
         return (
             <Aux>
                 <Cheesewich ingredients={this.state.ingredients} />
-                <UserControls addIngredient={this.addIngredient} />
-                <UserControls removeIngredient={this.removeIngredient} />
+                <UserControls addIngredient={this.addIngredient} removeIngredient={this.removeIngredient}/>
             </Aux>
         );
     }
