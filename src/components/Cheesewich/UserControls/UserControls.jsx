@@ -12,7 +12,9 @@ const ingredients = [
 const UserControls = (props) => (
     <div className={classes['user-control']}>
         {ingredients.map(ingredient => (
-            <Incrementor key={ingredient.label} label={ingredient.label} />
+            <Incrementor key={ingredient.label} 
+                         label={ingredient.label} 
+                         added={()=> props.addIngredient(ingredient.type)}/>
         ))}
     </div>
 );

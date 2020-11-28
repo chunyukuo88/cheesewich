@@ -4,14 +4,14 @@
     width: 80px;
 }
 
-.user-control {
+.user_control {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin: 5px 0;
 }
 
-.user-control button {
+.user_control button {
     display: block;
     font: inherit;
     padding: 5px;
@@ -22,36 +22,36 @@
     outline: none;
 }
 
-.user-control button:disabled {
+.user_control button:disabled {
     background-color: #AC9980;
     border: 1px solid #7E7365;
     color: #ccc;
     cursor: default;
 }
 
-.user-control button:hover:disabled {
+.user_control button:hover:disabled {
     background-color: #AC9980;
     color: #ccc;
     cursor: not-allowed;
 }
 
 
-.user-control .less {  
+.user_control .less {  
     background-color: #D39952;
     color: white;
 }
 
-.user-control .more {
+.user_control .more {
     background-color: #8F5E1E;
     color: white;
 }
 
-.user-control .less:hover, .user-control .less:active {  
+.user_control .less:hover, .user_control .less:active {  
     background-color: #DAA972;
     color: white;
 }
 
-.user-control .more:hover,.user-control .more:active {
+.user_control .more:hover,.user_control .more:active {
     background-color: #99703F;
     color: white;
 }
