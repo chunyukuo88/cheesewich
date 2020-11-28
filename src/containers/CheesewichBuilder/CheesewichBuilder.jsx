@@ -32,7 +32,7 @@ class CheesewichBuilder extends Component {
                               removeIngredient={this.removeIngredient}
                               disabled={disabledInfo}
                               price={this.state.totalPrice}
-                              userCanOrder={this.state.userCanOrder}/>
+                              purchasable={this.state.userCanOrder}/>
             </Aux>
         );
     }
