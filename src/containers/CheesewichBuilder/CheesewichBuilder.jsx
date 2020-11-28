@@ -34,15 +34,30 @@ class CheesewichBuilder extends Component {
         this.setState({
             ingredients: updatedIngredients,
             totalPrice: newPrice
-        })        
+        });    
     };
-    removeIngredient = (type) => {};
+    removeIngredient = (type) => {
+        const oldCount = this.state.ingredients[type];
+        const updatedCount = oldCount - 1;
+        const updatedIngredients = {
+            ...this.state.ingredients
+        };
+        updatedIngredients[type] = updatedCount;
+        const subtractionFromTotalPrice = INGREDIENT_PRICES[type];
+        const oldPrice = this.state.totalPrice;
+        const newPrice = oldPrice + subtractionFromTotalPrice;
+        this.setState({
+            ingredients: updatedIngredients,
+            totalPrice: newPrice
+        });
+    };
 
     render(){
         return (
             <Aux>
                 <Cheesewich ingredients={this.state.ingredients} />
                 <UserControls addIngredient={this.addIngredient} />
+                <UserControls removeIngredient={this.removeIngredient} />
             </Aux>
         );
     }
