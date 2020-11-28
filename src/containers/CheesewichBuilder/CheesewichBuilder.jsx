@@ -55,10 +55,7 @@ class CheesewichBuilder extends Component {
     };
 
     render(){
-        const disabledInfo = {...this.state.ingredients};
-        for (let key in disabledInfo) {
-            disabledInfo[key] = disabledInfo[key] <= 0;
-        }
+        const disabledInfo = produceDisabledInfoObject(this.state.ingredients);
         return (
             <Aux>
                 <Cheesewich ingredients={this.state.ingredients} />
@@ -68,6 +65,14 @@ class CheesewichBuilder extends Component {
             </Aux>
         );
     }
+}
+
+const produceDisabledInfoObject = (ingredientQuantityObject) => {
+    const disabledInfo = {...ingredientQuantityObject};
+    for (const key in disabledInfo) {
+        disabledInfo[key] = disabledInfo[key] <= 0;
+    }
+    return disabledInfo;
 }
 
 export default CheesewichBuilder;
