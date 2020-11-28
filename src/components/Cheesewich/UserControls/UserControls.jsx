@@ -14,7 +14,7 @@ const UserControls = props => (
         <p>Current price: {props.price.toFixed(2)}</p>
         {_getIngredientsDisplay(props, ingredients)}
         <button className={classes['order-button']}
-                disabled={!props.purchasable}>Place order!</button>
+                disabled={!props.userCanOrder}>Place order!</button>
     </div>
 );
 
@@ -24,8 +24,7 @@ const _getIngredientsDisplay = (props, ingredients) => {
                           label={ingredient.label} 
                           added={()=> props.addIngredient(ingredient.type)}
                           removed={()=> props.removeIngredient(ingredient.type)}
-                          disabled={props.disabled[ingredient.type]}
-                          />
+                          disabled={props.disabled[ingredient.type]}/>
         ));
 };
 
