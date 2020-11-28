@@ -40,22 +40,26 @@ export const removalFn = (stateObject, type) => {
 
 export const produceDisabledInfoObject = ingredientQuantityObject => {
     const disabledInfo = {...ingredientQuantityObject};
-    for (const key in disabledInfo) {
-        disabledInfo[key] = disabledInfo[key] <= 0;
-    }
+    _replaceQuantitiesWithBooleans(disabledInfo);
     return disabledInfo;
 };
 
+export const _replaceQuantitiesWithBooleans = ingredientsObject => {
+    for (const key in ingredientsObject) {
+        ingredientsObject[key] = ingredientsObject[key] <= 0;
+    };
+};
+
 export const orderButtonIsDisabled = ingredientQuantityObject => {
-    const ingredients = {
-        ...ingredientQuantityObject
-    }
-    const totalIngredients = Object.keys(ingredients)
-        .map(key => {
-            return ingredients[key];
-        })
-        .reduce((sum, element) => {
-            return sum + element
-        }, 0);
+    const ingredients = { ...ingredientQuantityObject };
+    const totalIngredients = _produceQuantityOfAllIngredients(ingredients);
     return totalIngredients === 0;
 };
+
+export const _produceQuantityOfAllIngredients = ingredientsObject => {
+    return Object.keys(ingredientsObject)
+            .map(key => ingredientsObject[key])
+            .reduce((sum, element) => {
+                return sum + element;
+            }, 0);
+}
