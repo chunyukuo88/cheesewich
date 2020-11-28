@@ -18,7 +18,7 @@ class CheesewichBuilder extends Component {
         return (
             <Aux>
                 <Cheesewich ingredients={this.state.ingredients} />
-                <UserControls {...this.state.ingredients} />
+                <UserControls />
             </Aux>
         );
     }
