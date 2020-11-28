@@ -19,7 +19,7 @@ export const checkForIngredients = (ingredientsArray, ingredients) => {
     return ingredients;
 }
 
-export const reduceIngredients = (ingredients) => {
+export const reduceIngredients = ingredients => {
     return ingredients.reduce((array, element)=>{
         return array.concat(element);
     }, []);

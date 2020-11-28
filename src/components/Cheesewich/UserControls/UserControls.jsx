@@ -6,14 +6,15 @@ const ingredients = [
     { label: 'Shallots', type: 'shallots'},
     { label: 'Bacon', type: 'bacon'},
     { label: 'Cheese', type: 'cheese'},
-    { label: 'Meat', type: 'meat'},
+    { label: 'Mustard', type: 'mustard'},
 ];
 
-const UserControls = (props) => (
+const UserControls = props => (
     <div className={classes['user-control']}>
         <p>Current price: {props.price.toFixed(2)}</p>
         {_getIngredientsDisplay(props, ingredients)}
-        <button className={classes['order-button']}>Place order!</button>
+        <button className={classes['order-button']}
+                disabled={!props.purchasable}>Place order!</button>
     </div>
 );
 
@@ -23,7 +24,8 @@ const _getIngredientsDisplay = (props, ingredients) => {
                           label={ingredient.label} 
                           added={()=> props.addIngredient(ingredient.type)}
                           removed={()=> props.removeIngredient(ingredient.type)}
-                          disabled={props.disabled[ingredient.type]}/>
+                          disabled={props.disabled[ingredient.type]}
+                          />
         ));
 };
 

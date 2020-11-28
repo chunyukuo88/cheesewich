@@ -38,10 +38,24 @@ export const removalFn = (stateObject, type) => {
     };
 };
 
-export const produceDisabledInfoObject = (ingredientQuantityObject) => {
+export const produceDisabledInfoObject = ingredientQuantityObject => {
     const disabledInfo = {...ingredientQuantityObject};
     for (const key in disabledInfo) {
         disabledInfo[key] = disabledInfo[key] <= 0;
     }
     return disabledInfo;
-}
+};
+
+export const orderButtonIsDisabled = ingredientQuantityObject => {
+    const ingredients = {
+        ...ingredientQuantityObject
+    }
+    const totalIngredients = Object.keys(ingredients)
+        .map(key => {
+            return ingredients[key];
+        })
+        .reduce((sum, element) => {
+            return sum + element
+        }, 0);
+    return totalIngredients === 0;
+};

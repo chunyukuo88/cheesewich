@@ -1,29 +1,41 @@
 import React, { Component } from 'react';
 import Aux from '../../hoc/auxilliary';
-import { additionFn, removalFn, produceDisabledInfoObject } from './utils';
+import { additionFn, removalFn, produceDisabledInfoObject, orderButtonIsDisabled } from './utils';
 import Cheesewich from '../../components/Cheesewich/Cheesewich.jsx';
 import UserControls from '../../components/Cheesewich/UserControls/UserControls.jsx';
 
 
 class CheesewichBuilder extends Component {
     state = {
-        ingredients: { bacon: 0, cheese: 0, meat: 0, shallots: 0, },
+        ingredients: { bacon: 0, cheese: 0, mustard: 0, shallots: 0, },
         totalPrice: 2,
+        purchasable: false,
     };
 
-    addIngredient = (type) => this.setState(additionFn(this.state, type));
+    updatePurchasability = () => this.setState({purchasable: orderButtonIsDisabled(this.state.ingredients)});
 
-    removeIngredient = (type) => this.setState(removalFn(this.state, type));
+    addIngredient = type => {
+        this.setState(additionFn(this.state, type));
+        this.updatePurchasability();
+    }
+
+    removeIngredient = type => {
+        this.setState(removalFn(this.state, type));
+        this.updatePurchasability();
+    } 
+
 
     render(){
         const disabledInfo = produceDisabledInfoObject(this.state.ingredients);
+        
         return (
             <Aux>
                 <Cheesewich ingredients={this.state.ingredients} />
                 <UserControls addIngredient={this.addIngredient} 
                               removeIngredient={this.removeIngredient}
                               disabled={disabledInfo}
-                              price={this.state.totalPrice}/>
+                              price={this.state.totalPrice}
+                              purchasable={this.state.purchasable}/>
             </Aux>
         );
     }
