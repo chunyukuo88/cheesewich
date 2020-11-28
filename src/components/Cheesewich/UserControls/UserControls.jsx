@@ -12,14 +12,19 @@ const ingredients = [
 const UserControls = (props) => (
     <div className={classes['user-control']}>
         <p>Current price: {props.price.toFixed(2)}</p>
-        {ingredients.map(ingredient => (
-            <QuantityAdjuster key={ingredient.label} 
-                                label={ingredient.label} 
-                                added={()=> props.addIngredient(ingredient.type)}
-                                removed={()=> props.removeIngredient(ingredient.type)}
-                                disabled={props.disabled[ingredient.type]}/>
-        ))}
+        {_getIngredientsDisplay(props, ingredients)}
+        <button className={classes['order-button']}>Place order!</button>
     </div>
 );
+
+const _getIngredientsDisplay = (props, ingredients) => {
+    return ingredients.map(ingredient => (
+        <QuantityAdjuster key={ingredient.label} 
+                          label={ingredient.label} 
+                          added={()=> props.addIngredient(ingredient.type)}
+                          removed={()=> props.removeIngredient(ingredient.type)}
+                          disabled={props.disabled[ingredient.type]}/>
+        ));
+};
 
 export default UserControls;

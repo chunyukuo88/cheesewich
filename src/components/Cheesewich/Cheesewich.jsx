@@ -9,7 +9,7 @@ const Cheesewich = props => {
     transformedIngredients = checkForIngredients(reduced, transformedIngredients);
 
     return (
-        <div className={classes.Cheesewich}>
+        <div className={classes.cheesewich}>
             <Ingredient type="bread-top"/>
             {transformedIngredients}
             <Ingredient type="bread-bottom"/>
