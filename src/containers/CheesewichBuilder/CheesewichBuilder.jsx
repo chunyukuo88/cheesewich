@@ -22,7 +22,8 @@ class CheesewichBuilder extends Component {
                 <Cheesewich ingredients={this.state.ingredients} />
                 <UserControls addIngredient={this.addIngredient} 
                               removeIngredient={this.removeIngredient}
-                              disabled={disabledInfo}/>
+                              disabled={disabledInfo}
+                              price={this.state.totalPrice}/>
             </Aux>
         );
     }
