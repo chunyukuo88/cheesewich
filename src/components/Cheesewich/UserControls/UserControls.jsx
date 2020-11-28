@@ -10,8 +10,6 @@ const ingredients = [
 ];
 
 const UserControls = (props) => {
-    console.log('props passed to UserControls:\n', props)
-
     return (
         <div className={classes['user-control']}>
             {ingredients.map(ingredient => (
