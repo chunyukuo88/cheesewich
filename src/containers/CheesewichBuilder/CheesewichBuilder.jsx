@@ -7,18 +7,13 @@ const INGREDIENT_PRICES = {
     bacon: 0.5,
     cheese: 0.4,
     meat: 1.3,
-    salad: 0.7,
+    shallots: 0.7,
 }
 
 class CheesewichBuilder extends Component {
     state = {
-        ingredients: {
-            bacon: 0,
-            cheese: 0,
-            meat: 0,
-            salad: 0,
-        },
-        totalPrice: 2
+        ingredients: { bacon: 0, cheese: 0, meat: 0, shallots: 0, },
+        totalPrice: 2,
     };
 
     addIngredient = (type) => {

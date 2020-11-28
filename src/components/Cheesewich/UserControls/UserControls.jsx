@@ -3,7 +3,7 @@ import classes from './UserControls.css';
 import QuantityAdjuster from './QuantityAdjuster/QuantityAdjuster.jsx';
 
 const ingredients = [
-    { label: 'Salad', type: 'salad'},
+    { label: 'Shallots', type: 'shallots'},
     { label: 'Bacon', type: 'bacon'},
     { label: 'Cheese', type: 'cheese'},
     { label: 'Meat', type: 'meat'},
