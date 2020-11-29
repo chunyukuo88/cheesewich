@@ -11,16 +11,12 @@ class CheesewichBuilder extends Component {
         userCanOrder: false,
     };
 
-    updatePurchasability = () => this.setState({userCanOrder: orderButtonIsDisabled(this.state.ingredients)});
-
     addIngredient = type => {
         this.setState(additionFn(this.state, type));
-        this.updatePurchasability();
     }
 
     removeIngredient = type => {
         this.setState(removalFn(this.state, type));
-        this.updatePurchasability();
     } 
 
     render(){

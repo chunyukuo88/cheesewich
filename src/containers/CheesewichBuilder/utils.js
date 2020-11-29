@@ -5,19 +5,35 @@ const INGREDIENT_PRICES = {
     shallots: 0.7,
 }
 
+export const orderButtonIsDisabled = ingredients => {
+    const totalIngredients = _produceQuantityOfAllIngredients(ingredients);
+    console.log('totalIngredients: ', totalIngredients);
+    return totalIngredients > 0;
+};
+
+export const _produceQuantityOfAllIngredients = ingredientsObject => {
+    return Object.keys(ingredientsObject)
+            .map(igKey => ingredientsObject[igKey])
+            .reduce((sum, element) => {
+                return sum + element;
+            }, 0);
+}
+
 export const additionFn = (stateObject, type) => {
     const oldCount = stateObject.ingredients[type];
     const updatedCount = oldCount + 1;
     const updatedIngredients = {
         ...stateObject.ingredients
     };
+    const purchasability = orderButtonIsDisabled(updatedIngredients);
     updatedIngredients[type] = updatedCount;
     const additionToTotalPrice = INGREDIENT_PRICES[type];
     const oldPrice = stateObject.totalPrice;
     const newPrice = oldPrice + additionToTotalPrice;
     return {
         ingredients: updatedIngredients,
-        totalPrice: newPrice
+        totalPrice: newPrice,
+        userCanOrder: purchasability
     };
 };
 
@@ -28,13 +44,15 @@ export const removalFn = (stateObject, type) => {
     const updatedIngredients = {
         ...stateObject.ingredients
     };
+    const purchasability = orderButtonIsDisabled(updatedIngredients);
     updatedIngredients[type] = updatedCount;
     const subtractionFromTotalPrice = INGREDIENT_PRICES[type];
     const oldPrice = stateObject.totalPrice;
-    const newPrice = oldPrice + subtractionFromTotalPrice;
+    const newPrice = oldPrice - subtractionFromTotalPrice;
     return {
         ingredients: updatedIngredients,
-        totalPrice: newPrice
+        totalPrice: newPrice,
+        userCanOrder: purchasability
     };
 };
 
@@ -50,16 +68,3 @@ export const _replaceQuantitiesWithBooleans = ingredientsObject => {
     };
 };
 
-export const orderButtonIsDisabled = ingredientQuantityObject => {
-    const ingredients = { ...ingredientQuantityObject };
-    const totalIngredients = _produceQuantityOfAllIngredients(ingredients);
-    return totalIngredients === 0;
-};
-
-export const _produceQuantityOfAllIngredients = ingredientsObject => {
-    return Object.keys(ingredientsObject)
-            .map(key => ingredientsObject[key])
-            .reduce((sum, element) => {
-                return sum + element;
-            }, 0);
-}
