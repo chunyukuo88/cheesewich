@@ -1,7 +1,7 @@
 const INGREDIENT_PRICES = {
     bacon: 0.5,
     cheese: 0.4,
-    meat: 1.3,
+    mustard: 1.3,
     shallots: 0.7,
 }
 
