@@ -1,9 +1,4 @@
-const INGREDIENT_PRICES = {
-    bacon: 0.5,
-    cheese: 0.4,
-    mustard: 1.3,
-    shallots: 0.7,
-}
+import INGREDIENT_PRICES from '../../components/Cheesewich/Ingredients/ingredientPrices';
 
 export const orderButtonIsDisabled =  async ingredients => {
     const totalIngredients = await _produceQuantityOfAllIngredients(ingredients);
@@ -26,16 +21,17 @@ export const additionFn = (stateObject, type) => {
         ...stateObject.ingredients
     };
     updatedIngredients[type] = updatedCount;
+    const newPrice = _updatePriceFollowingAddition(stateObject, type);
+    const purchasability = orderButtonIsDisabled(updatedIngredients);
+    return _buildUpdatedState(updatedIngredients, newPrice, purchasability);
+};
+
+export const _updatePriceFollowingAddition = (stateObject, type) => {
     const additionToTotalPrice = INGREDIENT_PRICES[type];
     const oldPrice = stateObject.totalPrice;
     const newPrice = oldPrice + additionToTotalPrice;
-    const purchasability = orderButtonIsDisabled(updatedIngredients);
-    return {
-        ingredients: updatedIngredients,
-        totalPrice: newPrice,
-        userCanOrder: purchasability
-    };
-};
+    return newPrice;
+}
 
 export const removalFn = (stateObject, type) => {
     const oldCount = stateObject.ingredients[type];
@@ -45,15 +41,24 @@ export const removalFn = (stateObject, type) => {
         ...stateObject.ingredients
     };
     updatedIngredients[type] = updatedCount;
+    const newPrice = _updatePriceFollowingRemoval(stateObject, type);
+    const purchasability = orderButtonIsDisabled(updatedIngredients);
+    return _buildUpdatedState(updatedIngredients, newPrice, purchasability);
+};
+
+export const _updatePriceFollowingRemoval = (stateObject, type) => {
     const subtractionFromTotalPrice = INGREDIENT_PRICES[type];
     const oldPrice = stateObject.totalPrice;
     const newPrice = oldPrice - subtractionFromTotalPrice;
-    const purchasability = orderButtonIsDisabled(updatedIngredients);
+    return newPrice;
+}
+
+export const _buildUpdatedState = (ingredients, totalPrice, userCanOrder) => {
     return {
-        ingredients: updatedIngredients,
-        totalPrice: newPrice,
-        userCanOrder: purchasability
-    };
+        ingredients: ingredients,
+        totalPrice: totalPrice,
+        userCanOrder: userCanOrder
+    }
 };
 
 export const produceDisabledInfoObject = ingredientQuantityObject => {
