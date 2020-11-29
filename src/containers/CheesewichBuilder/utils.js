@@ -7,7 +7,7 @@ export const additionFn = (stateObject, type) => {
     return _buildUpdatedState(updatedIngredients, newPrice, purchasability);
 };
 
-export const _updateQuantitiesFollowingAddition = (stateObject, type) => {
+const _updateQuantitiesFollowingAddition = (stateObject, type) => {
     const oldCount = stateObject.ingredients[type];
     const updatedCount = oldCount + 1;
     const updatedIngredients = {
@@ -17,24 +17,11 @@ export const _updateQuantitiesFollowingAddition = (stateObject, type) => {
     return updatedIngredients;
 };
 
-export const _updatePriceFollowingAddition = (stateObject, type) => {
+const _updatePriceFollowingAddition = (stateObject, type) => {
     const additionToTotalPrice = INGREDIENT_PRICES[type];
     const oldPrice = stateObject.totalPrice;
     const newPrice = oldPrice + additionToTotalPrice;
     return newPrice;
-};
-
-export const _orderButtonIsDisabled = ingredients => {
-    const totalIngredients = _produceQuantityOfAllIngredients(ingredients);
-    return totalIngredients > 0;
-};
-
-export const _produceQuantityOfAllIngredients = ingredientsObject => {
-    return Object.keys(ingredientsObject)
-            .map(igKey => ingredientsObject[igKey])
-            .reduce((sum, element) => {
-                return sum + element;
-            }, 0);
 };
 
 export const removalFn = (stateObject, type) => {
@@ -44,7 +31,20 @@ export const removalFn = (stateObject, type) => {
     return _buildUpdatedState(updatedIngredients, newPrice, purchasability);
 };
 
-export const _updateQuantitiesFollowingRemoval = (stateObject, type) => {
+const _orderButtonIsDisabled = ingredients => {
+    const totalIngredients = _produceQuantityOfAllIngredients(ingredients);
+    return totalIngredients > 0;
+};
+
+const _produceQuantityOfAllIngredients = ingredientsObject => {
+    return Object.keys(ingredientsObject)
+            .map(igKey => ingredientsObject[igKey])
+            .reduce((sum, element) => {
+                return sum + element;
+            }, 0);
+};
+
+const _updateQuantitiesFollowingRemoval = (stateObject, type) => {
     const oldCount = stateObject.ingredients[type];
     if (oldCount === 0) return;
     const updatedCount = oldCount - 1;
@@ -55,14 +55,14 @@ export const _updateQuantitiesFollowingRemoval = (stateObject, type) => {
     return updatedIngredients;
 };
 
-export const _updatePriceFollowingRemoval = (stateObject, type) => {
+const _updatePriceFollowingRemoval = (stateObject, type) => {
     const subtractionFromTotalPrice = INGREDIENT_PRICES[type];
     const oldPrice = stateObject.totalPrice;
     const newPrice = oldPrice - subtractionFromTotalPrice;
     return newPrice;
 };
 
-export const _buildUpdatedState = (ingredients, totalPrice, userCanOrder) => {
+const _buildUpdatedState = (ingredients, totalPrice, userCanOrder) => {
     return {
         ingredients: ingredients,
         totalPrice: totalPrice,
@@ -76,7 +76,7 @@ export const produceDisabledInfoObject = ingredientQuantityObject => {
     return disabledInfo;
 };
 
-export const _replaceQuantitiesWithBooleans = ingredientsObject => {
+const _replaceQuantitiesWithBooleans = ingredientsObject => {
     for (const key in ingredientsObject) {
         ingredientsObject[key] = ingredientsObject[key] <= 0;
     };
