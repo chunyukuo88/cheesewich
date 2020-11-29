@@ -46,9 +46,9 @@ const _produceQuantityOfAllIngredients = ingredientsObject => {
             }, 0);
 };
 
-const _updateQuantitiesFollowingRemoval = (stateObject, type) => {
+export const _updateQuantitiesFollowingRemoval = (stateObject, type) => {
     const oldCount = stateObject.ingredients[type];
-    if (oldCount <= 0) return;
+    if (oldCount === 0) return undefined;
     const updatedCount = oldCount - 1;
     const updatedIngredients = {
         ...stateObject.ingredients
@@ -60,6 +60,7 @@ const _updateQuantitiesFollowingRemoval = (stateObject, type) => {
 const _updatePriceFollowingRemoval = (stateObject, type) => {
     const subtractionFromTotalPrice = INGREDIENT_PRICES[type];
     const oldPrice = stateObject.totalPrice;
+    if (oldPrice <= 2) return 2;
     const newPrice = oldPrice - subtractionFromTotalPrice;
     return newPrice;
 };

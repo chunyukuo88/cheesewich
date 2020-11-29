@@ -61,8 +61,21 @@ describe('utils.js', ()=>{
             });
             test('AND: The price is unchanged.', ()=>{
                 const thePrice = removalResult.totalPrice;
-                console.log('=======', thePrice);
                 expect(thePrice).toEqual(ings.totalPrice);
+            });
+        });
+        describe('WHEN: Given an ingredient type and a stateObject a price below 2, ', ()=>{
+            delete INGREDIENT_PRICES['testIngredient1'];
+            delete INGREDIENT_PRICES['testIngredient2'];
+            const ings = {
+                ingredients: { shallots: 0, cheese: 0 },
+                totalPrice: 1,
+                userCanOrder: false,
+            };
+            const removalResult = utils.removalFn(ings, 'Shallots');
+            test('AND: The price is set to 2.', ()=>{
+                const thePrice = removalResult.totalPrice;
+                expect(thePrice).toEqual(2);
             });
         });
     });
@@ -87,6 +100,19 @@ describe('utils.js', ()=>{
                 const result = utils.produceDisabledInfoObject(ingredients);
                 expect(result.testIngredient1).toEqual(false);
                 expect(result.testIngredient2).toEqual(true);
+            });
+        });
+    });
+    describe('_updateQuantitiesFollowingRemoval()', ()=>{
+        describe('WHEN: Given a stateObject with no ingredients and a type', ()=>{
+            test('THEN: Return nothing', ()=>{
+                const ings = {
+                    ingredients: { shallots: 0 },
+                    totalPrice: 2,
+                    userCanOrder: false,
+                };
+                const result = utils._updateQuantitiesFollowingRemoval(ings, 'shallots');
+                expect(result).toBeUndefined();
             });
         });
     });
