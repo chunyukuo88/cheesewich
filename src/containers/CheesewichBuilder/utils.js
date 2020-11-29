@@ -5,8 +5,8 @@ const INGREDIENT_PRICES = {
     shallots: 0.7,
 }
 
-export const orderButtonIsDisabled = ingredients => {
-    const totalIngredients = _produceQuantityOfAllIngredients(ingredients);
+export const orderButtonIsDisabled =  async ingredients => {
+    const totalIngredients = await _produceQuantityOfAllIngredients(ingredients);
     console.log('totalIngredients: ', totalIngredients);
     return totalIngredients > 0;
 };
@@ -25,11 +25,11 @@ export const additionFn = (stateObject, type) => {
     const updatedIngredients = {
         ...stateObject.ingredients
     };
-    const purchasability = orderButtonIsDisabled(updatedIngredients);
     updatedIngredients[type] = updatedCount;
     const additionToTotalPrice = INGREDIENT_PRICES[type];
     const oldPrice = stateObject.totalPrice;
     const newPrice = oldPrice + additionToTotalPrice;
+    const purchasability = orderButtonIsDisabled(updatedIngredients);
     return {
         ingredients: updatedIngredients,
         totalPrice: newPrice,
@@ -44,11 +44,11 @@ export const removalFn = (stateObject, type) => {
     const updatedIngredients = {
         ...stateObject.ingredients
     };
-    const purchasability = orderButtonIsDisabled(updatedIngredients);
     updatedIngredients[type] = updatedCount;
     const subtractionFromTotalPrice = INGREDIENT_PRICES[type];
     const oldPrice = stateObject.totalPrice;
     const newPrice = oldPrice - subtractionFromTotalPrice;
+    const purchasability = orderButtonIsDisabled(updatedIngredients);
     return {
         ingredients: updatedIngredients,
         totalPrice: newPrice,
