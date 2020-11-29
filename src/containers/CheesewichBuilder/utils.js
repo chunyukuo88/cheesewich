@@ -1,22 +1,9 @@
 import INGREDIENT_PRICES from '../../components/Cheesewich/Ingredients/ingredientPrices';
 
-export const orderButtonIsDisabled = ingredients => {
-    const totalIngredients = _produceQuantityOfAllIngredients(ingredients);
-    return totalIngredients > 0;
-};
-
-export const _produceQuantityOfAllIngredients = ingredientsObject => {
-    return Object.keys(ingredientsObject)
-            .map(igKey => ingredientsObject[igKey])
-            .reduce((sum, element) => {
-                return sum + element;
-            }, 0);
-}
-
 export const additionFn = (stateObject, type) => {
     const updatedIngredients = _updateQuantitiesFollowingAddition(stateObject, type);
     const newPrice = _updatePriceFollowingAddition(stateObject, type);
-    const purchasability = orderButtonIsDisabled(updatedIngredients);
+    const purchasability = _orderButtonIsDisabled(updatedIngredients);
     return _buildUpdatedState(updatedIngredients, newPrice, purchasability);
 };
 
@@ -28,19 +15,32 @@ export const _updateQuantitiesFollowingAddition = (stateObject, type) => {
     };
     updatedIngredients[type] = updatedCount;
     return updatedIngredients;
-}
+};
 
 export const _updatePriceFollowingAddition = (stateObject, type) => {
     const additionToTotalPrice = INGREDIENT_PRICES[type];
     const oldPrice = stateObject.totalPrice;
     const newPrice = oldPrice + additionToTotalPrice;
     return newPrice;
-}
+};
+
+export const _orderButtonIsDisabled = ingredients => {
+    const totalIngredients = _produceQuantityOfAllIngredients(ingredients);
+    return totalIngredients > 0;
+};
+
+export const _produceQuantityOfAllIngredients = ingredientsObject => {
+    return Object.keys(ingredientsObject)
+            .map(igKey => ingredientsObject[igKey])
+            .reduce((sum, element) => {
+                return sum + element;
+            }, 0);
+};
 
 export const removalFn = (stateObject, type) => {
     const updatedIngredients = _updateQuantitiesFollowingRemoval(stateObject, type);
     const newPrice = _updatePriceFollowingRemoval(stateObject, type);
-    const purchasability = orderButtonIsDisabled(updatedIngredients);
+    const purchasability = _orderButtonIsDisabled(updatedIngredients);
     return _buildUpdatedState(updatedIngredients, newPrice, purchasability);
 };
 
@@ -60,14 +60,14 @@ export const _updatePriceFollowingRemoval = (stateObject, type) => {
     const oldPrice = stateObject.totalPrice;
     const newPrice = oldPrice - subtractionFromTotalPrice;
     return newPrice;
-}
+};
 
 export const _buildUpdatedState = (ingredients, totalPrice, userCanOrder) => {
     return {
         ingredients: ingredients,
         totalPrice: totalPrice,
         userCanOrder: userCanOrder
-    }
+    };
 };
 
 export const produceDisabledInfoObject = ingredientQuantityObject => {
