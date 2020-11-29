@@ -38,7 +38,9 @@ const _orderButtonIsDisabled = ingredients => {
 
 const _produceQuantityOfAllIngredients = ingredientsObject => {
     return Object.keys(ingredientsObject)
-            .map(igKey => ingredientsObject[igKey])
+            .map(igKey => {
+                return ingredientsObject[igKey];
+            })
             .reduce((sum, element) => {
                 return sum + element;
             }, 0);
@@ -46,7 +48,7 @@ const _produceQuantityOfAllIngredients = ingredientsObject => {
 
 const _updateQuantitiesFollowingRemoval = (stateObject, type) => {
     const oldCount = stateObject.ingredients[type];
-    if (oldCount === 0) return;
+    if (oldCount <= 0) return;
     const updatedCount = oldCount - 1;
     const updatedIngredients = {
         ...stateObject.ingredients

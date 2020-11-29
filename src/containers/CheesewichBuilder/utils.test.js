@@ -1,11 +1,10 @@
 import * as utils from './utils';
 import INGREDIENT_PRICES from '../../components/Cheesewich/Ingredients/ingredientPrices';
 
-INGREDIENT_PRICES['testIngredient1'] = 1.3;
-INGREDIENT_PRICES['testIngredient2'] = 42.61;
-
 describe('utils.js', ()=>{
     describe('additionFn()', ()=>{
+        INGREDIENT_PRICES['testIngredient1'] = 1.35;
+        INGREDIENT_PRICES['testIngredient2'] = 42.61;
         describe('WHEN: Given stateObject and an ingredient type, ', ()=>{
             const ing = {
                 ingredients: { testIngredient1: 0, testIngredient2: 0 },
@@ -26,6 +25,8 @@ describe('utils.js', ()=>{
     });
     describe('removalFn()', ()=>{
         describe('WHEN: Given stateObject with at least one ingredient and an ingredient type, ', ()=>{
+            INGREDIENT_PRICES['testIngredient1'] = 1.3;
+            INGREDIENT_PRICES['testIngredient2'] = 42.61;
             const ing = {
                 ingredients: { testIngredient1: 1, testIngredient2: 0 },
                 totalPrice: 3.3,
@@ -42,22 +43,26 @@ describe('utils.js', ()=>{
                 expect(result.totalPrice).toBe(3.3 - 1.3);
             });
         });
-        describe('WHEN: Given stateObject with no ingredients and an ingredient type, ', ()=>{
+        describe('WHEN: Given an ingredient type and a stateObject with no ingredients, ', ()=>{
+            delete INGREDIENT_PRICES['testIngredient1'];
+            delete INGREDIENT_PRICES['testIngredient2'];
             const ings = {
-                ingredients: { testIngredient1: 0, testIngredient2: 0 },
+                ingredients: { shallots: 0, cheese: 0 },
                 totalPrice: 2,
                 userCanOrder: false,
             };
-            const removalResult = utils.removalFn(ings, 'testIngredient1');
+            const removalResult = utils.removalFn(ings, 'Shallots');
             test('THEN: The quantities are unchanged, ', ()=>{
-                expect(removalResult.ingredients.testIngredient1).toEqual(0);
-                expect(removalResult.ingredients.testIngredient2).toEqual(0);
+                expect(removalResult.ingredients.shallots).toEqual(0);
+                expect(removalResult.ingredients.cheese).toEqual(0);
             });
             test('AND: The userCanOrder value is unchanged, ', ()=>{
                 expect(removalResult.userCanOrder).toEqual(false);
             });
-            test('AND: The price stays at 2.', ()=>{
-                expect(removalResult.totalPrice).toEqual(2);
+            test('AND: The price is unchanged.', ()=>{
+                const thePrice = removalResult.totalPrice;
+                console.log('=======', thePrice);
+                expect(thePrice).toEqual(ings.totalPrice);
             });
         });
     });
