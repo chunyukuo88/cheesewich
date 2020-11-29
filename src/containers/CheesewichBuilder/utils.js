@@ -1,8 +1,7 @@
 import INGREDIENT_PRICES from '../../components/Cheesewich/Ingredients/ingredientPrices';
 
-export const orderButtonIsDisabled =  async ingredients => {
-    const totalIngredients = await _produceQuantityOfAllIngredients(ingredients);
-    console.log('totalIngredients: ', totalIngredients);
+export const orderButtonIsDisabled = ingredients => {
+    const totalIngredients = _produceQuantityOfAllIngredients(ingredients);
     return totalIngredients > 0;
 };
 
