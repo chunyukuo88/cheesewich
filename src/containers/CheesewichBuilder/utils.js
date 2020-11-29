@@ -14,16 +14,21 @@ export const _produceQuantityOfAllIngredients = ingredientsObject => {
 }
 
 export const additionFn = (stateObject, type) => {
+    const updatedIngredients = _updateQuantitiesFollowingAddition(stateObject, type);
+    const newPrice = _updatePriceFollowingAddition(stateObject, type);
+    const purchasability = orderButtonIsDisabled(updatedIngredients);
+    return _buildUpdatedState(updatedIngredients, newPrice, purchasability);
+};
+
+export const _updateQuantitiesFollowingAddition = (stateObject, type) => {
     const oldCount = stateObject.ingredients[type];
     const updatedCount = oldCount + 1;
     const updatedIngredients = {
         ...stateObject.ingredients
     };
     updatedIngredients[type] = updatedCount;
-    const newPrice = _updatePriceFollowingAddition(stateObject, type);
-    const purchasability = orderButtonIsDisabled(updatedIngredients);
-    return _buildUpdatedState(updatedIngredients, newPrice, purchasability);
-};
+    return updatedIngredients;
+}
 
 export const _updatePriceFollowingAddition = (stateObject, type) => {
     const additionToTotalPrice = INGREDIENT_PRICES[type];
@@ -33,6 +38,13 @@ export const _updatePriceFollowingAddition = (stateObject, type) => {
 }
 
 export const removalFn = (stateObject, type) => {
+    const updatedIngredients = _updateQuantitiesFollowingRemoval(stateObject, type);
+    const newPrice = _updatePriceFollowingRemoval(stateObject, type);
+    const purchasability = orderButtonIsDisabled(updatedIngredients);
+    return _buildUpdatedState(updatedIngredients, newPrice, purchasability);
+};
+
+export const _updateQuantitiesFollowingRemoval = (stateObject, type) => {
     const oldCount = stateObject.ingredients[type];
     if (oldCount === 0) return;
     const updatedCount = oldCount - 1;
@@ -40,9 +52,7 @@ export const removalFn = (stateObject, type) => {
         ...stateObject.ingredients
     };
     updatedIngredients[type] = updatedCount;
-    const newPrice = _updatePriceFollowingRemoval(stateObject, type);
-    const purchasability = orderButtonIsDisabled(updatedIngredients);
-    return _buildUpdatedState(updatedIngredients, newPrice, purchasability);
+    return updatedIngredients;
 };
 
 export const _updatePriceFollowingRemoval = (stateObject, type) => {
