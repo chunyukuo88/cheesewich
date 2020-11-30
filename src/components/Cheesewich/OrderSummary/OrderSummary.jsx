@@ -1,11 +1,9 @@
 import React from 'react';
-import Aux from '../../../hoc/auxilliary.js';
+import Aux from '../../../hoc/auxilliary';
+import { _getSummaryItem, _getIngredientSummary } from './orderSummaryUtils';
 
 const OrderSummary = ({ingredients}) => {
-    const ingredientSummary = Object.keys(ingredients)
-                                    .map(ingredient => {
-                                        return _getSummaryItem(ingredients, ingredient);
-                                    });
+    const ingredientSummary = _getIngredientSummary(ingredients);
     return (
         <Aux>
             <h3>Your Order:</h3>
@@ -18,8 +16,5 @@ const OrderSummary = ({ingredients}) => {
     );
 };
 
-export const _getSummaryItem = (ingrsObject, ingr) => {
-    return <li key={ingr}>{ingr}: {ingrsObject[ingr]}</li>;
-};
 
 export default OrderSummary;
