@@ -6,7 +6,7 @@ import Aux from '../../../hoc/auxilliary.js';
 
 const Modal = props => (
     <Aux>
-        <Backdrop show={props.show}/>
+        <Backdrop show={props.show} clicked={props.modalClosed}/>
         <div className={classes.Modal} 
             style={_modalStyle(props.show)}>
             {props.children}

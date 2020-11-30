@@ -18,6 +18,10 @@ class CheesewichBuilder extends Component {
         this.setState({userHasPlacedOrder: true});
     }
 
+    orderCancellationHandler = () => {
+        this.setState({userHasPlacedOrder: false});
+    }
+
     addIngredient = type => {
         this.setState(additionFn(this.state, type));
     }
@@ -30,7 +34,7 @@ class CheesewichBuilder extends Component {
         const disabledInfo = produceDisabledInfoObject(this.state.ingredients);
         return (
             <Aux>
-                <Modal show={this.state.userHasPlacedOrder}>
+                <Modal show={this.state.userHasPlacedOrder} modalClosed={this.orderCancellationHandler}>
                     <OrderSummary ingredients={this.state.ingredients}/>
                 </Modal>
                 <Cheesewich ingredients={this.state.ingredients} />
