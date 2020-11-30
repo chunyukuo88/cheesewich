@@ -14,7 +14,8 @@ const UserControls = props => (
         <p>Current price: {props.price.toFixed(2)}</p>
         {_getIngredientsDisplay(props, ingredients)}
         <button className={classes['order-button']}
-                disabled={!props.purchasable}>Place order!</button>
+                disabled={!props.purchasable}
+                onClick={props.ordered}>Place order!</button>
     </div>
 );
 

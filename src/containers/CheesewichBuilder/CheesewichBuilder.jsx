@@ -11,7 +11,12 @@ class CheesewichBuilder extends Component {
         ingredients: { bacon: 0, cheese: 0, mustard: 0, shallots: 0, },
         totalPrice: 2,
         userCanOrder: false,
+        userHasPlacedOrder: false
     };
+
+    orderHandler = () => {
+        this.setState({userHasPlacedOrder: true});
+    }
 
     addIngredient = type => {
         this.setState(additionFn(this.state, type));
@@ -25,7 +30,7 @@ class CheesewichBuilder extends Component {
         const disabledInfo = produceDisabledInfoObject(this.state.ingredients);
         return (
             <Aux>
-                <Modal>
+                <Modal show={this.state.userHasPlacedOrder}>
                     <OrderSummary ingredients={this.state.ingredients}/>
                 </Modal>
                 <Cheesewich ingredients={this.state.ingredients} />
@@ -33,7 +38,8 @@ class CheesewichBuilder extends Component {
                               removeIngredient={this.removeIngredient}
                               disabled={disabledInfo}
                               price={this.state.totalPrice}
-                              purchasable={this.state.userCanOrder}/>
+                              purchasable={this.state.userCanOrder}
+                              ordered={this.orderHandler}/>
             </Aux>
         );
     }
