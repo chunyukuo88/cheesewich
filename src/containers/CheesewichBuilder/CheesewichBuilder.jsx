@@ -3,6 +3,8 @@ import Aux from '../../hoc/auxilliary';
 import { additionFn, removalFn, produceDisabledInfoObject } from './utils';
 import Cheesewich from '../../components/Cheesewich/Cheesewich.jsx';
 import UserControls from '../../components/Cheesewich/UserControls/UserControls.jsx';
+import Modal from '../../components/UI/Modal/Modal.jsx';
+import OrderSummary from '../../components/Cheesewich/OrderSummary/OrderSummary.jsx';
 
 class CheesewichBuilder extends Component {
     state = {
@@ -23,6 +25,9 @@ class CheesewichBuilder extends Component {
         const disabledInfo = produceDisabledInfoObject(this.state.ingredients);
         return (
             <Aux>
+                <Modal>
+                    <OrderSummary ingredients={this.state.ingredients}/>
+                </Modal>
                 <Cheesewich ingredients={this.state.ingredients} />
                 <UserControls addIngredient={this.addIngredient} 
                               removeIngredient={this.removeIngredient}
