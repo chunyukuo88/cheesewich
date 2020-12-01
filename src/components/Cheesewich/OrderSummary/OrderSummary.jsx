@@ -1,9 +1,10 @@
 import React from 'react';
 import Aux from '../../../hoc/auxilliary';
 import * as utils from './orderSummaryUtils';
+import Button from '../../UI/Button/Button.jsx';
 
-const OrderSummary = ({ingredients}) => {
-    const ingredientSummary = utils._getIngredientSummary(ingredients);
+const OrderSummary = (props) => {
+    const ingredientSummary = utils._getIngredientSummary(props.ingredients);
     return (
         <Aux>
             <h3>Your Order:</h3>
@@ -12,8 +13,13 @@ const OrderSummary = ({ingredients}) => {
                 {ingredientSummary}
             </ul>
             <p>Proceed to checkout?</p>
+            <Button buttonType="green"
+                    clicked={props.goToCheckout}>Yep!</Button>
+            <Button buttonType="red"
+                    clicked={props.orderCancelled}>Nope!</Button>
         </Aux>
     );
 };
+
 
 export default OrderSummary;

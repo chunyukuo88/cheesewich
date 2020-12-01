@@ -14,13 +14,6 @@ class CheesewichBuilder extends Component {
         userHasPlacedOrder: false
     };
 
-    orderHandler = () => {
-        this.setState({userHasPlacedOrder: true});
-    }
-
-    orderCancellationHandler = () => {
-        this.setState({userHasPlacedOrder: false});
-    }
 
     addIngredient = type => {
         this.setState(additionFn(this.state, type));
@@ -30,12 +23,26 @@ class CheesewichBuilder extends Component {
         this.setState(removalFn(this.state, type));
     } 
 
+    orderHandler = () => {
+        this.setState({userHasPlacedOrder: true});
+    }
+
+    orderCancellationHandler = () => {
+        this.setState({userHasPlacedOrder: false});
+    }
+
+    proceedToCheckoutHandler = () => {
+        alert('Add a checkout function');
+    }
+
     render(){
         const disabledInfo = produceDisabledInfoObject(this.state.ingredients);
         return (
             <Aux>
                 <Modal show={this.state.userHasPlacedOrder} modalClosed={this.orderCancellationHandler}>
-                    <OrderSummary ingredients={this.state.ingredients}/>
+                    <OrderSummary ingredients={this.state.ingredients}
+                                  orderCancelled={this.orderCancellationHandler}
+                                  goToCheckout={this.proceedToCheckoutHandler}/>
                 </Modal>
                 <Cheesewich ingredients={this.state.ingredients} />
                 <UserControls addIngredient={this.addIngredient} 
