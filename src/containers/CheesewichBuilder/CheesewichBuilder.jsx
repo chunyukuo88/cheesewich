@@ -42,7 +42,8 @@ class CheesewichBuilder extends Component {
                 <Modal show={this.state.userHasPlacedOrder} modalClosed={this.orderCancellationHandler}>
                     <OrderSummary ingredients={this.state.ingredients}
                                   orderCancelled={this.orderCancellationHandler}
-                                  goToCheckout={this.proceedToCheckoutHandler}/>
+                                  goToCheckout={this.proceedToCheckoutHandler}
+                                  price={this.state.totalPrice}/>
                 </Modal>
                 <Cheesewich ingredients={this.state.ingredients} />
                 <UserControls addIngredient={this.addIngredient} 

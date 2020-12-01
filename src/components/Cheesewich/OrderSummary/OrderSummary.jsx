@@ -4,6 +4,7 @@ import * as utils from './orderSummaryUtils';
 import Button from '../../UI/Button/Button.jsx';
 
 const OrderSummary = props => {
+    console.log('price', props.totalPrice);
     return (
         <Aux>
             <h3>Your Order:</h3>
@@ -11,6 +12,7 @@ const OrderSummary = props => {
             <ul>
                 {ingredientSummary(props.ingredients)}
             </ul>
+            <p>Total price: {props.price}</p>
             <p>Proceed to checkout?</p>
             <Button buttonType="green"
                     clicked={props.goToCheckout}>Yep!</Button>
