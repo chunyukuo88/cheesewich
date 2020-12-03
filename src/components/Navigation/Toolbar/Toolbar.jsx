@@ -4,7 +4,7 @@ import NavItems from '../NavItems/NavItems.jsx';
 
 const Toolbar = props => (
     <header className={classes.toolbar}>
-        <div>MENU</div>
+        <div onClick={props.openDrawer}>MENU</div>
         <div>LOGO</div>
         <nav className={classes.desktop_only}>
             <NavItems />
