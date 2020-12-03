@@ -5,24 +5,17 @@ import Toolbar from '../Navigation/Toolbar/Toolbar.jsx';
 import SideDrawer from '../Navigation/SideDrawer/SideDrawer.jsx';
 
 class Layout extends Component {
-    state = {
-        showSideDrawer: true
-    }
+    state = { showSideDrawer: false }
 
-    drawerCloseHandler = () => {
-        this.setState({showSideDrawer: false});
-    }
-    openCloseHandler = () => {
-        console.log('openCloseHandler()');
-        this.setState({showSideDrawer: true});
-    }
+    drawerCloser = () => this.setState({showSideDrawer: false});
+    drawerOpener = () => this.setState({showSideDrawer: true});
 
     render(){
         return (
             <Aux>
-                <Toolbar openDrawer={this.openCloseHandler}/>
+                <Toolbar clicked={this.drawerOpener}/>
                 <SideDrawer open={this.state.showSideDrawer} 
-                            closed={this.drawerCloseHandler}/>
+                            closed={this.drawerCloser}/>
                 <div data-test="layout-overview">
                 </div>
                 <main className={classes.Content}>
