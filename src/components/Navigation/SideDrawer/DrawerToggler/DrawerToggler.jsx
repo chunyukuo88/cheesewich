@@ -1,7 +1,12 @@
 import React from 'react';
+import classes from './DrawerToggler.css';
 
 const DrawerToggler = props => (
-    <div onClick={props.openDrawer}>MENU</div>
+    <div className={classes.drawer_toggler} onClick={props.openDrawer}>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
 );
 
 export default DrawerToggler;
