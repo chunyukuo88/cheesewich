@@ -3,7 +3,7 @@ import Layout from './Layout';
 
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import { findByTestAttr } from '../../../src/testUtils';
+import { findByTestAttr } from '../../testUtils';
 Enzyme.configure({ adapter: new Adapter() });
 
 const setup = () => shallow(<Layout/>);
