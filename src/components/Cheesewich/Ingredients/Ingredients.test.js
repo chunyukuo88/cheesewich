@@ -1,5 +1,5 @@
 import React from 'react';
-import { findByTestAttr } from '../../../testUtils.js';
+import { findByTestAttr } from '../../../utils/testUtils';
 import Ingredient from './Ingredients.jsx';
 import Enzyme, { shallow, render } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
