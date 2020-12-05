@@ -1,5 +1,13 @@
 import INGREDIENT_PRICES from '../../components/Cheesewich/Ingredients/ingredientPrices';
 
+export const stateWhenPageFirstLoads = {
+    ingredients: { bacon: 0, cheese: 0, mustard: 0, shallots: 0, },
+    totalPrice: 2,
+    userCanOrder: false,
+    userHasPlacedOrder: false,
+    loading: false
+};
+
 export const additionFn = (stateObject, type) => {
     const updatedIngredients = _updateQuantitiesFollowingAddition(stateObject, type);
     const newPrice = _updatePriceFollowingAddition(stateObject, type);
