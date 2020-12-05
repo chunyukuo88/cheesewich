@@ -26,13 +26,12 @@ class CheesewichBuilder extends Component {
         axios.post('/orders.json', order)
                 .then(res => {
                     console.log(res)
-                    this.setState({loading: false, userHasPlacedOrder: false,});
+                    this.setState(stateWhenPageFirstLoads);
                 })
                 .catch(e => {
-                    console.error('=== Oh nose! ===\n\n', e);
-                    this.setState({loading: false, userHasPlacedOrder: false,});
+                    console.error('=== Error ===\n\n', e);
+                    this.setState(stateWhenPageFirstLoads);
                 });
-        
     }
 
     render(){
@@ -40,13 +39,13 @@ class CheesewichBuilder extends Component {
         const orderSummary = (this.state.loading)
             ? <Spinner />
             : <OrderSummary ingredients={this.state.ingredients}
-                                         orderCancelled={this.orderCancellationHandler}
-                                         goToCheckout={this.proceedToCheckoutHandler}
-                                         price={this.state.totalPrice}/>;
+                            orderCancelled={this.orderCancellationHandler}
+                            goToCheckout={this.proceedToCheckoutHandler}
+                            price={this.state.totalPrice}/>;
         return (
             <Aux>
                 <Modal show={this.state.userHasPlacedOrder} modalClosed={this.orderCancellationHandler}>
-                {orderSummary}
+                    {orderSummary}
                 </Modal>
                 <Cheesewich ingredients={this.state.ingredients} />
                 <UserControls addIngredient={this.addIngredient} 
