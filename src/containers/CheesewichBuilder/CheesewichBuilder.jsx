@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import axios from '../../../src/axios-instance';
 import Aux from '../../hoc/auxilliary';
-import { additionFn, removalFn, produceDisabledInfoObject, stateWhenPageFirstLoads } from './utils';
+import { additionFn, 
+         removalFn, 
+         produceDisabledInfoObject, 
+         stateWhenPageFirstLoads, 
+         getOrderDataForCheckout,
+         showSpinnerOrSummary,
+         customerInfo } from './utils';
 import Cheesewich from '../../components/Cheesewich/Cheesewich.jsx';
 import UserControls from '../../components/Cheesewich/UserControls/UserControls.jsx';
 import Modal from '../../components/UI/Modal/Modal.jsx';
-import OrderSummary from '../../components/Cheesewich/OrderSummary/OrderSummary.jsx';
-import Spinner from '../../components/UI/Spinner/Spinner.jsx';
 
 class CheesewichBuilder extends Component {
     state = stateWhenPageFirstLoads;
@@ -18,30 +22,15 @@ class CheesewichBuilder extends Component {
 
     proceedToCheckoutHandler = () => {
         this.setState({loading: true});
-        const order = {
-            ingredients: this.state.ingredients,
-            price: this.state.totalPrice,
-            customer: customerInfo,
-        };
+        const order = getOrderDataForCheckout(this.state, customerInfo);
         axios.post('/orders.json', order)
-                .then(res => {
-                    console.log(res)
-                    this.setState(stateWhenPageFirstLoads);
-                })
-                .catch(e => {
-                    console.error('=== Error ===\n\n', e);
-                    this.setState(stateWhenPageFirstLoads);
-                });
+                .then(() => this.setState(stateWhenPageFirstLoads))
+                .catch(e => this.setState(stateWhenPageFirstLoads));
     }
 
     render(){
         const disabledInfo = produceDisabledInfoObject(this.state.ingredients);
-        const orderSummary = (this.state.loading)
-            ? <Spinner />
-            : <OrderSummary ingredients={this.state.ingredients}
-                            orderCancelled={this.orderCancellationHandler}
-                            goToCheckout={this.proceedToCheckoutHandler}
-                            price={this.state.totalPrice}/>;
+        const orderSummary = showSpinnerOrSummary(this.state, this.orderCancellationHandler, this.proceedToCheckoutHandler)
         return (
             <Aux>
                 <Modal show={this.state.userHasPlacedOrder} modalClosed={this.orderCancellationHandler}>
@@ -59,11 +48,5 @@ class CheesewichBuilder extends Component {
     }
 }
 
-const customerInfo = {
-    name: 'David the Airplane',
-    address: '123 Food Street',
-    town: 'Flavor Town',
-    country: 'Snackistan',
-};
 
 export default CheesewichBuilder;
