@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from '../../../src/axios-instance';
 import Aux from '../../hoc/auxilliary';
 import { additionFn, removalFn, produceDisabledInfoObject } from './utils';
 import Cheesewich from '../../components/Cheesewich/Cheesewich.jsx';
@@ -32,7 +33,19 @@ class CheesewichBuilder extends Component {
     }
 
     proceedToCheckoutHandler = () => {
-        alert('Add a checkout function');
+        const order = {
+            ingredients: this.state.ingredients,
+            price: this.state.totalPrice,
+            customer: {
+                name: 'David the Airplane',
+                address: '123 Food Street',
+                town: 'Flavor Town',
+                country: 'Snackistan',
+            }
+        };
+        axios.post('/orders.json', order)
+                .then(res => console.log(res))
+                .catch(e => console.error('=== Oh nose! ===\n\n', e));
     }
 
     render(){
