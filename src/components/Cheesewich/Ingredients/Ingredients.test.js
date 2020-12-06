@@ -21,12 +21,11 @@ describe('Ingredient.jsx', ()=>{
             test('THEN: It returns an ingredient corresponding to that string.', ()=>{
                 const ingredient = 'cheese';
                 const result = _buildIngredientDisplay(ingredient);
-    //TODO: Figure out how to test CSS modules
                 jest.mock('./Ingredients.css');
                 const cheese = <div className="cheese"/>;
-                expect(result).not.toBeNull();
+                expect(result).toEqual(cheese);
             });
-    });
+        });
         describe('WHEN: Given nothing, ', ()=>{
             test('THEN: It returns null.', ()=>{
                 const result = _buildIngredientDisplay();
