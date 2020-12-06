@@ -1,7 +1,6 @@
 import React from 'react';
-import classes from './Ingredients.css';
 import Ingredient, { _buildIngredientDisplay } from './Ingredients.jsx';
-import Enzyme, { shallow, render } from 'enzyme';
+import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -21,7 +20,6 @@ describe('Ingredient.jsx', ()=>{
             test('THEN: It returns an ingredient corresponding to that string.', ()=>{
                 const ingredient = 'cheese';
                 const result = _buildIngredientDisplay(ingredient);
-                jest.mock('./Ingredients.css');
                 const cheese = <div className="cheese"/>;
                 expect(result).toEqual(cheese);
             });
