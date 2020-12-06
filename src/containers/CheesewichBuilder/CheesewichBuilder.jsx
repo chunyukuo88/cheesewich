@@ -7,7 +7,7 @@ import { additionFn,
          stateWhenPageFirstLoads, 
          getOrderDataForCheckout,
          showSpinnerOrSummary,
-         customerInfo } from './utils';
+         customerInfo } from './builderUtils';
 import Cheesewich from '../../components/Cheesewich/Cheesewich.jsx';
 import UserControls from '../../components/Cheesewich/UserControls/UserControls.jsx';
 import Modal from '../../components/UI/Modal/Modal.jsx';
