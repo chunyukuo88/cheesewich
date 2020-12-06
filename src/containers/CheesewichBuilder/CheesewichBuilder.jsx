@@ -11,7 +11,7 @@ import { additionFn,
 import Cheesewich from '../../components/Cheesewich/Cheesewich.jsx';
 import UserControls from '../../components/Cheesewich/UserControls/UserControls.jsx';
 import Modal from '../../components/UI/Modal/Modal.jsx';
-
+import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 
 
 class CheesewichBuilder extends Component {
@@ -35,7 +35,8 @@ class CheesewichBuilder extends Component {
         const orderSummary = showSpinnerOrSummary(this.state, this.orderCancellationHandler, this.proceedToCheckoutHandler)
         return (
             <Aux>
-                <Modal show={this.state.userHasPlacedOrder} modalClosed={this.orderCancellationHandler}>
+                <Modal show={this.state.userHasPlacedOrder} 
+                       modalClosed={this.orderCancellationHandler}>
                     {orderSummary}
                 </Modal>
                 <Cheesewich ingredients={this.state.ingredients} />
@@ -51,4 +52,4 @@ class CheesewichBuilder extends Component {
 }
 
 
-export default CheesewichBuilder;
+export default withErrorHandler(CheesewichBuilder, axios);
