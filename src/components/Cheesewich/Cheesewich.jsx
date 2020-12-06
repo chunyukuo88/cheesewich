@@ -11,7 +11,7 @@ const Cheesewich = props => {
     return (
         <div className={classes.cheesewich}>
             <Ingredient type="bread-top"/>
-            {transformedIngredients}
+                {transformedIngredients}
             <Ingredient type="bread-bottom"/>
         </div>
     );
