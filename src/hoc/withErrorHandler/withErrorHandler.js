@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Modal from '../../components/UI/Modal/Modal.jsx';
 import Aux from '../auxilliary.js';
+import { showError } from './withErrorHandlerUtils';
 
 const withErrorHandler = (ComponentToBeWrapped, axios) => {
     //Note the anonymous class; `withErrorHandler` is a class factory.
@@ -37,8 +38,5 @@ const withErrorHandler = (ComponentToBeWrapped, axios) => {
     }
 }
 
-const showError = (errorObject) => {
-    return errorObject.error ? errorObject.error.message : null;
-}
 
 export default withErrorHandler;
