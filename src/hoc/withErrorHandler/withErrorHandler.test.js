@@ -1,6 +1,6 @@
 import { showError } from './withErrorHandlerUtils';
 
-describe('withErrorHandler.js', () =>{
+describe('withErrorHandlerUtils.js', () =>{
     describe('showError()', () =>{
         describe('WHEN: Given an error object, ', ()=>{
            test('THEN: It returns the message of that object.', ()=>{
