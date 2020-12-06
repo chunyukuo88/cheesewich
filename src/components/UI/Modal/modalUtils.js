@@ -6,5 +6,6 @@ export const modalStyle = modalShouldBeDisplayed => {
 };
 
 export const childrenOrShowHaveChanged = (nextProps, props) => {
-    return (nextProps.show !== props.show || nextProps.children !== props.children);
+    return (nextProps.show !== props.show 
+         || nextProps.children !== props.children);
 };
