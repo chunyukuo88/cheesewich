@@ -15,8 +15,7 @@ class Layout extends Component {
             <Aux>
                 <Toolbar clicked={this.drawerOpener}/>
                 <SideDrawer open={this.state.showSideDrawer} closed={this.drawerCloser}/>
-                <div data-test="layout-overview">
-                </div>
+                <div data-test="layout-overview"></div>
                 <main className={classes.Content}>
                     {this.props.children}
                 </main>
