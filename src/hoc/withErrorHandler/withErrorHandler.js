@@ -19,9 +19,10 @@ const withErrorHandler = (ComponentToBeWrapped, axios) => {
             });
         }
 
-        userAcknowledgesError () {
+        userAcknowledgesError = () => {
             this.setState({ error: null });
         }
+
         render(){
             return (
                 <Aux>
