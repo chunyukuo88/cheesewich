@@ -11,7 +11,7 @@ describe('SideDrawer()', ()=>{
         const wrapper = shallow(<SideDrawer />);
         expect(wrapper.length).toBe(1);
     });
-    describe('GIVEN: A props.open value of true, ', ()=>{
+    xdescribe('GIVEN: A props.open value of true, ', ()=>{
         test('THEN: It returns a classes.open value in the resultant array.', ()=>{
             const props = {
                 open: true

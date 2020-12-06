@@ -58,7 +58,9 @@
       "src/**/*.{js,jsx,mjs}"
     ],
     "coveragePathIgnorePatterns": [
-      "src/utils/testUtils.js"
+      "src/utils/testUtils.js",
+      "src/index.js",
+      "src/registerServiceWorker.js"
     ],
     "setupFiles": [
       "<rootDir>/config/polyfills.js"
