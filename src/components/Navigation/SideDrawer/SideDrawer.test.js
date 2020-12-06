@@ -2,7 +2,6 @@ import React from 'react';
 import Enzyme, { shallow, render } from 'enzyme';
 import EnzymeAdapter from 'enzyme-adapter-react-16';
 import SideDrawer from './SideDrawer.jsx';
-import classes from './SideDrawer.css';
 
 Enzyme.configure({ adapter: new EnzymeAdapter()});
 
