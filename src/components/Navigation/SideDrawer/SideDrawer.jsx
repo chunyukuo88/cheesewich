@@ -6,10 +6,12 @@ import Backdrop from '../../UI/Backdrop/Backdrop.jsx';
 import Aux from '../../../hoc/auxilliary.js';
 
 const SideDrawer = props => {
-    let attachedClasses = [classes.side_drawer, classes.closed];
-    if (props.open) {
-        attachedClasses = [classes.side_drawer, classes.open];
-    }
+    // let attachedClasses = [classes.side_drawer, classes.closed];
+    // if (props.open) {
+    //     attachedClasses = [classes.side_drawer, classes.open];
+    // }
+    const attachedClasses = getClasses(props);
+    
     return (
         <Aux>
             <Backdrop show={props.open} clicked={props.closed}/>
@@ -23,11 +25,11 @@ const SideDrawer = props => {
     );
 }
 
-// export const getClasses = (props) => {
-//     return props.open 
-//         ? [classes.side_drawer, classes.open]
-//         : [classes.side_drawer, classes.closed];
-// };
+export const getClasses = (props) => {
+    return props.open 
+        ? [classes.side_drawer, classes.open]
+        : [classes.side_drawer, classes.closed];
+};
 
 
 export default SideDrawer;
