@@ -1,49 +1,43 @@
 import React, { Component } from 'react';
+import axios from '../../../src/axios-instance';
 import Aux from '../../hoc/auxilliary';
-import { additionFn, removalFn, produceDisabledInfoObject } from './utils';
+import { additionFn, 
+         removalFn, 
+         produceDisabledInfoObject, 
+         stateWhenPageFirstLoads, 
+         getOrderDataForCheckout,
+         showSpinnerOrSummary,
+         customerInfo } from './builderUtils';
 import Cheesewich from '../../components/Cheesewich/Cheesewich.jsx';
 import UserControls from '../../components/Cheesewich/UserControls/UserControls.jsx';
 import Modal from '../../components/UI/Modal/Modal.jsx';
-import OrderSummary from '../../components/Cheesewich/OrderSummary/OrderSummary.jsx';
+import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
+
 
 class CheesewichBuilder extends Component {
-    state = {
-        ingredients: { bacon: 0, cheese: 0, mustard: 0, shallots: 0, },
-        totalPrice: 2,
-        userCanOrder: false,
-        userHasPlacedOrder: false
-    };
+    state = stateWhenPageFirstLoads;
 
-
-    addIngredient = type => {
-        this.setState(additionFn(this.state, type));
-    }
-
-    removeIngredient = type => {
-        this.setState(removalFn(this.state, type));
-    } 
-
-    orderHandler = () => {
-        this.setState({userHasPlacedOrder: true});
-    }
-
-    orderCancellationHandler = () => {
-        this.setState({userHasPlacedOrder: false});
-    }
+    addIngredient = type => this.setState(additionFn(this.state, type));
+    removeIngredient = type => this.setState(removalFn(this.state, type));
+    orderHandler = () => this.setState({userHasPlacedOrder: true});
+    orderCancellationHandler = () => this.setState({userHasPlacedOrder: false});
 
     proceedToCheckoutHandler = () => {
-        alert('Add a checkout function');
+        this.setState({loading: true});
+        const order = getOrderDataForCheckout(this.state, customerInfo);
+        axios.post('/orders.json', order)
+                .then(() => this.setState(stateWhenPageFirstLoads))
+                .catch(e => this.setState(stateWhenPageFirstLoads));
     }
 
     render(){
         const disabledInfo = produceDisabledInfoObject(this.state.ingredients);
+        const orderSummary = showSpinnerOrSummary(this.state, this.orderCancellationHandler, this.proceedToCheckoutHandler)
         return (
             <Aux>
-                <Modal show={this.state.userHasPlacedOrder} modalClosed={this.orderCancellationHandler}>
-                    <OrderSummary ingredients={this.state.ingredients}
-                                  orderCancelled={this.orderCancellationHandler}
-                                  goToCheckout={this.proceedToCheckoutHandler}
-                                  price={this.state.totalPrice}/>
+                <Modal show={this.state.userHasPlacedOrder} 
+                       modalClosed={this.orderCancellationHandler}>
+                    {orderSummary}
                 </Modal>
                 <Cheesewich ingredients={this.state.ingredients} />
                 <UserControls addIngredient={this.addIngredient} 
@@ -57,4 +51,5 @@ class CheesewichBuilder extends Component {
     }
 }
 
-export default CheesewichBuilder;
+
+export default withErrorHandler(CheesewichBuilder, axios);

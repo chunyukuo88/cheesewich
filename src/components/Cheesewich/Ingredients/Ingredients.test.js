@@ -1,7 +1,6 @@
 import React from 'react';
-import { findByTestAttr } from '../../../testUtils.js';
-import Ingredient from './Ingredients.jsx';
-import Enzyme, { shallow, render } from 'enzyme';
+import Ingredient, { _buildIngredientDisplay } from './Ingredients.jsx';
+import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -17,12 +16,19 @@ describe('Ingredient.jsx', ()=>{
         });
     });
     describe('_buildIngredientDisplay()', ()=>{
-        describe('WHEN: given a valid (string) prop, ', ()=>{
-        test('THEN: It returns an ingredient corresponding to that string.', ()=>{
-            const wrapper = render(<Ingredient {...props}/>);
-            const cheese = <div className="cheese"/>;
-            expect(wrapper).toEqual(cheese);
+        describe('WHEN: given a valid string, ', ()=>{
+            test('THEN: It returns an ingredient corresponding to that string.', ()=>{
+                const ingredient = 'cheese';
+                const result = _buildIngredientDisplay(ingredient);
+                const cheese = <div className="cheese"/>;
+                expect(result).toEqual(cheese);
+            });
+        });
+        describe('WHEN: Given nothing, ', ()=>{
+            test('THEN: It returns null.', ()=>{
+                const result = _buildIngredientDisplay();
+                expect(result).toBeNull();
+            });
         });
     });
-});
 });

@@ -1,4 +1,39 @@
+import React from 'react';
+import OrderSummary from '../../components/Cheesewich/OrderSummary/OrderSummary.jsx';
+import Spinner from '../../components/UI/Spinner/Spinner.jsx';
 import INGREDIENT_PRICES from '../../components/Cheesewich/Ingredients/ingredientPrices';
+
+export const getOrderDataForCheckout = (state, customerInfo) => {
+    return {
+        ingredients: state.ingredients,
+        price: state.totalPrice,
+        customer: customerInfo,
+    };
+};
+
+export const customerInfo = {
+    name: 'David the Airplane',
+    address: '123 Food Street',
+    town: 'Flavor Town',
+    country: 'Snackistan',
+};
+
+export const showSpinnerOrSummary = (state, cancelFn, gotoCheckoutFn) => {
+    return (state.loading)
+        ? <Spinner />
+        : <OrderSummary ingredients={state.ingredients}
+                        orderCancelled={cancelFn}
+                        goToCheckout={gotoCheckoutFn}
+                        price={state.totalPrice}/>;
+};
+
+export const stateWhenPageFirstLoads = {
+    ingredients: { bacon: 0, cheese: 0, mustard: 0, shallots: 0, },
+    totalPrice: 2,
+    userCanOrder: false,
+    userHasPlacedOrder: false,
+    loading: false
+};
 
 export const additionFn = (stateObject, type) => {
     const updatedIngredients = _updateQuantitiesFollowingAddition(stateObject, type);

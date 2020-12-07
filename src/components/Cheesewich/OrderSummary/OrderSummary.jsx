@@ -4,11 +4,6 @@ import * as utils from './orderSummaryUtils';
 import Button from '../../UI/Button/Button.jsx';
 
 class OrderSummary extends Component {
-
-    componentDidUpdate() {
-        console.log('Summary did update');
-    }
-
     render(){
         return (
             <Aux>

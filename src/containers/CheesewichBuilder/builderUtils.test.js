@@ -1,7 +1,56 @@
-import * as utils from './utils';
+import React from 'react';
+import * as utils from './builderUtils';
+import Spinner from '../../components/UI/Spinner/Spinner.jsx';
+import OrderSummary from '../../components/Cheesewich/OrderSummary/OrderSummary.jsx';
 import INGREDIENT_PRICES from '../../components/Cheesewich/Ingredients/ingredientPrices';
 
 describe('utils.js', ()=>{
+    describe('getOrderDataForCheckout()', ()=>{
+        test('Maps state fields and customer info to an object and returns it.', ()=>{
+            const state = {
+                ingredients: [],
+                totalPrice: 1234
+            };
+            const customerInfo = 'test';
+            const result = utils.getOrderDataForCheckout(state, customerInfo);
+            const expectedResult = {
+                ingredients: [],
+                price: 1234,
+                customer: 'test'
+            };
+            expect(result).toEqual(expectedResult);
+        });
+    });
+    describe('showSpinnerOrSummary()', ()=>{
+        describe('GIVEN: A state with a loading field set to TRUE, ', ()=>{
+            test('THEN: It returns a loading spinner.', ()=>{
+                const state = {
+                    loading: true
+                };
+                const result = utils.showSpinnerOrSummary(state);
+                jest.mock('../../components/UI/Spinner/Spinner.jsx');
+                const expectedResult = <Spinner/>;
+                expect(result).toEqual(expectedResult);
+            });
+        });
+        describe('GIVEN: A state with a loading field set to FALSE, ', ()=>{
+            test('THEN: It returns the OrderSummary.', ()=>{
+                const state = {
+                    loading: false,
+                    totalPrice: 1234
+                };
+                const cancelFn = jest.fn();
+                const gotoCheckoutFn = jest.fn();
+                const result = utils.showSpinnerOrSummary(state, cancelFn, gotoCheckoutFn);
+                jest.mock('../../components/Cheesewich/OrderSummary/OrderSummary.jsx');
+                const expectedResult = <OrderSummary ingredients={state.ingredients}
+                                                     orderCancelled={cancelFn}
+                                                     goToCheckout={gotoCheckoutFn}
+                                                     price={state.totalPrice}/>;
+                expect(result).toEqual(expectedResult);
+            });
+        });
+    });
     describe('additionFn()', ()=>{
         INGREDIENT_PRICES['testIngredient1'] = 1.35;
         INGREDIENT_PRICES['testIngredient2'] = 42.61;
