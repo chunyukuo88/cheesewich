@@ -6,16 +6,10 @@ import Backdrop from '../../UI/Backdrop/Backdrop.jsx';
 import Aux from '../../../hoc/auxilliary.js';
 
 const SideDrawer = props => {
-    // let attachedClasses = [classes.side_drawer, classes.closed];
-    // if (props.open) {
-    //     attachedClasses = [classes.side_drawer, classes.open];
-    // }
-    const attachedClasses = getClasses(props);
-    
     return (
         <Aux>
             <Backdrop show={props.open} clicked={props.closed}/>
-            <div className={attachedClasses.join(' ')}>
+            <div className={getClasses(props).join(' ')}>
                 {/* Logo */}
                 <nav>
                     <NavItems />
