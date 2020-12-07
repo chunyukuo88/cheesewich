@@ -10,13 +10,12 @@ export const ingredients = [
 
 export const getIngredientsDisplay = (props, ingredientArray) => {
     return ingredientArray.map(ingredient => {
-        console.log(ingredient) 
         return (
         <QuantityAdjuster key={ingredient.label} 
                           label={ingredient.label} 
                           added={()=> props.addIngredient(ingredient.type)}
                           removed={()=> props.removeIngredient(ingredient.type)}
                           disabled={props.disabled[ingredient.type]}/>
-                );
+        );
     });
 };
