@@ -10,7 +10,7 @@ const withErrorHandler = (ComponentToBeWrapped, axios) => {
             error: null,
             test: 42
         };
-        componentDidMount () {
+        componentWillMount () {
             this.reqInterceptor = axios.interceptors.request.use(req => {
                 this.setState({ error: null });
                 return req;
@@ -19,6 +19,11 @@ const withErrorHandler = (ComponentToBeWrapped, axios) => {
                 this.setState({ error: error });
                 console.error('=== Error ===', error);
             });
+        }
+
+        componentWillUnmount () {
+            axios.interceptors.request.eject(this.reqInterceptor);
+            axios.interceptors.request.eject(this.resInterceptor);
         }
 
         userAcknowledgesError = () => {

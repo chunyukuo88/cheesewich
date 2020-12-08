@@ -23,7 +23,8 @@ export const defaultBuilderState = {
     totalPrice: 2,
     userCanOrder: false,
     userHasPlacedOrder: false,
-    loading: false
+    loading: false,
+    error: null
 };
 
 export const additionFn = (stateObject, type) => {

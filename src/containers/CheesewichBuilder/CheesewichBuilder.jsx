@@ -21,14 +21,18 @@ class CheesewichBuilder extends Component {
         totalPrice: 2,
         userCanOrder: false,
         userHasPlacedOrder: false,
-        loading: false
+        loading: false,
+        error: null
     };
 
     componentDidMount() {
         axios.get('https://cheesewich-49a69-default-rtdb.firebaseio.com/ingredients.json')
              .then(res => {
                 this.setState({ingredients : res.data});
-             });
+             })
+            .catch(error => {
+                this.setState({error: error});
+            });
     }
 
     addIngredient = type => this.setState(additionFn(this.state, type));
@@ -47,7 +51,7 @@ class CheesewichBuilder extends Component {
     render(){
         const disabledInfo = produceDisabledInfoObject(this.state.ingredients);
         let orderSummary = null;
-        let cheesewichAndControls = <Spinner />;
+        let cheesewichAndControls = this.state.error ? <p>Ingredients could not be found.</p> : <Spinner />;
         if (this.state.ingredients) {
            cheesewichAndControls = (
                 <Aux>
