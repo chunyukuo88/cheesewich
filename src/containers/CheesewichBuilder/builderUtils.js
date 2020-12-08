@@ -18,7 +18,7 @@ export const customerInfo = {
     country: 'Snackistan',
 };
 
-export const stateWhenPageFirstLoads = {
+export const defaultBuilderState = {
     ingredients: { bacon: 0, cheese: 0, mustard: 0, shallots: 0, },
     totalPrice: 2,
     userCanOrder: false,

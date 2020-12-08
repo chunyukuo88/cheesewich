@@ -4,7 +4,7 @@ import Aux from '../../hoc/auxilliary';
 import { additionFn,
          removalFn,
          produceDisabledInfoObject,
-         stateWhenPageFirstLoads,
+         defaultBuilderState,
          getOrderDataForCheckout,
          customerInfo } from './builderUtils';
 import Cheesewich from '../../components/Cheesewich/Cheesewich.jsx';
@@ -40,8 +40,8 @@ class CheesewichBuilder extends Component {
         this.setState({loading: true});
         const order = getOrderDataForCheckout(this.state, customerInfo);
         axios.post('/orders.json', order)
-                .then(() => this.setState(stateWhenPageFirstLoads))
-                .catch(e => this.setState(stateWhenPageFirstLoads));
+                .then(() => this.setState(defaultBuilderState))
+                .catch(e => this.setState(defaultBuilderState));
     }
 
     render(){
