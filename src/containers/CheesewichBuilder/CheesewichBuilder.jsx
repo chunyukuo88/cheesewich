@@ -1,21 +1,36 @@
 import React, { Component } from 'react';
 import axios from '../../../src/axios-instance';
 import Aux from '../../hoc/auxilliary';
-import { additionFn, 
-         removalFn, 
-         produceDisabledInfoObject, 
-         stateWhenPageFirstLoads, 
+import { additionFn,
+         removalFn,
+         produceDisabledInfoObject,
+         stateWhenPageFirstLoads,
          getOrderDataForCheckout,
-         showSpinnerOrSummary,
+         // showSpinnerOrSummary,
          customerInfo } from './builderUtils';
 import Cheesewich from '../../components/Cheesewich/Cheesewich.jsx';
 import UserControls from '../../components/Cheesewich/UserControls/UserControls.jsx';
 import Modal from '../../components/UI/Modal/Modal.jsx';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
+import Spinner from "../../components/UI/Spinner/Spinner";
+import OrderSummary from "../../components/Cheesewich/OrderSummary/OrderSummary";
 
 
 class CheesewichBuilder extends Component {
-    state = stateWhenPageFirstLoads;
+    state = {
+        ingredients: null,
+        totalPrice: 2,
+        userCanOrder: false,
+        userHasPlacedOrder: false,
+        loading: false
+    };
+
+    componentDidMount() {
+        axios.get('https://cheesewich-49a69-default-rtdb.firebaseio.com/ingredients.json')
+             .then(res => {
+                this.setState({ingredients : res.data});
+             });
+    }
 
     addIngredient = type => this.setState(additionFn(this.state, type));
     removeIngredient = type => this.setState(removalFn(this.state, type));
@@ -32,20 +47,37 @@ class CheesewichBuilder extends Component {
 
     render(){
         const disabledInfo = produceDisabledInfoObject(this.state.ingredients);
-        const orderSummary = showSpinnerOrSummary(this.state, this.orderCancellationHandler, this.proceedToCheckoutHandler)
+        let orderSummary = null;
+        let cheesewichAndControls = <Spinner />;
+        if (this.state.ingredients) {
+           cheesewichAndControls = (
+                <Aux>
+                    <Cheesewich ingredients={this.state.ingredients} />
+                    <UserControls addIngredient={this.addIngredient}
+                                  removeIngredient={this.removeIngredient}
+                                  disabled={disabledInfo}
+                                  price={this.state.totalPrice}
+                                  purchasable={this.state.userCanOrder}
+                                  ordered={this.orderHandler}/>
+                </Aux>
+            );
+            orderSummary = <OrderSummary ingredients={this.state.ingredients}
+                                         orderCancelled={this.orderCancellationHandler}
+                                         goToCheckout={this.proceedToCheckoutHandler}
+                                         price={this.state.totalPrice}/>;
+        }
+        if (this.state.loading) {
+            orderSummary = <Spinner />;
+        }
+        console.log('this.state.loading: ', this.state.loading);
+        console.log('this.state.ingredients: ', this.state.ingredients);
         return (
             <Aux>
-                <Modal show={this.state.userHasPlacedOrder} 
+                <Modal show={this.state.userHasPlacedOrder}
                        modalClosed={this.orderCancellationHandler}>
                     {orderSummary}
                 </Modal>
-                <Cheesewich ingredients={this.state.ingredients} />
-                <UserControls addIngredient={this.addIngredient} 
-                              removeIngredient={this.removeIngredient}
-                              disabled={disabledInfo}
-                              price={this.state.totalPrice}
-                              purchasable={this.state.userCanOrder}
-                              ordered={this.orderHandler}/>
+                {cheesewichAndControls}
             </Aux>
         );
     }

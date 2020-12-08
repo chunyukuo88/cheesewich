@@ -1,25 +1,25 @@
-import { showError } from './withErrorHandlerUtils';
+import React, { Component } from 'react';
+import Enzyme, { shallow, render } from 'enzyme';
+import EnzymeAdapter from 'enzyme-adapter-react-16';
+import withErrorHandler from './withErrorHandler';
+import axios from '../../../src/axios-instance';
 
-describe('withErrorHandlerUtils.js', () =>{
-    describe('showError()', () =>{
-        describe('WHEN: Given an error object, ', ()=>{
-           test('THEN: It returns the message of that object.', ()=>{
-                const errorObject = {
-                    error: {
-                        message: 'test',
-                    },
-                };
-                const result = showError(errorObject);
-                console.log(result);
-                expect(result).toBe('test');
-           });
-        });
-        describe('WHEN: Given an empty errorObject, ', ()=>{
-           test('THEN: It returns nulls.', ()=>{
-                const errorObject = {};
-                const result = showError(errorObject);
-                expect(result).toBeNull();
-           });
+Enzyme.configure({ adapter: new EnzymeAdapter()});
+
+describe('withErrorHandler.jsx', ()=>{
+    describe('withErrorHandler()', ()=>{
+        describe('WHEN: Given a component and an axios instance', ()=>{
+            test('THEN: It returns a modal and wrapped component.', () => {
+                const toBeWrapped = <div>I should be wrapped</div>;
+                jest.mock('../../../src/axios-instance', ()=>{
+                    return jest.fn(()=> {});
+                });
+                const axios = require('../../../src/axios-instance');
+                const resultantFunction = withErrorHandler(toBeWrapped, axios);
+                const result = new resultantFunction();
+                expect(result.state.test).toBe(42);
+                expect(result.state.error).toBe(null);
+            });
         });
     });
 });

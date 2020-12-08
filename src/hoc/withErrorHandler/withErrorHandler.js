@@ -4,10 +4,11 @@ import Aux from '../auxilliary.js';
 import { showError } from './withErrorHandlerUtils';
 
 const withErrorHandler = (ComponentToBeWrapped, axios) => {
-    //Note the anonymous class; `withErrorHandler` is a class factory.
+    //NOTE: `withErrorHandler` is a class factory.
     return class extends Component {
         state = {
-            error: null
+            error: null,
+            test: 42
         };
         componentDidMount () {
             this.reqInterceptor = axios.interceptors.request.use(req => {
