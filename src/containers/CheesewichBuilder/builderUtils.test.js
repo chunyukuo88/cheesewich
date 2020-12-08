@@ -1,7 +1,5 @@
 import React from 'react';
 import * as utils from './builderUtils';
-import Spinner from '../../components/UI/Spinner/Spinner.jsx';
-import OrderSummary from '../../components/Cheesewich/OrderSummary/OrderSummary.jsx';
 import INGREDIENT_PRICES from '../../components/Cheesewich/Ingredients/ingredientPrices';
 
 describe('utils.js', ()=>{
@@ -19,36 +17,6 @@ describe('utils.js', ()=>{
                 customer: 'test'
             };
             expect(result).toEqual(expectedResult);
-        });
-    });
-    describe('showSpinnerOrSummary()', ()=>{
-        describe('GIVEN: A state with a loading field set to TRUE, ', ()=>{
-            test('THEN: It returns a loading spinner.', ()=>{
-                const state = {
-                    loading: true
-                };
-                const result = utils.showSpinnerOrSummary(state);
-                jest.mock('../../components/UI/Spinner/Spinner.jsx');
-                const expectedResult = <Spinner/>;
-                expect(result).toEqual(expectedResult);
-            });
-        });
-        describe('GIVEN: A state with a loading field set to FALSE, ', ()=>{
-            test('THEN: It returns the OrderSummary.', ()=>{
-                const state = {
-                    loading: false,
-                    totalPrice: 1234
-                };
-                const cancelFn = jest.fn();
-                const gotoCheckoutFn = jest.fn();
-                const result = utils.showSpinnerOrSummary(state, cancelFn, gotoCheckoutFn);
-                jest.mock('../../components/Cheesewich/OrderSummary/OrderSummary.jsx');
-                const expectedResult = <OrderSummary ingredients={state.ingredients}
-                                                     orderCancelled={cancelFn}
-                                                     goToCheckout={gotoCheckoutFn}
-                                                     price={state.totalPrice}/>;
-                expect(result).toEqual(expectedResult);
-            });
         });
     });
     describe('additionFn()', ()=>{
@@ -131,9 +99,9 @@ describe('utils.js', ()=>{
     describe('produceDisabledInfoObject()', ()=>{
         describe('WHEN: Given an object of zero ingredients, ', ()=>{
             test('THEN: It replaces the zeroes with booleans (true) and returns the object.', ()=>{
-                const ingredients = { 
-                    testIngredient1: 0, 
-                    testIngredient2: 0 
+                const ingredients = {
+                    testIngredient1: 0,
+                    testIngredient2: 0
                 };
                 const result = utils.produceDisabledInfoObject(ingredients);
                 expect(result.testIngredient1).toEqual(true);
@@ -142,9 +110,9 @@ describe('utils.js', ()=>{
         });
         describe('WHEN: Given an object of ingredients and their quantities, ', ()=>{
             test('THEN: It replaces the quantities with booleans (false) and returns the object.', ()=>{
-                const ingredients = { 
-                    testIngredient1: 3333, 
-                    testIngredient2: 0 
+                const ingredients = {
+                    testIngredient1: 3333,
+                    testIngredient2: 0
                 };
                 const result = utils.produceDisabledInfoObject(ingredients);
                 expect(result.testIngredient1).toEqual(false);

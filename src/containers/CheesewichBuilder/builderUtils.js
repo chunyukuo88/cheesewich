@@ -18,15 +18,6 @@ export const customerInfo = {
     country: 'Snackistan',
 };
 
-export const showSpinnerOrSummary = (state, cancelFn, gotoCheckoutFn) => {
-    return (state.loading)
-        ? <Spinner />
-        : <OrderSummary ingredients={state.ingredients}
-                        orderCancelled={cancelFn}
-                        goToCheckout={gotoCheckoutFn}
-                        price={state.totalPrice}/>;
-};
-
 export const stateWhenPageFirstLoads = {
     ingredients: { bacon: 0, cheese: 0, mustard: 0, shallots: 0, },
     totalPrice: 2,

@@ -6,7 +6,6 @@ import { additionFn,
          produceDisabledInfoObject,
          stateWhenPageFirstLoads,
          getOrderDataForCheckout,
-         // showSpinnerOrSummary,
          customerInfo } from './builderUtils';
 import Cheesewich from '../../components/Cheesewich/Cheesewich.jsx';
 import UserControls from '../../components/Cheesewich/UserControls/UserControls.jsx';
