@@ -10,7 +10,6 @@ describe('withErrorHandlerUtils.js', () =>{
                     },
                 };
                 const result = showError(errorObject);
-                console.log(result);
                 expect(result).toBe('test');
            });
         });

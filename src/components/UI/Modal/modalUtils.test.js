@@ -64,13 +64,12 @@ describe('modalUtils.js', ()=> {
         });
         describe('WHEN: nextProps.children and props.children are the same, ', ()=> {
             test('THEN: It returns false', ()=> {
-                const nextProps = {                    
+                const nextProps = {
                     children: `<div></div>`
                 };
                 const props = {
                     children: `<div></div>`
                 };
-                console.log(props)
                 const result = childrenOrShowHaveChanged(nextProps, props);
                 expect(result).toBe(false);
             });

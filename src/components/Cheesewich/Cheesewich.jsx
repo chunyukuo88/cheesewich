@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 import classes from './Cheesewich.css';
 import Ingredient from '../Cheesewich/Ingredients/Ingredients.jsx';
 import { OptionalIngredients, checkForIngredients, reduceIngredients } from './OptionalIngredients';
@@ -17,4 +18,4 @@ const Cheesewich = props => {
     );
 };
 
-export default Cheesewich;
+export default withRouter(Cheesewich);

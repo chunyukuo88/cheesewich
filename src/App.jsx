@@ -9,7 +9,7 @@ const App = () => (
     <Layout>
         <Switch>
             <Route path='/' component={CheesewichBuilder}/>
-            <Route path='/checkout' component={Checkout}/>
+            <Route path='/checkout' exact component={Checkout}/>
         </Switch>
     </Layout>
   </div>

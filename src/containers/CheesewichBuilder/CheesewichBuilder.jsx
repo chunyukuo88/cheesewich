@@ -26,6 +26,7 @@ class CheesewichBuilder extends Component {
     };
 
     componentDidMount() {
+        console.log('CheesewichBuilder, componentDidMount() -- props: ', this.props);
         axios.get('https://cheesewich-49a69-default-rtdb.firebaseio.com/ingredients.json')
              .then(res => {
                 this.setState({ingredients : res.data});
@@ -41,11 +42,12 @@ class CheesewichBuilder extends Component {
     orderCancellationHandler = () => this.setState({userHasPlacedOrder: false});
 
     proceedToCheckoutHandler = () => {
-        this.setState({loading: true});
-        const order = getOrderDataForCheckout(this.state, customerInfo);
-        axios.post('/orders.json', order)
-                .then(() => this.setState(defaultBuilderState))
-                .catch(e => this.setState(defaultBuilderState));
+        // this.setState({loading: true});
+        // const order = getOrderDataForCheckout(this.state, customerInfo);
+        // axios.post('/orders.json', order)
+        //         .then(() => this.setState(defaultBuilderState))
+        //         .catch(e => this.setState(defaultBuilderState));
+        this.props.history.push('/checkout');
     }
 
     render(){
