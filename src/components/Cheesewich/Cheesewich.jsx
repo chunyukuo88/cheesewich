@@ -5,17 +5,23 @@ import Ingredient from '../Cheesewich/Ingredients/Ingredients.jsx';
 import { OptionalIngredients, checkForIngredients, reduceIngredients } from './OptionalIngredients';
 
 const Cheesewich = props => {
-    let transformedIngredients = OptionalIngredients(props.ingredients);
-    const reduced = reduceIngredients(transformedIngredients);
-    transformedIngredients = checkForIngredients(reduced, transformedIngredients);
+
+    const ingredients = getIngredients(props)
 
     return (
         <div className={classes.cheesewich}>
             <Ingredient type="bread-top"/>
-                {transformedIngredients}
+                {ingredients}
             <Ingredient type="bread-bottom"/>
         </div>
     );
+};
+
+export const getIngredients = ({ingredients}) => {
+    let transformedIngredients = OptionalIngredients(ingredients);
+    const reduced = reduceIngredients(transformedIngredients);
+    transformedIngredients = checkForIngredients(reduced, transformedIngredients);
+    return transformedIngredients;
 };
 
 export default withRouter(Cheesewich);
