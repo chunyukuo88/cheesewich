@@ -2,12 +2,13 @@ import React from 'react';
 import Cheesewich from '../../Cheesewich/Cheesewich';
 import Button from '../../UI/Button/Button';
 import classes from './CheckoutSummary.css';
-const CheckoutSummary = props => {
 
+
+const CheckoutSummary = props => {
     //TODO: Move this.
     const cheesewichInlineStyle = {
+        margin: 'auto',
         width: '100%',
-        margin: 'auto'
     };
 
     return (

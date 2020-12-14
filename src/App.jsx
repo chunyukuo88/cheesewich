@@ -8,8 +8,8 @@ const App = () => (
   <div>
     <Layout>
         <Switch>
-            <Route path='/' component={CheesewichBuilder}/>
-            <Route path='/checkout' exact component={Checkout}/>
+            <Route path='/' exact component={CheesewichBuilder}/>
+            <Route path='/checkout' component={Checkout}/>
         </Switch>
     </Layout>
   </div>

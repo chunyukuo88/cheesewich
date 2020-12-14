@@ -1,5 +1,4 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
 import classes from './Cheesewich.css';
 import Ingredient from '../Cheesewich/Ingredients/Ingredients.jsx';
 import { OptionalIngredients, checkForIngredients, reduceIngredients } from './OptionalIngredients';
@@ -7,7 +6,6 @@ import { OptionalIngredients, checkForIngredients, reduceIngredients } from './O
 const Cheesewich = props => {
 
     const ingredients = getIngredients(props)
-
     return (
         <div className={classes.cheesewich}>
             <Ingredient type="bread-top"/>
@@ -24,4 +22,4 @@ export const getIngredients = ({ingredients}) => {
     return transformedIngredients;
 };
 
-export default withRouter(Cheesewich);
+export default Cheesewich;

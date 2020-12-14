@@ -23,6 +23,7 @@ class CheesewichBuilder extends Component {
     };
 
     componentDidMount() {
+        console.log('componentDidMount(): ', this.props);
         axios.get(urls.firebaseIngredients)
              .then(res => {
                 this.setState({ingredients : res.data});
@@ -36,10 +37,7 @@ class CheesewichBuilder extends Component {
     removeIngredient = type => this.setState(removalFn(this.state, type));
     orderHandler = () => this.setState({userHasPlacedOrder: true});
     orderCancellationHandler = () => this.setState({userHasPlacedOrder: false});
-
-    proceedToCheckoutHandler = () => {
-        this.props.history.push('/checkout');
-    }
+    proceedToCheckoutHandler = () => this.props.history.push('/checkout');
 
     render(){
         const disabledInfo = produceDisabledInfoObject(this.state.ingredients);
@@ -65,8 +63,6 @@ class CheesewichBuilder extends Component {
         if (this.state.loading) {
             orderSummary = <Spinner />;
         }
-        console.log('this.state.loading: ', this.state.loading);
-        console.log('this.state.ingredients: ', this.state.ingredients);
         return (
             <Aux>
                 <Modal show={this.state.userHasPlacedOrder}
