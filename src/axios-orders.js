@@ -1,7 +1,8 @@
 import axios from 'axios';
+import urls from './urls';
 
 const instance = axios.create({
-    baseURL: 'cheesewich-49a69-default-rtdb',
+    baseURL: urls.ordersBaseUrl
 });
 
 export default instance;
