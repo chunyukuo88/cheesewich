@@ -5,14 +5,12 @@ import CheesewichBuilder from './containers/CheesewichBuilder/CheesewichBuilder.
 import Checkout from './containers/Checkout/Checkout';
 
 const App = () => (
-  <div>
     <Layout>
         <Switch>
             <Route path='/' exact component={CheesewichBuilder}/>
             <Route path='/checkout' component={Checkout}/>
         </Switch>
     </Layout>
-  </div>
 );
 
 export default App;

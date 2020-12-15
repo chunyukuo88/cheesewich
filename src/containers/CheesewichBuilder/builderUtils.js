@@ -27,6 +27,19 @@ export const defaultBuilderState = {
     error: null
 };
 
+export const goToCheckoutHandler = (state, props) => {
+    const queryParams = [];
+    const ingredients = state.ingredients;
+    for (let i in ingredients) {
+        queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(ingredients[i]));
+    }
+    const queryString = queryParams.join('&');
+    props.history.push({
+        pathname: '/checkout',
+        search: '?' + queryString
+    });
+};
+
 export const additionFn = (stateObject, type) => {
     const updatedIngredients = _updateQuantitiesFollowingAddition(stateObject, type);
     const newPrice = _updatePriceFollowingAddition(stateObject, type);

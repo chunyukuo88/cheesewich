@@ -1,3 +1,1 @@
-export const showError = (errorObject) => {
-    return (errorObject.error) ? errorObject.error.message : null;
-}
+export const showError = errorObject => (errorObject.error) ? errorObject.error.message : null;
