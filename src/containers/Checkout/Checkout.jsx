@@ -1,18 +1,14 @@
 import React, { Component } from 'react';
 import CheckoutSummary from '../../components/Order/CheckoutSummary/CheckoutSummary';
+import { getIngredientsFromURI } from './checkoutUtils';
 
 class Checkout extends Component {
     state = {
-        ingredients: {}
+        ingredients: {},
     };
 
     componentDidMount() {
-        const query = new URLSearchParams(this.props.location.search);
-        const ingredients = {};
-        for (const param of query.entries()) {
-            ingredients[param[0]] = +param[1];
-        };
-        this.setState({ingredients: ingredients});
+        this.setState({ingredients: getIngredientsFromURI(this.props)});
     }
 
     checkoutCancelledHandler = () => this.props.history.goBack();
