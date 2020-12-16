@@ -6,11 +6,13 @@ import ContactData from './ContactData/ContactData';
 
 class Checkout extends Component {
     state = {
-        ingredients: {},
+        ingredients: null,
+        price: 0,
     };
 
-    componentDidMount() {
-        this.setState({ingredients: getIngredientsFromURI(this.props)});
+    componentWillMount() {
+        const { ingredients, price } = getIngredientsFromURI(this.props);
+        this.setState({ingredients: ingredients, price: price});
     }
 
     checkoutCancelledHandler = () => this.props.history.goBack();
@@ -22,7 +24,9 @@ class Checkout extends Component {
                 <CheckoutSummary ingredients={this.state.ingredients}
                                  checkoutCancelled={this.checkoutCancelledHandler}
                                  checkoutContinue={this.checkoutContinueHandler}/>
-                <Route path={`${this.props.match.path}/contact-data`} component={ContactData}/>
+                <Route
+                    path={`${this.props.match.path}/contact-data`}
+                    render={()=> <ContactData ingredients={this.state.ingredients} price={this.state.price}/>}/>
             </div>
         );
     }

@@ -28,18 +28,19 @@ export const defaultBuilderState = {
 };
 
 export const goToCheckoutHandler = (state, props) => {
-    const queryString = _produceQueryString(state.ingredients);
+    const queryString = _produceQueryString(state);
     props.history.push({
         pathname: '/checkout',
         search: '?' + queryString
     });
 };
 
-const _produceQueryString = ingredients => {
+const _produceQueryString = ({ingredients, totalPrice}) => {
     const queryParams = [];
     for (const i in ingredients) {
         queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(ingredients[i]));
     };
+    queryParams.push(`price=${totalPrice}`);
     return queryParams.join('&');
 };
 
