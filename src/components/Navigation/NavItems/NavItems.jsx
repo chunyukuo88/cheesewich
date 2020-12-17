@@ -4,8 +4,8 @@ import NavigationItem from '../NavigationItem/NavigationItem.jsx';
 
 const NavItems = () => (
     <ul className={classes.nav_items}>
-        <NavigationItem link="/" active>Cheesewich Builder</NavigationItem>
-        <NavigationItem link="/">Checkout</NavigationItem>
+        <NavigationItem link="/" exact>Cheesewich Builder</NavigationItem>
+        <NavigationItem link="/orders">Orders</NavigationItem>
     </ul>
 );
 

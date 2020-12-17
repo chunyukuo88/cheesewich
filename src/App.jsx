@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import Layout from './hoc/Layout/Layout.jsx';
 import CheesewichBuilder from './containers/CheesewichBuilder/CheesewichBuilder.jsx';
 import Checkout from './containers/Checkout/Checkout.jsx';
-import Orders from './containers/Orders/Orders.jsx'l
+import Orders from './containers/Orders/Orders.jsx';
 
 const App = () => (
     <Layout>
