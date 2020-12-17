@@ -21,14 +21,9 @@ class CheesewichBuilder extends Component {
     };
 
     componentDidMount() {
-        console.log('componentDidMount(): ', this.props);
         axios.get(urls.firebaseIngredients)
-             .then(res => {
-                this.setState({ingredients : res.data});
-             })
-            .catch(error => {
-                this.setState({error: error});
-            });
+             .then(res => this.setState({ingredients : res.data}))
+             .catch(error => this.setState({error: error}));
     }
 
     addIngredient = type => this.setState(utils.additionFn(this.state, type));

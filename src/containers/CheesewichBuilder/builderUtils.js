@@ -1,6 +1,3 @@
-import React from 'react';
-import OrderSummary from '../../components/Cheesewich/OrderSummary/OrderSummary.jsx';
-import Spinner from '../../components/UI/Spinner/Spinner.jsx';
 import INGREDIENT_PRICES from '../../components/Cheesewich/Ingredients/ingredientPrices';
 
 export const getOrderDataForCheckout = (state, customerInfo) => {
@@ -9,22 +6,6 @@ export const getOrderDataForCheckout = (state, customerInfo) => {
         price: state.totalPrice,
         customer: customerInfo,
     };
-};
-
-export const customerInfo = {
-    name: 'David the Airplane',
-    address: '123 Food Street',
-    town: 'Flavor Town',
-    country: 'Snackistan',
-};
-
-export const defaultBuilderState = {
-    ingredients: { bacon: 0, cheese: 0, mustard: 0, shallots: 0, },
-    totalPrice: 2,
-    userCanOrder: false,
-    userHasPlacedOrder: false,
-    loading: false,
-    error: null
 };
 
 export const goToCheckoutHandler = (state, props) => {

@@ -10,7 +10,7 @@ class Checkout extends Component {
         price: 0,
     };
 
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
         const { ingredients, price } = getIngredientsFromURI(this.props);
         this.setState({ingredients: ingredients, price: price});
     }
