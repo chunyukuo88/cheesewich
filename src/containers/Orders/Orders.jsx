@@ -14,7 +14,6 @@ class Orders extends Component {
             .then(res => {
                 const fetchedOrders = this.buildFetchedOrders(res);
                 this.setState({ orders: fetchedOrders, loading: false});
-                console.log(this.state.orders);
             })
             .catch(err => {
                 this.setState({ loading: false});
@@ -33,14 +32,16 @@ class Orders extends Component {
     }
 
     render(){
-        return (
-            <div>
-                {this.state.orders.map((order, key) => (
-                    <Order key={key} ingredients={order.ingredients} price={order.price}/>
-                ))}
-            </div>
-        );
+        return <div>{getContent(this.state)}</div>;
     }
+}
+
+const getContent = ({ orders }) => {
+    return orders.map(({ingredients, price}, key) => (
+        <Order key={key}
+               ingredients={ingredients}
+               price={price}/>
+    ));
 }
 
 export default withErrorHandler(Orders, axios);
