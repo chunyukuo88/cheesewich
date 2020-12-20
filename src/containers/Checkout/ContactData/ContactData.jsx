@@ -4,13 +4,15 @@ import classes from './ContactData.css';
 import axios from '../../../axios-orders';
 import Input from '../../../components/UI/Input/Input';
 
+
 class ContactData extends Component {
     state = {
-        name: '',
-        email: '',
-        address: {
-            street: '',
-            postalCode: ''
+        orderForm: {
+            name: buildOrderFieldObject('input', 'text', 'Your name'),
+            street: buildOrderFieldObject('input', 'text', 'Street'),
+            zipCode: buildOrderFieldObject('input', 'text', 'ZIP code'),
+            email: buildOrderFieldObject('input', 'email', 'Your email'),
+            deliveryMethod: getDeliveryMethodField(),
         },
         loading: false,
     }
@@ -48,5 +50,29 @@ class ContactData extends Component {
         );
     }
 }
+
+const buildOrderFieldObject = (elementType, inputType, placeholder, value = '') => {
+    return {
+        elementType: elementType,
+        elementConfig: {
+            type: inputType,
+            placeholder: placeholder
+        },
+        value: value
+    };
+};
+
+const getDeliveryMethodField = () => {
+    return {
+        elementType: 'select',
+        elementConfig: {
+            options: [
+                {value: 'fastest', displayValue: 'Fastest'},
+                {value: 'cheapest', displayValue: 'Cheapest'}
+            ]
+        },
+        value: ''
+    };
+};
 
 export default ContactData;

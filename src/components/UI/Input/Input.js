@@ -12,10 +12,9 @@ const Input = props => {
 
 const getInputElement = (props) => {
     let inputElement = null;
-
     switch (props.inputtype) {
-        case ('input'): inputElement = <input className={classes.Input} {...props}/>
         case ('textarea'): inputElement = <textarea className={classes.InputElement} {...props}/>
+        case ('input'): inputElement = <input className={classes.Input} {...props}/>
         default: inputElement = <input className={classes.Label} {...props}/>
     }
     return inputElement;
