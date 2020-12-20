@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Button from '../../../components/UI/Button/Button';
 import classes from './ContactData.css';
 import axios from '../../../axios-orders';
-import Input from '../../../components/UI/Input/Input';
+import Input from '../../../components/UI/Input/Input.jsx';
 
 
 class ContactData extends Component {
@@ -40,10 +40,10 @@ class ContactData extends Component {
             <div className={classes.ContactData}>
                 <h4>Enter your contact info</h4>
                 <form>
-                    <Input inputtype="text" name="name" placeholder="Your name" />
-                    <Input inputtype="email" name="email" placeholder="Your email" />
-                    <Input inputtype="text" name="street" placeholder="Address" />
-                    <Input inputtype="text" name="postal" placeholder="Postal Code" />
+                    <Input props={this.state.orderForm.name}/>
+                    <Input props={this.state.orderForm.street}/>
+                    <Input props={this.state.orderForm.zipCode}/>
+                    <Input props={this.state.orderForm.deliveryMethod}/>
                     <Button btnType="Success" clicked={this.orderHandler}>ORDER!</Button>
                 </form>
             </div>
