@@ -4,7 +4,6 @@ import classes from './ContactData.css';
 import axios from '../../../axios-orders';
 import Input from '../../../components/UI/Input/Input.jsx';
 
-
 class ContactData extends Component {
     state = {
         orderForm: {
@@ -36,20 +35,36 @@ class ContactData extends Component {
     }
 
     render(){
+        const formElementsArray = createFormElementsArray(this.state);
         return (
             <div className={classes.ContactData}>
                 <h4>Enter your contact info</h4>
                 <form>
-                    <Input props={this.state.orderForm.name}/>
-                    <Input props={this.state.orderForm.street}/>
-                    <Input props={this.state.orderForm.zipCode}/>
-                    <Input props={this.state.orderForm.deliveryMethod}/>
-                    <Button btnType="Success" clicked={this.orderHandler}>ORDER!</Button>
+                    {formElementsArray.map(el =>  {
+                        return <Input key={el.id}
+                                      elementType={el.config.elementType}
+                                      elementConfig={el.config.elementConfig}
+                                      placeholder={el.config.placeholder}
+                                      value={el.config.value}/>;
+                    })}
                 </form>
+                <Button btnType="Success" clicked={this.orderHandler}>ORDER!</Button>
             </div>
         );
     }
 }
+
+const createFormElementsArray = (state) => {
+    console.log('createFormElementsArray()')
+    const formElementsArray = [];
+    for (let key in state.orderForm) {
+        formElementsArray.push({
+            id: key,
+            config: state.orderForm[key]
+        });
+    };
+    return formElementsArray;
+};
 
 const buildOrderFieldObject = (elementType, inputType, placeholder, value = '') => {
     return {
