@@ -13,6 +13,7 @@ class ContactData extends Component {
             email: buildOrderFieldObject('input', 'email', 'Your email'),
             deliveryMethod: getDeliveryMethodField(),
         },
+        formIsValid: false,
         loading: false,
     }
 
@@ -46,10 +47,18 @@ class ContactData extends Component {
             ...updatedOrderForm[inputIdentifier]
         };
         updatedFormElement.value = event.target.value;
-        updatedOrderForm.valid = checkValidity(updatedFormElement.value, updatedFormElement.validation);
+        if (!updatedOrderForm.deliveryMethod) {
+            updatedOrderForm.valid = checkValidity(updatedFormElement.value, updatedFormElement.validation);
+        }
         updatedFormElement.touched = true;
         updatedOrderForm[inputIdentifier] = updatedFormElement;
-        this.setState({ orderForm: updatedOrderForm });
+        let formIsValid = true;
+        for (const inputId in updatedOrderForm) {
+            console.log(updatedOrderForm[inputId].valid);
+            console.log(formIsValid);
+            formIsValid = updatedOrderForm[inputId].valid && formIsValid;
+        }
+        this.setState({ orderForm: updatedOrderForm, formIsValid: formIsValid});
     }
 
     render(){
@@ -59,7 +68,7 @@ class ContactData extends Component {
                 <h4>Enter your contact info</h4>
                 <form onSubmit={this.orderHandler}>
                     {buildContent(formElementsArray, this.inputChangedHandler)}
-                    <Button btnType="Success">ORDER!</Button>
+                    <Button btnType="Success" disabled={!this.state.formIsValid}>ORDER!</Button>
                 </form>
             </div>
         );
