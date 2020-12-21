@@ -18,12 +18,15 @@ class ContactData extends Component {
 
     orderHandler = (event) => {
         event.preventDefault();
+        const formData = {};
+        for (const formElementId in this.state.orderForm){
+            formData[formElementId] = this.state.orderForm[formElementId].value;
+        };
         this.setState({ loading: true});
         const order = {
             ingredients: this.props.ingredients,
             price: this.props.price,
-            customer: {},
-            deliveryMethod: 'fastest',
+            orderData: formData,
         };
         axios.post('/orders.json', order)
             .then( res => {
@@ -51,20 +54,24 @@ class ContactData extends Component {
         return (
             <div className={classes.ContactData}>
                 <h4>Enter your contact info</h4>
-                <form>
-                    {formElementsArray.map(el =>  {
-                        return <Input key={el.id}
-                                      elementType={el.config.elementType}
-                                      elementConfig={el.config.elementConfig}
-                                      placeholder={el.config.placeholder}
-                                      value={el.config.value}
-                                      changed={(event)=>this.inputChangedHandler(event, el.id)}/>;
-                    })}
+                <form onSubmit={this.orderHandler}>
+                    {buildContent(formElementsArray, this.inputChangedHandler)}
+                    <Button btnType="Success">ORDER!</Button>
                 </form>
-                <Button btnType="Success" clicked={this.orderHandler}>ORDER!</Button>
             </div>
         );
     }
+}
+
+const buildContent = (formElementsArray, inputChangedHandler) => {
+    return formElementsArray.map(el =>  {
+            return <Input key={el.id}
+                          elementType={el.config.elementType}
+                          elementConfig={el.config.elementConfig}
+                          placeholder={el.config.placeholder}
+                          value={el.config.value}
+                          changed={(event)=>inputChangedHandler(event, el.id)}/>;
+        });
 }
 
 const createFormElementsArray = (state) => {
