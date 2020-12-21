@@ -41,7 +41,7 @@ class ContactData extends Component {
             });
     }
 
-    inputChangedHandler = (event, inputIdentifier)=> {
+    inputChangedHandler = (event, inputIdentifier) => {
         const updatedOrderForm = {
             ...this.state.orderForm
         };
@@ -50,23 +50,35 @@ class ContactData extends Component {
         };
         updatedFormElement.value = event.target.value;
         if (updatedFormElement !== updatedOrderForm.deliveryMethod) {
-            console.log('!updatedOrderForm.deliveryMethod')
             updatedOrderForm.valid = checkValidity(updatedFormElement.value, updatedFormElement.validation);
+            console.log(`${updatedFormElement.value}: ${updatedOrderForm.valid}`)
         }
         updatedFormElement.touched = true;
         updatedOrderForm[inputIdentifier] = updatedFormElement;
+
         let formIsValid = true;
-        for (const inputId in updatedOrderForm) {
-            formIsValid = updatedOrderForm[inputId].valid && formIsValid;
+        for (const inputIdentifier in updatedOrderForm) {
+            formIsValid = updatedOrderForm[inputIdentifier].valid && formIsValid;
         }
-        this.setState({ orderForm: updatedOrderForm, formIsValid: formIsValid});
+        console.log(updatedOrderForm)
+        this.setState({orderForm: updatedOrderForm, formIsValid: formIsValid});
     }
 
     render(){
         const formElementsArray = createFormElementsArray(this.state);
         return (
             <form className={classes.ContactData} onSubmit={this.orderHandler}>
-                {buildContent(formElementsArray, this.inputChangedHandler)}
+                {formElementsArray.map(el =>  {
+                    return <Input key={el.id}
+                                  elementType={el.config.elementType}
+                                  elementConfig={el.config.elementConfig}
+                                  placeholder={el.config.placeholder}
+                                  value={el.config.value}
+                                  shouldValidate={el.config.validation}
+                                  invalid={!el.config.valid} //Note the exclamation mark
+                                  touched={el.config.touched}
+                                  changed={(event)=>this.inputChangedHandler(event, el.id)}/>;
+                })}
                 <Button btnType="Success" disabled={!this.state.formIsValid}>ORDER!</Button>
             </form>
         );
@@ -127,7 +139,7 @@ const buildOrderFieldObject = (elementType, inputType, placeholder, value = '') 
             maxLength: 10,
         },
         valid: false,
-        userTouchedThis: false,
+        touched: false,
     };
     return result;
 };
