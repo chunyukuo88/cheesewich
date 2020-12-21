@@ -20,6 +20,7 @@ class ContactData extends Component {
     orderHandler = (event) => {
         //TODO: Figure out how to extract the setState method.
         event.preventDefault();
+        this.setState({ loading: true});
         const formData = {};
         for (const formElementId in this.state.orderForm){
             formData[formElementId] = this.state.orderForm[formElementId].value;
@@ -32,7 +33,8 @@ class ContactData extends Component {
         };
         axios.post('/orders.json', order)
             .then( res => {
-                this.setState({loading: false})
+                this.setState({loading: false});
+                this.props.history.push('/');
             })
             .catch( err => {
                 this.setState({loading: false})
@@ -47,7 +49,8 @@ class ContactData extends Component {
             ...updatedOrderForm[inputIdentifier]
         };
         updatedFormElement.value = event.target.value;
-        if (!updatedOrderForm.deliveryMethod) {
+        if (updatedFormElement !== updatedOrderForm.deliveryMethod) {
+            console.log('!updatedOrderForm.deliveryMethod')
             updatedOrderForm.valid = checkValidity(updatedFormElement.value, updatedFormElement.validation);
         }
         updatedFormElement.touched = true;
@@ -62,13 +65,10 @@ class ContactData extends Component {
     render(){
         const formElementsArray = createFormElementsArray(this.state);
         return (
-            <div className={classes.ContactData}>
-                <h4>Enter your contact info</h4>
-                <form onSubmit={this.orderHandler}>
-                    {buildContent(formElementsArray, this.inputChangedHandler)}
-                    <Button btnType="Success" disabled={!this.state.formIsValid}>ORDER!</Button>
-                </form>
-            </div>
+            <form className={classes.ContactData} onSubmit={this.orderHandler}>
+                {buildContent(formElementsArray, this.inputChangedHandler)}
+                <Button btnType="Success" disabled={!this.state.formIsValid}>ORDER!</Button>
+            </form>
         );
     }
 }
@@ -76,9 +76,15 @@ class ContactData extends Component {
 const checkValidity = (value, rules) => {
     let isValid = true;
     if (!rules) return true;
-    if (rules.required)  isValid = value.trim() !== '' && isValid;
-    if (rules.minLength) isValid = value.length >= rules.minLength && isValid;
-    if (rules.maxLength) isValid = value.length <= rules.maxLength && isValid;
+    if (rules.required) {
+        isValid = value.trim() !== '' && isValid;
+    }
+    if (rules.minLength) {
+        isValid = value.length >= rules.minLength && isValid
+    }
+    if (rules.maxLength) {
+        isValid = value.length <= rules.maxLength && isValid
+    }
     return isValid;
 };
 

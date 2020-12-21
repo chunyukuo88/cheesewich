@@ -8,7 +8,7 @@ const Input = props => (
     </div>
 );
 
-const Content = (props) => {
+const Content = props => {
     let inputElement = null;
     const inputClasses = [classes.InputElement];
     checkForInvalidity(props, inputClasses);
