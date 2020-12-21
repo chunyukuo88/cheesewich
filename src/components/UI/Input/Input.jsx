@@ -4,20 +4,20 @@ import classes from './Input.css';
 const Input = props => (
     <div>
         <label>{props.label}</label>
-        {getInputElement(props)}
+        {Content(props)}
     </div>
 );
 
-const checkForInvalidity = ({ invalid, shouldValidate }, classArray) => {
-    if (invalid && shouldValidate) classArray.push(classes.Invalid);
-};
-
-const getInputElement = (props) => {
+const Content = (props) => {
     let inputElement = null;
     const inputClasses = [classes.InputElement];
     checkForInvalidity(props, inputClasses);
     return buildInputElement(props, inputElement, inputClasses);
 }
+
+const checkForInvalidity = ({ invalid, shouldValidate, touched }, classArray) => {
+    if (invalid && shouldValidate && touched) classArray.push(classes.Invalid);
+};
 
 const buildInputElement = (props, inputElement, inputClasses) => {
     //TODO: Improve this after converting everything to classes AND adding Redux to the project.

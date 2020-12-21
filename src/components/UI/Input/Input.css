@@ -4,11 +4,6 @@
     width: 100%;
 }
 
-.Invalid {
-    border: 1px solid red;
-    background-color: salmon;
-}
-
 .InputElement {
     background-color: white;
     border: 1px solid #ccc;
@@ -22,6 +17,11 @@
 .InputElement:focus {
     background-color: #ccc;
     outline: none;
+}
+
+.Invalid {
+    border: 1px solid red;
+    background-color: salmon;
 }
 
 .Label {

@@ -47,6 +47,7 @@ class ContactData extends Component {
         };
         updatedFormElement.value = event.target.value;
         updatedOrderForm.valid = checkValidity(updatedFormElement.value, updatedFormElement.validation);
+        updatedFormElement.touched = true;
         updatedOrderForm[inputIdentifier] = updatedFormElement;
         this.setState({ orderForm: updatedOrderForm });
     }
@@ -88,6 +89,7 @@ const buildContent = (formElementsArray, inputChangedHandler) => {
                           value={el.config.value}
                           shouldValidate={el.config.validation}
                           invalid={!el.config.valid} //Note the exclamation mark
+                          touched={el.config.touched}
                           changed={(event)=>inputChangedHandler(event, el.id)}/>;
         });
 };
@@ -117,6 +119,7 @@ const buildOrderFieldObject = (elementType, inputType, placeholder, value = '') 
             maxLength: 10,
         },
         valid: false,
+        userTouchedThis: false,
     };
 };
 
