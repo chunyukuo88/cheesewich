@@ -1,5 +1,37 @@
 import React from 'react';
+import Spinner from "../../../components/UI/Spinner/Spinner";
+import Input from "../../../components/UI/Input/Input";
+import Button from "../../../components/UI/Button/Button";
 
+export const buildForm = ({ loading, formIsValid }, inputChangedHandler, formElementsArray) => {
+    return (loading)
+        ? <Spinner/>
+        : <form onSubmit={this.orderHandler}>
+            {formElementsArray.map(formElement => (
+                <Input
+                    key={formElement.id}
+                    elementType={formElement.config.elementType}
+                    elementConfig={formElement.config.elementConfig}
+                    value={formElement.config.value}
+                    invalid={!formElement.config.valid}
+                    shouldValidate={formElement.config.validation}
+                    touched={formElement.config.touched}
+                    changed={(event) => inputChangedHandler(event, formElement.id)} />
+            ))}
+            <Button btnType="Success" disabled={!formIsValid}>ORDER</Button>
+        </form>;
+};
+
+export const mapOrderFormToArray = (orderFormObject) => {
+    const formElementsArray = [];
+    for (let key in orderFormObject) {
+        formElementsArray.push({
+            id: key,
+            config: orderFormObject[key]
+        });
+    }
+    return formElementsArray;
+}
 export const buildInputFieldObject = (placeholder, minLength, maxLength, type) => {
     const result = {
         elementType: 'input',
@@ -34,4 +66,12 @@ export const getDeliveryMethodObject = () => {
         valid: true
     };
 };
+
+export const checkValidity = (value, rules) => {
+    let isValid = true;
+    if (rules.required) isValid = value.trim() !== '' && isValid;
+    if (rules.minLength) isValid = value.length >= rules.minLength && isValid
+    if (rules.maxLength) isValid = value.length <= rules.maxLength && isValid
+    return isValid;
+}
 
