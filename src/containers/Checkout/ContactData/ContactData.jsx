@@ -45,6 +45,7 @@ class ContactData extends Component {
             ...updatedOrderForm[inputIdentifier]
         };
         updatedFormElement.value = event.target.value;
+        updatedOrderForm.valid = checkValidity(updatedFormElement.value, updatedFormElement.validation);
         updatedOrderForm[inputIdentifier] = updatedFormElement;
         this.setState({ orderForm: updatedOrderForm });
     }
@@ -63,6 +64,20 @@ class ContactData extends Component {
     }
 }
 
+const checkValidity = (value, rules) => {
+    let isValid = true;
+    if (rules.required) {
+        isValid = value.trim() !== '' && isValid;
+    };
+    if (rules.minLength) {
+        isValid = value.length >= rules.minLength && isValid;
+    };
+    if (rules.maxLength) {
+        isValid = value.length <= rules.maxLength && isValid;
+    };
+    return isValid;
+};
+
 const buildContent = (formElementsArray, inputChangedHandler) => {
     return formElementsArray.map(el =>  {
             return <Input key={el.id}
@@ -72,7 +87,7 @@ const buildContent = (formElementsArray, inputChangedHandler) => {
                           value={el.config.value}
                           changed={(event)=>inputChangedHandler(event, el.id)}/>;
         });
-}
+};
 
 const createFormElementsArray = (state) => {
     const formElementsArray = [];
@@ -92,7 +107,13 @@ const buildOrderFieldObject = (elementType, inputType, placeholder, value = '') 
             type: inputType,
             placeholder: placeholder
         },
-        value: value
+        value: value,
+        validation: {
+            required: true,
+            minLength: 1,
+            maxLength: 10,
+        },
+        valid: false,
     };
 };
 
