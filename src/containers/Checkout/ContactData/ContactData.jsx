@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import classes from './ContactData.css';
 import axios from '../../../axios-orders';
 import { buildForm,
+         buildFormData,
          buildInputFieldObject,
+         buildOrderForAxios,
          checkValidity,
          getDeliveryMethodObject,
          mapOrderFormToArray } from './contactDataUtils';
@@ -24,15 +26,8 @@ class ContactData extends Component {
     orderHandler = ( event ) => {
         event.preventDefault();
         this.setState( { loading: true } );
-        const formData = {};
-        for (let formElementIdentifier in this.state.orderForm) {
-            formData[formElementIdentifier] = this.state.orderForm[formElementIdentifier].value;
-        }
-        const order = {
-            ingredients: this.props.ingredients,
-            price: this.props.price,
-            orderData: formData
-        }
+        const formData = buildFormData(this.state);
+        const order = buildOrderForAxios(this.props, formData);
         axios.post( '/orders.json', order )
             .then( response => {
                 this.setState( { loading: false } );

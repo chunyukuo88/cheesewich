@@ -22,16 +22,14 @@ export const buildForm = ({ loading, formIsValid }, inputChangedHandler, formEle
         </form>;
 };
 
-export const mapOrderFormToArray = (orderFormObject) => {
-    const formElementsArray = [];
-    for (let key in orderFormObject) {
-        formElementsArray.push({
-            id: key,
-            config: orderFormObject[key]
-        });
-    }
-    return formElementsArray;
-}
+export const buildFormData = ({ orderForm }) => {
+    const formData = {};
+    for (let formElementIdentifier in orderForm) {
+        formData[formElementIdentifier] = orderForm[formElementIdentifier].value;
+    };
+    return formData;
+};
+
 export const buildInputFieldObject = (placeholder, minLength, maxLength, type) => {
     const result = {
         elementType: 'input',
@@ -52,6 +50,22 @@ export const buildInputFieldObject = (placeholder, minLength, maxLength, type) =
     return result;
 };
 
+export const buildOrderForAxios = ({ingredients, price}, formData) => {
+    return {
+        ingredients: ingredients,
+        price: price,
+        orderData: formData,
+    };
+};
+
+export const checkValidity = (value, rules) => {
+    let isValid = true;
+    if (rules.required) isValid = value.trim() !== '' && isValid;
+    if (rules.minLength) isValid = value.length >= rules.minLength && isValid
+    if (rules.maxLength) isValid = value.length <= rules.maxLength && isValid
+    return isValid;
+};
+
 export const getDeliveryMethodObject = () => {
     return {
         elementType: 'select',
@@ -67,11 +81,13 @@ export const getDeliveryMethodObject = () => {
     };
 };
 
-export const checkValidity = (value, rules) => {
-    let isValid = true;
-    if (rules.required) isValid = value.trim() !== '' && isValid;
-    if (rules.minLength) isValid = value.length >= rules.minLength && isValid
-    if (rules.maxLength) isValid = value.length <= rules.maxLength && isValid
-    return isValid;
-}
-
+export const mapOrderFormToArray = (orderFormObject) => {
+    const formElementsArray = [];
+    for (let key in orderFormObject) {
+        formElementsArray.push({
+            id: key,
+            config: orderFormObject[key]
+        });
+    }
+    return formElementsArray;
+};
