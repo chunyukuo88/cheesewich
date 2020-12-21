@@ -17,6 +17,7 @@ class ContactData extends Component {
     }
 
     orderHandler = (event) => {
+        //TODO: Figure out how to extract the setState method.
         event.preventDefault();
         const formData = {};
         for (const formElementId in this.state.orderForm){
