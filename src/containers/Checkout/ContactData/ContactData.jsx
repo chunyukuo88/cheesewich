@@ -54,8 +54,6 @@ class ContactData extends Component {
         updatedOrderForm[inputIdentifier] = updatedFormElement;
         let formIsValid = true;
         for (const inputId in updatedOrderForm) {
-            console.log(updatedOrderForm[inputId].valid);
-            console.log(formIsValid);
             formIsValid = updatedOrderForm[inputId].valid && formIsValid;
         }
         this.setState({ orderForm: updatedOrderForm, formIsValid: formIsValid});
@@ -77,15 +75,10 @@ class ContactData extends Component {
 
 const checkValidity = (value, rules) => {
     let isValid = true;
-    if (rules.required) {
-        isValid = value.trim() !== '' && isValid;
-    };
-    if (rules.minLength) {
-        isValid = value.length >= rules.minLength && isValid;
-    };
-    if (rules.maxLength) {
-        isValid = value.length <= rules.maxLength && isValid;
-    };
+    if (!rules) return true;
+    if (rules.required)  isValid = value.trim() !== '' && isValid;
+    if (rules.minLength) isValid = value.length >= rules.minLength && isValid;
+    if (rules.maxLength) isValid = value.length <= rules.maxLength && isValid;
     return isValid;
 };
 
@@ -142,7 +135,8 @@ const getDeliveryMethodField = () => {
                 {value: 'cheapest', displayValue: 'Cheapest'}
             ],
         },
-        value: '',
+        value: 'fastest',
+        validation: {},
         valid: true,
     };
 };
