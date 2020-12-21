@@ -14,15 +14,24 @@ const getInputElement = (props) => {
     let inputElement = null;
     switch (props.elementType) {
         case ('textarea'):
-            inputElement = <textarea className={classes.InputElement} value={props.value} {...props.elementConfig}/>;
+            inputElement = <textarea className={classes.InputElement}
+                                     onChange={props.changed}
+                                     value={props.value}
+                                     {...props.elementConfig}/>;
             break;
         case ('input'):
-            inputElement = <input className={classes.Input} value={props.value} {...props.elementConfig}/>;
+            inputElement = <input className={classes.Input}
+                                  onChange={props.changed}
+                                  value={props.value}
+                                  {...props.elementConfig}/>;
             break;
         case ('select'):
-            inputElement = <select className={classes.Input} value={props.value} {...props.elementConfig}>
+            inputElement = <select className={classes.Input}
+                                   onChange={props.changed}
+                                   value={props.value}
+                                   {...props.elementConfig}>
                                 {props.elementConfig.options.map(option => (
-                                    <option value={option.value}>
+                                    <option key={option.value} value={option.value}>
                                         {option.displayValue}
                                     </option>
                                 ))}
