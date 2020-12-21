@@ -115,7 +115,7 @@ const createFormElementsArray = (state) => {
 };
 
 const buildOrderFieldObject = (elementType, inputType, placeholder, value = '') => {
-    return {
+    const result = {
         elementType: elementType,
         elementConfig: {
             type: inputType,
@@ -130,6 +130,7 @@ const buildOrderFieldObject = (elementType, inputType, placeholder, value = '') 
         valid: false,
         userTouchedThis: false,
     };
+    return result;
 };
 
 const getDeliveryMethodField = () => {
@@ -142,6 +143,7 @@ const getDeliveryMethodField = () => {
             ],
         },
         value: '',
+        valid: true,
     };
 };
 
