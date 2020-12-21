@@ -1,4 +1,4 @@
-.button {
+.Button {
     background-color: transparent;
     border: none;
     color: green;
@@ -10,7 +10,11 @@
     padding: 10px;
 }
 
-.button:first-of-type {
+.Button:disabled {
+    color: gray;
+}
+
+.Button:first-of-type {
     margin-left: 0;
     padding-left: 0;
 }
