@@ -8,23 +8,33 @@ const Input = props => (
     </div>
 );
 
+const checkForInvalidity = ({ invalid, shouldValidate }, classArray) => {
+    if (invalid && shouldValidate) classArray.push(classes.Invalid);
+};
+
 const getInputElement = (props) => {
     let inputElement = null;
+    const inputClasses = [classes.InputElement];
+    checkForInvalidity(props, inputClasses);
+
+    //TODO: Improve this after converting everything to classes AND adding Redux to the project.
     switch (props.elementType) {
         case ('textarea'):
-            inputElement = <textarea className={classes.InputElement}
+            inputElement = <textarea className={inputClasses.join(' ')}
                                      onChange={props.changed}
                                      value={props.value}
                                      {...props.elementConfig}/>;
+            console.log(inputElement);
             break;
         case ('input'):
-            inputElement = <input className={classes.Input}
+            inputElement = <input className={inputClasses.join(' ')}
                                   onChange={props.changed}
                                   value={props.value}
                                   {...props.elementConfig}/>;
+            console.log(inputElement);
             break;
         case ('select'):
-            inputElement = <select className={classes.Input}
+            inputElement = <select className={inputClasses.join(' ')}
                                    onChange={props.changed}
                                    value={props.value}
                                    {...props.elementConfig}>
@@ -34,10 +44,13 @@ const getInputElement = (props) => {
                                     </option>
                                 ))}
                            </select>;
-        break;
-        default: inputElement = <input className={classes.Label}
+            break;
+        default:
+            inputElement = <input className={classes.Label}
                                        value={props.value}
-                                       {...props.elementConfig}/>; break;
+                                       {...props.elementConfig}/>;
+            console.log(inputElement);
+            break;
     }
     return inputElement;
 }

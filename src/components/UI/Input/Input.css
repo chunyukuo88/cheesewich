@@ -4,10 +4,9 @@
     width: 100%;
 }
 
-.Label {
-    display: block;
-    font-weight: bold;
-    margin: 8px;
+.Invalid {
+    border: 1px solid red;
+    background-color: salmon;
 }
 
 .InputElement {
@@ -23,4 +22,10 @@
 .InputElement:focus {
     background-color: #ccc;
     outline: none;
+}
+
+.Label {
+    display: block;
+    font-weight: bold;
+    margin: 8px;
 }

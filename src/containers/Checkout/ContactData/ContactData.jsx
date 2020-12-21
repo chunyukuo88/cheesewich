@@ -86,6 +86,8 @@ const buildContent = (formElementsArray, inputChangedHandler) => {
                           elementConfig={el.config.elementConfig}
                           placeholder={el.config.placeholder}
                           value={el.config.value}
+                          shouldValidate={el.config.validation}
+                          invalid={!el.config.valid} //Note the exclamation mark
                           changed={(event)=>inputChangedHandler(event, el.id)}/>;
         });
 };
