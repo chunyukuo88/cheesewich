@@ -3,7 +3,7 @@ import classes from './Input.css';
 
 const Input = props => (
     <div>
-        <label>{props.label}</label>
+        <label data-test="inputLabel">{props.label}</label>
         {Content(props)}
     </div>
 );
