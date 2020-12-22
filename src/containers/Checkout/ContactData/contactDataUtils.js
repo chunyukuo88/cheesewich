@@ -2,6 +2,7 @@ import React from 'react';
 import Spinner from "../../../components/UI/Spinner/Spinner";
 import Input from "../../../components/UI/Input/Input";
 import Button from "../../../components/UI/Button/Button";
+import classes from './ContactData.css';
 
 export const buildForm = ({ loading, formIsValid }, inputChangedHandler, formElementsArray) => {
     return (loading)
@@ -60,6 +61,7 @@ export const buildOrderForAxios = ({ingredients, price}, formData) => {
 
 export const checkValidity = (value, rules) => {
     let isValid = true;
+    if (!rules) return isValid;
     if (rules.required) isValid = value.trim() !== '' && isValid;
     if (rules.minLength) isValid = value.length >= rules.minLength && isValid
     if (rules.maxLength) isValid = value.length <= rules.maxLength && isValid
@@ -75,7 +77,7 @@ export const getDeliveryMethodObject = () => {
                 {value: 'cheapest', displayValue: 'Cheapest'}
             ]
         },
-        value: '',
+        value: 'fastest',
         validation: {},
         valid: true
     };

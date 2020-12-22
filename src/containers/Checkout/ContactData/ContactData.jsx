@@ -20,7 +20,7 @@ class ContactData extends Component {
             deliveryMethod: getDeliveryMethodObject()
         },
         formIsValid: false,
-        loading: false
+        loading: false,
     }
 
     orderHandler = ( event ) => {
@@ -62,7 +62,7 @@ class ContactData extends Component {
         const form = buildForm(this.state, this.inputChangedHandler, formElementsArray);
         return (
             <div className={classes.ContactData}>
-                <h4>Enter your Contact Data</h4>
+                <h3>Enter Your Contact Info</h3>
                 {form}
             </div>
         );
