@@ -5,13 +5,13 @@ const Order = ({ ingredients, price }) => (
   <div className={classes.Order}>
       <p>Ingredients:</p>
       <ul>
-          {ingredientsDisplay(ingredients)}
+          {buildContent(ingredients)}
       </ul>
-      <p>Price: <strong>${price}</strong></p>
+      <p>Price: <strong data-test="orderPrice">${price}</strong></p>
   </div>
 );
 
-const ingredientsDisplay = (ingredients) => {
+const buildContent = (ingredients) => {
     const ingredientArray = [];
     for (const ingredient in ingredients) {
         ingredientArray.push({
@@ -19,7 +19,7 @@ const ingredientsDisplay = (ingredients) => {
             amount: ingredients[ingredient]
         });
     };
-    return ingredientArray.map(({name, amount}) => <li>{name}: {amount}</li>);
+    return ingredientArray.map(({name, amount}, key) => <li key={key} data-test="orderIngredient">{name}: {amount}</li>);
 };
 
 export default Order;

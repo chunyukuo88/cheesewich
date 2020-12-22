@@ -2,7 +2,6 @@ import React from 'react';
 import Spinner from "../../../components/UI/Spinner/Spinner";
 import Input from "../../../components/UI/Input/Input";
 import Button from "../../../components/UI/Button/Button";
-import classes from './ContactData.css';
 
 export const buildForm = ({ loading, formIsValid }, inputChangedHandler, formElementsArray) => {
     return (loading)
