@@ -2,7 +2,7 @@ import React from 'react';
 import Enzyme, { render } from 'enzyme';
 import EnzymeAdapter from 'enzyme-adapter-react-16';
 import Input from './Input';
-import {findByTestAttr} from "../../../utils/testUtils";
+import { findByTestAttr } from '../../../utils/testUtils';
 import classes from './Input.css';
 
 Enzyme.configure({ adapter: new EnzymeAdapter()});
@@ -19,40 +19,30 @@ describe('Input.jsx', ()=>{
             expect(inputLabel.length).toBe(1);
         });
     });
-    describe('WHEN: The user has touched the input box but the input is invalid, ', ()=>{
-        test('THEN: The input box is rendered with invalid styling', ()=>{
-            const props = {
-                elementType: 'textarea',
-                label: 'test',
-                invalid: true,
-                shouldValidate: true,
-                touched: true,
-            };
-            const wrapper = render(<Input {...props}/>);
-            const inputElement = findByTestAttr(wrapper, 'inputElement');
-            // const expectedClass = 'Input__InputElement__-hash-/\d\d/-/\d/- Input__Invalid__-hash-/\d\d/-/\d/-';
-            const expectedClass = 'InputElement Invalid';
-            expect(inputElement.hasClass(expectedClass)).toBeTruthy();
-        });
-    });
-    describe('WHEN: The user has touched the input box and the input is valid, ', ()=>{
+    describe('WHEN: The user has touched the input box and the input is VALID, ', ()=>{
         test('THEN: The input box is rendered WITHOUT invalid styling', ()=>{
 
         });
     });
-    describe('WHEN: The input type is not given, ', ()=>{
-        test('THEN: The an input element is returned by default', ()=>{
+    describe('WHEN: The user has not touched the input box, ', ()=>{
+        test('THEN: The input box is rendered without invalid styling', ()=>{
             const props = {
-                elementType: undefined,
+                elementConfig: {
+                    type: "text",
+                    placeholder: "Your name"
+                },
+                elementType: 'input',
+                changed: jest.fn(),
+                value: '',
                 label: 'test',
-                invalid: true,
-                shouldValidate: true,
-                touched: true,
+                invalid: false,
+                shouldValidate: {
+                    required: true,
+                },
+                touched: false,
             };
             const wrapper = render(<Input {...props}/>);
-            const inputElement = findByTestAttr(wrapper, 'inputElement');
-            const expectedClass = 'Label';
-            expect(inputElement.hasClass(expectedClass)).toBeTruthy();
+            expect(wrapper.find('input').hasClass(classes.InputElement)).toBeTruthy();
         });
     });
 });
