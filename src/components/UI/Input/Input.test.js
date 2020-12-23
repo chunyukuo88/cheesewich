@@ -21,7 +21,45 @@ describe('Input.jsx', ()=>{
     });
     describe('WHEN: The user has touched the input box and the input is VALID, ', ()=>{
         test('THEN: The input box is rendered WITHOUT invalid styling', ()=>{
-
+            const props = {
+                elementConfig: {
+                    type: "text",
+                    placeholder: "Your name"
+                },
+                elementType: 'input',
+                changed: jest.fn(),
+                value: '',
+                label: 'test',
+                invalid: false,
+                shouldValidate: {
+                    required: true,
+                },
+                touched: true,
+            };
+            const wrapper = render(<Input {...props}/>);
+            expect(wrapper.find('input').hasClass(classes.InputElement)).toBeTruthy();
+        });
+    });
+    describe('WHEN: The user has touched the input box and the input is invalid, ', ()=>{
+        test('THEN: The input box is rendered with invalid styling', ()=>{
+            const props = {
+                elementConfig: {
+                    type: "text",
+                    placeholder: "Your name"
+                },
+                elementType: 'input',
+                changed: jest.fn(),
+                value: '',
+                label: 'test',
+                invalid: true,
+                shouldValidate: {
+                    required: true,
+                },
+                touched: true,
+            };
+            const wrapper = render(<Input {...props}/>);
+            expect(wrapper.find('input').hasClass(classes.InputElement)).toBeTruthy();
+            expect(wrapper.find('input').hasClass(classes.Invalid)).toBeTruthy();
         });
     });
     describe('WHEN: The user has not touched the input box, ', ()=>{
