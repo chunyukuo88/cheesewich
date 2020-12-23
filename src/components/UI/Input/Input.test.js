@@ -22,6 +22,7 @@ describe('Input.jsx', ()=>{
     describe('WHEN: The user has touched the input box but the input is invalid, ', ()=>{
         test('THEN: The input box is rendered with invalid styling', ()=>{
             const props = {
+                elementType: 'textarea',
                 label: 'test',
                 invalid: true,
                 shouldValidate: true,
@@ -29,14 +30,29 @@ describe('Input.jsx', ()=>{
             };
             const wrapper = render(<Input {...props}/>);
             const inputElement = findByTestAttr(wrapper, 'inputElement');
-            const expectedClass = 'Input__InputElement__-hash-/\d\d/-/\d/- Input__Invalid__-hash-/\d\d/-/\d/-';
-            // expect(inputElement.length).toBe(1)
+            // const expectedClass = 'Input__InputElement__-hash-/\d\d/-/\d/- Input__Invalid__-hash-/\d\d/-/\d/-';
+            const expectedClass = 'InputElement Invalid';
             expect(inputElement.hasClass(expectedClass)).toBeTruthy();
         });
     });
     describe('WHEN: The user has touched the input box and the input is valid, ', ()=>{
         test('THEN: The input box is rendered WITHOUT invalid styling', ()=>{
 
+        });
+    });
+    describe('WHEN: The input type is not given, ', ()=>{
+        test('THEN: The an input element is returned by default', ()=>{
+            const props = {
+                elementType: undefined,
+                label: 'test',
+                invalid: true,
+                shouldValidate: true,
+                touched: true,
+            };
+            const wrapper = render(<Input {...props}/>);
+            const inputElement = findByTestAttr(wrapper, 'inputElement');
+            const expectedClass = 'Label';
+            expect(inputElement.hasClass(expectedClass)).toBeTruthy();
         });
     });
 });

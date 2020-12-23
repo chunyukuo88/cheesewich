@@ -2,64 +2,52 @@ import React from 'react';
 import classes from './Input.css';
 
 const Input = props => {
-    console.log(Content(props));
-    return (
-        <div>
-            <label data-test="inputLabel">{props.label}</label>
-            {Content(props)}
-        </div>
-    );
+    console.log(props);
+    return (<div>
+                <label data-test="inputLabel">{props.label}</label>
+                {Content(props)}
+            </div>);
 };
 
 const Content = props => {
-    let inputElement = null;
     const inputClasses = [classes.InputElement];
     checkForInvalidity(props, inputClasses);
-    return buildInputElement(props, {inputElement}, inputClasses);
+    return buildInputElement(props, inputClasses);
 };
 
 const checkForInvalidity = ({ invalid, shouldValidate, touched }, classArray) => {
     if (invalid && shouldValidate && touched) classArray.push(classes.Invalid);
 };
 
-const buildInputElement = (props, inputElement, inputClasses) => {
+const buildInputElement = (props, inputClasses) => {
     //TODO: Improve this after converting everything to classes AND adding Redux to the project.
     switch (props.elementType) {
         case ('textarea'):
-            inputElement = <textarea className={inputClasses.join(' ')}
+            return <textarea className={inputClasses.join(' ')}
                                      onChange={props.changed}
-                                     data-test="inputElement"
                                      value={props.value}
                                      {...props.elementConfig}/>;
-            break;
         case ('input'):
-            inputElement = <input className={inputClasses.join(' ')}
+            return <input className={inputClasses.join(' ')}
                                   onChange={props.changed}
-                                  data-test="inputElement"
                                   value={props.value}
                                   {...props.elementConfig}/>;
-            break;
         case ('select'):
-            inputElement = <select className={inputClasses.join(' ')}
+            return <select className={inputClasses.join(' ')}
                                    onChange={props.changed}
-                                   data-test="inputElement"
                                    value={props.value}
                                    {...props.elementConfig}>
-                {props.elementConfig.options.map(option => (
-                    <option key={option.value} value={option.value}>
-                        {option.displayValue}
-                    </option>
-                ))}
-            </select>;
-            break;
+                                    {props.elementConfig.options.map(option => (
+                                        <option key={option.value} value={option.value}>
+                                            {option.displayValue}
+                                        </option>
+                                    ))}
+                            </select>;
         default:
-            inputElement = <input className={classes.Label}
-                                  data-test="inputElement"
+            return <input className={classes.Label}
                                   value={props.value}
                                   {...props.elementConfig}/>;
-            break;
     }
-    return inputElement;
 };
 
 export default Input;
