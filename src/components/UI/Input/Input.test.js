@@ -19,6 +19,48 @@ describe('Input.jsx', ()=>{
             expect(inputLabel.length).toBe(1);
         });
     });
+    describe('WHEN: The input type is "textarea"', ()=>{
+       test('THEN: It renders a text area.', ()=>{
+           const props = {
+               elementConfig: {
+                   type: "text",
+                   placeholder: "Your name"
+               },
+               elementType: 'textarea',
+               changed: jest.fn(),
+               value: '',
+               label: 'test',
+               invalid: false,
+               shouldValidate: {
+                   required: true,
+               },
+               touched: true,
+           };
+           const wrapper = render(<Input {...props}/>);
+           expect(wrapper.find('textarea').hasClass(classes.InputElement)).toBeTruthy();
+       });
+    });
+    describe('WHEN: The input type is "select"', ()=>{
+       test('THEN: It renders a text area.', ()=>{
+           const props = {
+               elementConfig: {
+                   type: "text",
+                   placeholder: "Your name"
+               },
+               elementType: 'select',
+               changed: jest.fn(),
+               value: '',
+               label: 'test',
+               invalid: false,
+               shouldValidate: {
+                   required: true,
+               },
+               touched: true,
+           };
+           const wrapper = render(<Input {...props}/>);
+           expect(wrapper.find('select').hasClass(classes.InputElement)).toBeTruthy();
+       });
+    });
     describe('WHEN: The user has touched the input box and the input is VALID, ', ()=>{
         test('THEN: The input box is rendered WITHOUT invalid styling', ()=>{
             const props = {
