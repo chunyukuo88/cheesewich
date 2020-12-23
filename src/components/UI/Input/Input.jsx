@@ -35,16 +35,7 @@ const buildInputElement = (props, inputElement, inputClasses) => {
                                   {...props.elementConfig}/>;
             break;
         case ('select'):
-            inputElement = <select className={inputClasses.join(' ')}
-                                   onChange={props.changed}
-                                   value={props.value}
-                                   {...props.elementConfig}>
-                {props.elementConfig.options.map(option => (
-                    <option key={option.value} value={option.value}>
-                        {option.displayValue}
-                    </option>
-                ))}
-            </select>;
+            inputElement = DropdownMenu(props, inputClasses);
             break;
         default:
             inputElement = <input className={classes.Label}
@@ -54,5 +45,23 @@ const buildInputElement = (props, inputElement, inputClasses) => {
     }
     return inputElement;
 };
+
+export const DropdownMenu = (props, inputClasses) => (
+    <select className={inputClasses.join(' ')}
+        onChange={props.changed}
+        value={props.value}
+        {...props.elementConfig}>
+            {populateDropdownMenu(props)}
+    </select>
+);
+
+const populateDropdownMenu = ({ elementConfig }) => {
+    const result = elementConfig.options.map(option => (
+                    <option key={option.value} value={option.value}>
+                        {option.displayValue}
+                    </option>
+                ));
+    return result;
+}
 
 export default Input;

@@ -1,7 +1,7 @@
 import React from 'react';
 import Enzyme, { render } from 'enzyme';
 import EnzymeAdapter from 'enzyme-adapter-react-16';
-import Input from './Input';
+import Input, { DropdownMenu } from './Input';
 import { findByTestAttr } from '../../../utils/testUtils';
 import classes from './Input.css';
 
@@ -83,4 +83,34 @@ describe('Input.jsx', ()=>{
             expect(wrapper.find('input').hasClass(classes.InputElement)).toBeTruthy();
         });
     });
+});
+describe('getSelectMenu', ()=>{
+   describe('WHEN: Given props and an array of classes', ()=>{
+       test('THEN: It builds a dropdown menu', ()=>{
+           const props = {
+               elementConfig: {
+                   options: [
+                       {
+                           value: 'foo',
+                           displayValue: 'FOO',
+                       },
+                       {
+                           value: 'bar',
+                           displayValue: 'BAR',
+                       },
+                   ],
+               },
+               elementType: 'select',
+               changed: jest.fn(),
+               value: '',
+               label: 'test',
+               invalid: false,
+               shouldValidate: {},
+               touched: false,
+           };
+           const inputClasses = ['a', 'b'];
+           const result = render(DropdownMenu(props, inputClasses));
+
+        });
+     });
 });
