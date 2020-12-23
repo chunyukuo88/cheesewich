@@ -90,14 +90,9 @@ describe('getSelectMenu', ()=>{
            const props = {
                elementConfig: {
                    options: [
-                       {
-                           value: 'foo',
-                           displayValue: 'FOO',
-                       },
-                       {
-                           value: 'bar',
-                           displayValue: 'BAR',
-                       },
+                       { value: 'foo', displayValue: 'FOO', },
+                       { value: 'bar', displayValue: 'BAR', },
+                       { value: 'baz', displayValue: 'BAZ', },
                    ],
                },
                elementType: 'select',
@@ -110,7 +105,7 @@ describe('getSelectMenu', ()=>{
            };
            const inputClasses = ['a', 'b'];
            const result = render(DropdownMenu(props, inputClasses));
-
+           expect(result.children().length).toBe(3);
         });
      });
 });
