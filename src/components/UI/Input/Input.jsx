@@ -1,19 +1,22 @@
 import React from 'react';
 import classes from './Input.css';
 
-const Input = props => (
-    <div>
-        <label data-test="inputLabel">{props.label}</label>
-        {Content(props)}
-    </div>
-);
+const Input = props => {
+    console.log(Content(props));
+    return (
+        <div>
+            <label data-test="inputLabel">{props.label}</label>
+            {Content(props)}
+        </div>
+    );
+};
 
 const Content = props => {
     let inputElement = null;
     const inputClasses = [classes.InputElement];
     checkForInvalidity(props, inputClasses);
-    return buildInputElement(props, inputElement, inputClasses);
-}
+    return buildInputElement(props, {inputElement}, inputClasses);
+};
 
 const checkForInvalidity = ({ invalid, shouldValidate, touched }, classArray) => {
     if (invalid && shouldValidate && touched) classArray.push(classes.Invalid);
@@ -25,18 +28,21 @@ const buildInputElement = (props, inputElement, inputClasses) => {
         case ('textarea'):
             inputElement = <textarea className={inputClasses.join(' ')}
                                      onChange={props.changed}
+                                     data-test="inputElement"
                                      value={props.value}
                                      {...props.elementConfig}/>;
             break;
         case ('input'):
             inputElement = <input className={inputClasses.join(' ')}
                                   onChange={props.changed}
+                                  data-test="inputElement"
                                   value={props.value}
                                   {...props.elementConfig}/>;
             break;
         case ('select'):
             inputElement = <select className={inputClasses.join(' ')}
                                    onChange={props.changed}
+                                   data-test="inputElement"
                                    value={props.value}
                                    {...props.elementConfig}>
                 {props.elementConfig.options.map(option => (
@@ -48,6 +54,7 @@ const buildInputElement = (props, inputElement, inputClasses) => {
             break;
         default:
             inputElement = <input className={classes.Label}
+                                  data-test="inputElement"
                                   value={props.value}
                                   {...props.elementConfig}/>;
             break;
