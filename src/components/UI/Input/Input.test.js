@@ -44,8 +44,16 @@ describe('Input.jsx', ()=>{
        test('THEN: It renders a text area.', ()=>{
            const props = {
                elementConfig: {
-                   type: "text",
-                   placeholder: "Your name"
+                   options: [
+                       {
+                           value: 'foo',
+                           displayValue: 'FOO'
+                       },
+                       {
+                           value: 'bar',
+                           displayValue: 'BAZ'
+                       },
+                   ],
                },
                elementType: 'select',
                changed: jest.fn(),
