@@ -1,7 +1,12 @@
 import * as actionTypes from './actions';
 
 const initialState = {
-    ingredients: null,
+    ingredients: {
+        cheese: 0,
+        shallots: 0,
+        bacon: 0,
+        mustard: 0,
+    },
     price: 0,
 };
 
@@ -9,11 +14,20 @@ const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.ADD_INGREDIENT: 
             return {
-
+                //TODO: Explore the library that Jason used for portal
+                ...initialState,
+                ingredients: {
+                    ...initialState.ingredients,
+                    [action.ingredientName]: state.ingredients[action.ingredientName] + 1,
+                }, 
             };
         case actionTypes.NIX_INGREDIENT: 
             return {
-
+                ...initialState,
+                ingredients: {
+                    ...initialState.ingredients,
+                    [action.ingredientName]: state.ingredients[action.ingredientName] - 1,
+                }, 
             };
         default: return state;
     }
