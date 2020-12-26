@@ -9,6 +9,8 @@ import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import OrderSummary from '../../components/Cheesewich/OrderSummary/OrderSummary';
 import urls from '../../urls';
+import { connect } from 'react-redux';
+import * as actionTypes from '../../../src/store/actions';
 
 class CheesewichBuilder extends Component {
     state = {
@@ -26,29 +28,27 @@ class CheesewichBuilder extends Component {
              .catch(error => this.setState({error: error}));
     }
 
-    addIngredient = type => this.setState(utils.additionFn(this.state, type));
-    removeIngredient = type => this.setState(utils.removalFn(this.state, type));
     orderHandler = () => this.setState({userHasPlacedOrder: true});
     orderCancellationHandler = () => this.setState({userHasPlacedOrder: false});
     proceedToCheckoutHandler = () => utils.goToCheckoutHandler(this.state, this.props);
 
     render(){
-        const disabledInfo = utils.produceDisabledInfoObject(this.state.ingredients);
+        const disabledInfo = utils.produceDisabledInfoObject(this.props.ings);
         let orderSummary = null;
         let cheesewichAndControls = this.state.error ? <p>Ingredients could not be found.</p> : <Spinner />;
-        if (this.state.ingredients) {
+        if (this.props.ings) {
            cheesewichAndControls = (
                 <Aux>
-                    <Cheesewich ingredients={this.state.ingredients} />
-                    <UserControls addIngredient={this.addIngredient}
-                                  removeIngredient={this.removeIngredient}
+                    <Cheesewich ingredients={this.props.ings} />
+                    <UserControls addIngredient={this.props.onIngredientAdded}
+                                  removeIngredient={this.props.onIngredientNixed}
                                   disabled={disabledInfo}
                                   price={this.state.totalPrice}
                                   purchasable={this.state.userCanOrder}
                                   ordered={this.orderHandler}/>
                 </Aux>
             );
-            orderSummary = <OrderSummary ingredients={this.state.ingredients}
+            orderSummary = <OrderSummary ingredients={this.props.ings}
                                          orderCancelled={this.orderCancellationHandler}
                                          goToCheckout={this.proceedToCheckoutHandler}
                                          price={this.state.totalPrice}/>;
@@ -69,5 +69,23 @@ class CheesewichBuilder extends Component {
     }
 }
 
+const mapStateToProps = (state) => {
+    return {
+        ings: state.ingredients,
+    };
+};
 
-export default withErrorHandler(CheesewichBuilder, axios);
+const mapDispatchToProps = dispatch => {
+    return {
+        onIngredientAdded: (ingName)=> dispatch({ 
+            type: actionTypes.ADD_INGREDIENT, 
+            ingredientName: ingName
+        }),
+        onIngredientNixed: (ingName)=> dispatch({ 
+            type: actionTypes.NIX_INGREDIENT, 
+            ingredientName: ingName
+        }),
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(CheesewichBuilder, axios));

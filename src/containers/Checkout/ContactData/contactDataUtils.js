@@ -6,7 +6,7 @@ import Button from "../../../components/UI/Button/Button";
 export const buildForm = ({ loading, formIsValid }, inputChangedHandler, formElementsArray) => {
     return (loading)
         ? <Spinner/>
-        : <form onSubmit={this.orderHandler}>
+        : <form onSubmit={this.orderHandler} autoComplete="off">
             {formElementsArray.map(formElement => (
                 <Input
                     key={formElement.id}
