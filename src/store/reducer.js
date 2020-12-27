@@ -13,19 +13,18 @@ const initialState = {
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.ADD_INGREDIENT: 
-            return {
-                //TODO: Explore the library that Jason used for portal
-                ...initialState,
+            return {    
+                ...state,
                 ingredients: {
-                    ...initialState.ingredients,
+                    ...state.ingredients,
                     [action.ingredientName]: state.ingredients[action.ingredientName] + 1,
                 }, 
             };
         case actionTypes.NIX_INGREDIENT: 
             return {
-                ...initialState,
+                ...state,
                 ingredients: {
-                    ...initialState.ingredients,
+                    ...state.ingredients,
                     [action.ingredientName]: state.ingredients[action.ingredientName] - 1,
                 }, 
             };

@@ -14,7 +14,6 @@ import * as actionTypes from '../../../src/store/actions';
 
 class CheesewichBuilder extends Component {
     state = {
-        ingredients: null,
         totalPrice: 2,
         userCanOrder: false,
         userHasPlacedOrder: false,
@@ -35,7 +34,7 @@ class CheesewichBuilder extends Component {
     render(){
         const disabledInfo = utils.produceDisabledInfoObject(this.props.ings);
         let orderSummary = null;
-        let cheesewichAndControls = this.state.error ? <p>Ingredients could not be found.</p> : <Spinner />;
+        let cheesewichAndControls = getStringOrSpinner(this.state.error);
         if (this.props.ings) {
            cheesewichAndControls = (
                 <Aux>
@@ -68,6 +67,10 @@ class CheesewichBuilder extends Component {
         );
     }
 }
+
+const getStringOrSpinner = (error) => error 
+                                ? <p>Ingredients could not be found.</p> 
+                                : <Spinner />;
 
 const mapStateToProps = (state) => {
     return {
