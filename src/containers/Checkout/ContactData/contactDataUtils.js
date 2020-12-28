@@ -3,20 +3,19 @@ import Spinner from "../../../components/UI/Spinner/Spinner";
 import Input from "../../../components/UI/Input/Input";
 import Button from "../../../components/UI/Button/Button";
 
-export const buildForm = ({ loading, formIsValid }, inputChangedHandler, formElementsArray) => {
+export const buildForm = ({ loading, formIsValid }, inputChangedHandler, orderHandler, formElementsArray) => {
     return (loading)
         ? <Spinner/>
-        : <form onSubmit={this.orderHandler} autoComplete="off">
+        : <form onSubmit={orderHandler} autoComplete="off">
             {formElementsArray.map(formElement => (
-                <Input
-                    key={formElement.id}
-                    elementType={formElement.config.elementType}
-                    elementConfig={formElement.config.elementConfig}
-                    value={formElement.config.value}
-                    invalid={!formElement.config.valid}
-                    shouldValidate={formElement.config.validation}
-                    touched={formElement.config.touched}
-                    changed={(event) => inputChangedHandler(event, formElement.id)} />
+                <Input  changed={(event) => inputChangedHandler(event, formElement.id)} 
+                        elementConfig={formElement.config.elementConfig}
+                        elementType={formElement.config.elementType}
+                        invalid={!formElement.config.valid}
+                        key={formElement.id}
+                        shouldValidate={formElement.config.validation}
+                        touched={formElement.config.touched}
+                        value={formElement.config.value} />
             ))}
             <Button btnType="Success" disabled={!formIsValid}>ORDER</Button>
         </form>;

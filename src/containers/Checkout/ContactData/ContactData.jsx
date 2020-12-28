@@ -60,7 +60,7 @@ class ContactData extends Component {
 
     render () {
         const formElementsArray = mapOrderFormToArray(this.state.orderForm);
-        const form = buildForm(this.state, this.inputChangedHandler, formElementsArray);
+        const form = buildForm(this.state, this.inputChangedHandler, this.orderHandler, formElementsArray);
         return (
             <div className={classes.ContactData}>
                 <h3>Enter Your Contact Info</h3>
