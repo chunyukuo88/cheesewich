@@ -118,7 +118,7 @@ describe('contactDataUtils.js', ()=>{
         });
     });
     describe('mapOrderFormToArray()', ()=>{
-        describe('WHEN: Given anorderFormObject, ', ()=>{
+        describe('WHEN: Given an orderFormObject, ', ()=>{
             test('THEN: It returns an array of form elements.', ()=>{
                 const orderFormObject = {
                     'test1': 'foo',
@@ -137,6 +137,47 @@ describe('contactDataUtils.js', ()=>{
                 ];
                 expect(result).toEqual(expectedResult);
             });
+        });
+    });
+    describe('buildOrderForAxios()', ()=>{
+        describe('WHEN: Given ingredients, price, and formData, ', ()=>{
+            test('THEN: It maps them to an object.', ()=>{
+                const props = {
+                    ingredients: {
+                        ing1: 'ing1',
+                        ing2: 'ing2'
+                    },
+                    price: 1234,
+                };
+                const formData = {
+                    test: 'test'
+                };
+                const result = utils.buildOrderForAxios(props, formData);
+                const expectedResult = {
+                    ingredients: props.ingredients,
+                    price: props.price,
+                    orderData: formData,
+                };
+                expect(result).toEqual(expectedResult);
+            });
+        });
+    });
+    describe('getDeliveryMethodObject()', ()=>{
+        test('It returns a deliveryMethodObject.', ()=>{
+            const result = utils.getDeliveryMethodObject();
+            const expectedResult = {
+                elementType: 'select',
+                elementConfig: {
+                    options: [
+                        {value: 'fastest', displayValue: 'Fastest'},
+                        {value: 'cheapest', displayValue: 'Cheapest'}
+                    ]
+                },
+                value: 'fastest',
+                validation: {},
+                valid: true
+            };;
+            expect(result).toEqual(expectedResult);
         });
     });
 });
