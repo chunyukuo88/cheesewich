@@ -1,3 +1,14 @@
+export const updatePurchasabilityStatus = (ingredients) => {
+    const sum = Object.keys( ingredients )
+                      .map( igKey => {
+                          return ingredients[igKey];
+                      })
+                      .reduce( (sum, el) => {
+                        return sum + el;
+                      }, 0);
+    return sum > 0;
+};
+
 export const getOrderDataForCheckout = (state, customerInfo) => {
     return {
         ingredients: state.ingredients,

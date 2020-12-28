@@ -14,7 +14,6 @@ import * as actionTypes from '../../../src/store/actions';
 
 class CheesewichBuilder extends Component {
     state = {
-        userCanOrder: false,
         userHasPlacedOrder: false,
         loading: false,
         error: null
@@ -42,7 +41,7 @@ class CheesewichBuilder extends Component {
                                   removeIngredient={this.props.onIngredientNixed}
                                   disabled={disabledInfo}
                                   price={this.props.price}
-                                  purchasable={this.state.userCanOrder}
+                                  purchasable={utils.updatePurchasabilityStatus(this.props.ings)}
                                   ordered={this.orderHandler}/>
                 </Aux>
             );
