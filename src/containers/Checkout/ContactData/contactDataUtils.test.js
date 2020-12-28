@@ -43,6 +43,52 @@ describe('contactDataUtils.js', ()=>{
             // });
         });
     });
+    describe('checkValidity()', ()=>{
+        describe('WHEN: Given a  value and no rules object, ', ()=>{
+            test('THEN: It returns TRUE.', ()=>{
+                const value = 'a';
+                const rules = {};
+                const result = utils.checkValidity(value, rules);
+                const expectedResult = true;
+                expect(result).toEqual(expectedResult);
+            });
+        });
+        describe('WHEN: Given a value and a rules object with required = true, ', ()=>{
+            test('THEN: It returns TRUE.', ()=>{
+                const value = 'a';
+                const rules = {
+                    required: true,
+                };
+                const result = utils.checkValidity(value, rules);
+                const expectedResult = true;
+                expect(result).toEqual(expectedResult);
+            });
+        });
+        describe('WHEN: Given a value that does not meet minimum length requirements, ', ()=>{
+            test('THEN: It returns FALSE.', ()=>{
+                const value = '';
+                const rules = {
+                    required: true,
+                    minLength: 5,
+                };
+                const result = utils.checkValidity(value, rules);
+                const expectedResult = false;
+                expect(result).toEqual(expectedResult);
+            });
+        });
+        describe('WHEN: Given a value that does not meet maximum length requirements, ', ()=>{
+            test('THEN: It returns FALSE.', ()=>{
+                const value = 'asdf';
+                const rules = {
+                    required: true,
+                    maxLength: 3,
+                };
+                const result = utils.checkValidity(value, rules);
+                const expectedResult = false;
+                expect(result).toEqual(expectedResult);
+            });
+        });
+    });
     describe('mapOrderFormToArray()', ()=>{
         describe('WHEN: Given anorderFormObject, ', ()=>{
             test('THEN: It returns an array of form elements.', ()=>{
