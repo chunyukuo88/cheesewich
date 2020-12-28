@@ -1,5 +1,3 @@
-import INGREDIENT_PRICES from '../../components/Cheesewich/Ingredients/ingredientPrices';
-
 export const getOrderDataForCheckout = (state, customerInfo) => {
     return {
         ingredients: state.ingredients,
@@ -23,17 +21,6 @@ const _produceQueryString = ({ingredients, totalPrice}) => {
     };
     queryParams.push(`price=${totalPrice}`);
     return queryParams.join('&');
-};
-
-export const _updateQuantitiesFollowingRemoval = (stateObject, type) => {
-    const oldCount = stateObject.ingredients[type];
-    if (oldCount === 0) return undefined;
-    const updatedCount = oldCount - 1;
-    const updatedIngredients = {
-        ...stateObject.ingredients
-    };
-    updatedIngredients[type] = updatedCount;
-    return updatedIngredients;
 };
 
 export const produceDisabledInfoObject = ingredientQuantityObject => {

@@ -14,7 +14,6 @@ import * as actionTypes from '../../../src/store/actions';
 
 class CheesewichBuilder extends Component {
     state = {
-        totalPrice: 2,
         userCanOrder: false,
         userHasPlacedOrder: false,
         loading: false,
@@ -42,7 +41,7 @@ class CheesewichBuilder extends Component {
                     <UserControls addIngredient={this.props.onIngredientAdded}
                                   removeIngredient={this.props.onIngredientNixed}
                                   disabled={disabledInfo}
-                                  price={this.state.totalPrice}
+                                  price={this.props.price}
                                   purchasable={this.state.userCanOrder}
                                   ordered={this.orderHandler}/>
                 </Aux>
@@ -50,7 +49,7 @@ class CheesewichBuilder extends Component {
             orderSummary = <OrderSummary ingredients={this.props.ings}
                                          orderCancelled={this.orderCancellationHandler}
                                          goToCheckout={this.proceedToCheckoutHandler}
-                                         price={this.state.totalPrice}/>;
+                                         price={this.props.price}/>;
         }
         if (this.state.loading) {
             orderSummary = <Spinner />;
@@ -75,6 +74,7 @@ const getStringOrSpinner = (error) => error
 const mapStateToProps = (state) => {
     return {
         ings: state.ingredients,
+        price: state.price,
     };
 };
 

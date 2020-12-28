@@ -10,6 +10,13 @@ const initialState = {
     price: 0,
 };
 
+const INGREDIENT_PRICES = {
+    bacon: 0.5,
+    cheese: 0.4,
+    mustard: 1.35,
+    shallots: 0.55,
+};
+
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.ADD_INGREDIENT: 
@@ -18,7 +25,8 @@ const reducer = (state = initialState, action) => {
                 ingredients: {
                     ...state.ingredients,
                     [action.ingredientName]: state.ingredients[action.ingredientName] + 1,
-                }, 
+                },
+                price: state.price + INGREDIENT_PRICES[action.ingredientName],
             };
         case actionTypes.NIX_INGREDIENT: 
             return {
@@ -27,6 +35,7 @@ const reducer = (state = initialState, action) => {
                     ...state.ingredients,
                     [action.ingredientName]: state.ingredients[action.ingredientName] - 1,
                 }, 
+                price: state.price - INGREDIENT_PRICES[action.ingredientName],
             };
         default: return state;
     }

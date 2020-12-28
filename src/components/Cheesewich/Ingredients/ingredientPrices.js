@@ -1,3 +1,4 @@
+//TODO: Check "Find usages in Intellij" to see if this whole module can be deleted.
 const INGREDIENT_PRICES = {
     bacon: 0.5,
     cheese: 0.4,
