@@ -1,3 +1,11 @@
+export const getOrderDataForCheckout = (state, customerInfo) => {
+    return {
+        ingredients: state.ingredients,
+        price: state.totalPrice,
+        customer: customerInfo,
+    };
+};
+
 export const getPurchasabilityStatus = (ingredients) => {
     const sum = Object.keys( ingredients )
                       .map( igKey => {
@@ -9,13 +17,6 @@ export const getPurchasabilityStatus = (ingredients) => {
     return sum > 0;
 };
 
-export const getOrderDataForCheckout = (state, customerInfo) => {
-    return {
-        ingredients: state.ingredients,
-        price: state.totalPrice,
-        customer: customerInfo,
-    };
-};
 
 export const goToCheckoutHandler = (props) => props.history.push('/checkout');
 
