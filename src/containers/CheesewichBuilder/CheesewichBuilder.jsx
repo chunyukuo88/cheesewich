@@ -27,7 +27,7 @@ class CheesewichBuilder extends Component {
 
     orderHandler = () => this.setState({userHasPlacedOrder: true});
     orderCancellationHandler = () => this.setState({userHasPlacedOrder: false});
-    proceedToCheckoutHandler = () => utils.goToCheckoutHandler(this.state, this.props);
+    proceedToCheckoutHandler = () => utils.goToCheckoutHandler(this.props);
 
     render(){
         const disabledInfo = utils.produceDisabledInfoObject(this.props.ings);
@@ -41,7 +41,7 @@ class CheesewichBuilder extends Component {
                                   removeIngredient={this.props.onIngredientNixed}
                                   disabled={disabledInfo}
                                   price={this.props.price}
-                                  purchasable={utils.updatePurchasabilityStatus(this.props.ings)}
+                                  purchasable={utils.getPurchasabilityStatus(this.props.ings)}
                                   ordered={this.orderHandler}/>
                 </Aux>
             );

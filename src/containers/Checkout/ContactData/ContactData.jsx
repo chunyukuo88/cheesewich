@@ -8,6 +8,7 @@ import { buildForm,
          checkValidity,
          getDeliveryMethodObject,
          mapOrderFormToArray } from './contactDataUtils';
+import { connect } from 'react-redux';
 
 class ContactData extends Component {
     state = {
@@ -69,5 +70,12 @@ class ContactData extends Component {
     }
 }
 
+const mapStateToProps = (state) => {
+    return {
+        ings: state.ingredients,
+        price: state.price,
+    };
+};
 
-export default ContactData;
+
+export default connect(mapStateToProps)(ContactData);
