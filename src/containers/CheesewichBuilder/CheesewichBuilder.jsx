@@ -10,7 +10,7 @@ import Spinner from '../../components/UI/Spinner/Spinner';
 import OrderSummary from '../../components/Cheesewich/OrderSummary/OrderSummary';
 import urls from '../../urls';
 import { connect } from 'react-redux';
-import * as actionTypes from '../../../src/store/actions';
+import { addIngredient, nixIngredient } from '../../../src/store/actions';
 
 class CheesewichBuilder extends Component {
     state = {
@@ -66,8 +66,8 @@ class CheesewichBuilder extends Component {
     }
 }
 
-const getStringOrSpinner = (error) => error 
-                                ? <p>Ingredients could not be found.</p> 
+const getStringOrSpinner = (error) => error
+                                ? <p>Ingredients could not be found.</p>
                                 : <Spinner />;
 
 const mapStateToProps = (state) => {
@@ -79,14 +79,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onIngredientAdded: (ingName)=> dispatch({ 
-            type: actionTypes.ADD_INGREDIENT, 
-            ingredientName: ingName
-        }),
-        onIngredientNixed: (ingName)=> dispatch({ 
-            type: actionTypes.NIX_INGREDIENT, 
-            ingredientName: ingName
-        }),
+        onIngredientAdded: (ingName)=> dispatch(addIngredient(ingName)),
+        onIngredientNixed: (ingName)=> dispatch(nixIngredient(ingName)),
     };
 };
 
