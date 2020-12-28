@@ -24,14 +24,14 @@ const buildInputElement = (props, inputElement, inputClasses) => {
     switch (props.elementType) {
         case ('textarea'):
             inputElement = <textarea className={inputClasses.join(' ')}
-                                     autocomplete="off"
+                                     autoComplete="off"
                                      onChange={props.changed}
                                      value={props.value}
                                      {...props.elementConfig}/>;
             break;
         case ('input'):
             inputElement = <input className={inputClasses.join(' ')}
-                                  autocomplete="off"
+                                  autoComplete="off"
                                   onChange={props.changed}
                                   value={props.value}
                                   {...props.elementConfig}/>;
