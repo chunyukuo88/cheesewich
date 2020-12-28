@@ -89,6 +89,34 @@ describe('contactDataUtils.js', ()=>{
             });
         });
     });
+    describe('buildInputFieldObject()', ()=>{
+        describe('WHEN: Given valid arguments, ', ()=>{
+            test('THEN: It returns an object containing input field data.', ()=>{
+               const placeholder = 'test';
+               const minLength = 1;
+               const maxLength = 4;
+               const type = 'input';
+
+                const result = utils.buildInputFieldObject(placeholder, minLength, maxLength, type);
+                const expectedResult = {
+                    elementType: 'input',
+                    elementConfig: {
+                        type: type,
+                        placeholder: placeholder,
+                    },
+                    value: '',
+                    validation: {
+                        required: true,
+                        minLength: minLength,
+                        maxLength: maxLength
+                    },
+                    valid: false,
+                    touched: false,
+                };
+                expect(result).toEqual(expectedResult);
+            });
+        });
+    });
     describe('mapOrderFormToArray()', ()=>{
         describe('WHEN: Given anorderFormObject, ', ()=>{
             test('THEN: It returns an array of form elements.', ()=>{
