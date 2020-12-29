@@ -10,7 +10,7 @@ import Spinner from '../../components/UI/Spinner/Spinner';
 import OrderSummary from '../../components/Cheesewich/OrderSummary/OrderSummary';
 import urls from '../../urls';
 import { connect } from 'react-redux';
-import { addIngredient, nixIngredient } from '../../store/actions/changeQuantity';
+import { addIngredient, nixIngredient } from '../../store/actions/cheesewichBuilder';
 
 class CheesewichBuilder extends Component {
     state = {
