@@ -1,5 +1,4 @@
-export const ADD_INGREDIENT = 'ADD_INGREDIENT';
-export const NIX_INGREDIENT = 'NIX_INGREDIENT';
+import { ADD_INGREDIENT, NIX_INGREDIENT } from './actionTypes';
 
 export const addIngredient = (ingName) => {
     return {
