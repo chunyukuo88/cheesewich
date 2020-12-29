@@ -4,6 +4,7 @@ import Input from "../../../components/UI/Input/Input";
 import Button from "../../../components/UI/Button/Button";
 
 export const buildForm = ({ loading, formIsValid }, inputChangedHandler, orderHandler, formElementsArray) => {
+    // console.log('formElementsArray: ', formElementsArray);
     return (loading)
         ? <Spinner/>
         : <form onSubmit={orderHandler} autoComplete="off">
@@ -22,12 +23,10 @@ export const buildForm = ({ loading, formIsValid }, inputChangedHandler, orderHa
 };
 
 export const buildFormData = ({ orderForm }) => {
-    console.log('orderForm: ', orderForm);
     const formData = {};
     for (let formElementIdentifier in orderForm) {
         formData[formElementIdentifier] = orderForm[formElementIdentifier].value;
     };
-    console.log('formData: ', formData);
     return formData;
 };
 

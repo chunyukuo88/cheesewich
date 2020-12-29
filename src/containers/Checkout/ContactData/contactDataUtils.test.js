@@ -7,8 +7,21 @@ import EnzymeAdapter from 'enzyme-adapter-react-16';
 Enzyme.configure({ adapter: new EnzymeAdapter()});
 
 const formElementsArray = [
-    {elementConfig: {}},
-    {elementConfig: {}},
+    {id: "name",
+     config: {
+             elementConfig: {
+                 placeholder: "Your name",
+                 type: "text",
+             },
+             elementType: "input",
+             touched: false,
+             valid: false,
+             validation: {
+                 required: true
+             },
+             value: '',
+         },
+     },
 ];
 
 describe('contactDataUtils.js', ()=>{
@@ -42,21 +55,18 @@ describe('contactDataUtils.js', ()=>{
                     expect(result).toEqual(expectedResult);
                 });
             });
-            // describe('AND: The state includes a "loading" value of FALSE and the form is valid,', ()=>{
-            //     test('THEN: It returns a form component with an enabled button.', ()=>{
-            //         //TODO: fix this test
-            //         const state = {
-            //             loading: false,
-            //             formIsValid: true,
-            //         };
-            //         const inputChangedHandler = jest.fn();
-            //         const orderHandler = jest.fn();
-            //         const result = utils.buildForm(state, inputChangedHandler, orderHandler, formElementsArray);
-            //         const wrapper = render(result);
-            //         console.log(wrapper);
-            //         expect(wrapper.children).toEqual('fix this test');
-            //     });
-            // });
+            describe('AND: The state includes a "loading" value of FALSE and the form is valid,', ()=>{
+                test('THEN: It returns a form component with an enabled button.', ()=>{
+                    const state = {
+                        loading: false,
+                        formIsValid: true,
+                    };
+                    const inputChangedHandler = jest.fn();
+                    const orderHandler = jest.fn();
+                    const result = utils.buildForm(state, inputChangedHandler, orderHandler, formElementsArray);
+                    expect(result).not.toEqual(<Spinner/>);
+                });
+            });
         });
     });
     describe('checkValidity()', ()=>{
