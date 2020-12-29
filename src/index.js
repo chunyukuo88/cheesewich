@@ -5,10 +5,11 @@ import './index.css';
 import App from './App.jsx';
 import registerServiceWorker from './registerServiceWorker';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
+import thunk from 'redux-thunk';
 import reducer from './store/reducers/cheesewichBuilder';
 
-const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+const store = createStore(reducer, compose(applyMiddleware(thunk)));
 
 const app = (
     <Provider store={store}>
