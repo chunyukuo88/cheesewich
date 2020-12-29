@@ -1,8 +1,6 @@
 import React from 'react';
 import * as utils from './contactDataUtils';
 import Spinner from "../../../components/UI/Spinner/Spinner";
-import Input from "../../../components/UI/Input/Input";
-import Button from "../../../components/UI/Button/Button";
 import Enzyme, { shallow, render } from 'enzyme';
 import EnzymeAdapter from 'enzyme-adapter-react-16';
 
@@ -14,6 +12,24 @@ const formElementsArray = [
 ];
 
 describe('contactDataUtils.js', ()=>{
+    describe('buildFormData()', ()=>{
+        describe('WHEN: Given state containing an orderForm object, ', ()=>{
+            test('THEN: It returns an object containing form data, ', ()=>{
+                const state = {
+                    orderForm: {
+                      test1: { value: 'foo'},
+                      test2: { value: 'bar'},
+                    },
+                };
+                const result = utils.buildFormData(state);
+                const expectedResult = {
+                    test1: 'foo',
+                    test2: 'bar',
+                };
+                expect(result).toEqual(expectedResult);
+            });
+        });
+    });
     describe('buildForm()', ()=>{
         describe('WHEN: Given state, an inputChangedHandler, and a formElementsArray', ()=>{
             describe('AND: The state includes a "loading" value of TRUE', ()=>{
@@ -127,11 +143,11 @@ describe('contactDataUtils.js', ()=>{
                 const result = utils.mapOrderFormToArray(orderFormObject);
                 const expectedResult = [
                     {
-                    "config": "foo", 
+                    "config": "foo",
                     "id": "test1"
-                    }, 
+                    },
                     {
-                    "config": "bar", 
+                    "config": "bar",
                     "id": "test2"
                     },
                 ];

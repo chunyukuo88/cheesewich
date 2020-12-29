@@ -8,7 +8,7 @@ export const buildForm = ({ loading, formIsValid }, inputChangedHandler, orderHa
         ? <Spinner/>
         : <form onSubmit={orderHandler} autoComplete="off">
             {formElementsArray.map(formElement => (
-                <Input  changed={(event) => inputChangedHandler(event, formElement.id)} 
+                <Input  changed={(event) => inputChangedHandler(event, formElement.id)}
                         elementConfig={formElement.config.elementConfig}
                         elementType={formElement.config.elementType}
                         invalid={!formElement.config.valid}
@@ -22,10 +22,12 @@ export const buildForm = ({ loading, formIsValid }, inputChangedHandler, orderHa
 };
 
 export const buildFormData = ({ orderForm }) => {
+    console.log('orderForm: ', orderForm);
     const formData = {};
     for (let formElementIdentifier in orderForm) {
         formData[formElementIdentifier] = orderForm[formElementIdentifier].value;
     };
+    console.log('formData: ', formData);
     return formData;
 };
 
