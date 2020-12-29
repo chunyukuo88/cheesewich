@@ -70,13 +70,19 @@ describe('contactDataUtils.js', ()=>{
         });
     });
     describe('checkValidity()', ()=>{
-        describe('WHEN: Given a  value and no rules object, ', ()=>{
+        describe('WHEN: Given a  value and an empty rules object, ', ()=>{
             test('THEN: It returns TRUE.', ()=>{
                 const value = 'a';
                 const rules = {};
                 const result = utils.checkValidity(value, rules);
-                const expectedResult = true;
-                expect(result).toEqual(expectedResult);
+                expect(result).toBeTruthy();
+            });
+        });
+        describe('WHEN: Given a  value and no rules object, ', ()=>{
+            test('THEN: It returns TRUE.', ()=>{
+                const value = 'a';
+                const result = utils.checkValidity(value);
+                expect(result).toBeTruthy();
             });
         });
         describe('WHEN: Given a value and a rules object with required = true, ', ()=>{
@@ -86,8 +92,7 @@ describe('contactDataUtils.js', ()=>{
                     required: true,
                 };
                 const result = utils.checkValidity(value, rules);
-                const expectedResult = true;
-                expect(result).toEqual(expectedResult);
+                expect(result).toBeTruthy();
             });
         });
         describe('WHEN: Given a value that does not meet minimum length requirements, ', ()=>{
@@ -98,8 +103,18 @@ describe('contactDataUtils.js', ()=>{
                     minLength: 5,
                 };
                 const result = utils.checkValidity(value, rules);
-                const expectedResult = false;
-                expect(result).toEqual(expectedResult);
+                expect(result).toBeFalsy();
+            });
+        });
+        describe('WHEN: Given a value that meets minimum length requirements, ', ()=>{
+            test('THEN: It returns TRUE.', ()=>{
+                const value = 'asdfasdfasdf';
+                const rules = {
+                    required: true,
+                    minLength: 5,
+                };
+                const result = utils.checkValidity(value, rules);
+                expect(result).toBeTruthy();
             });
         });
         describe('WHEN: Given a value that does not meet maximum length requirements, ', ()=>{
@@ -110,14 +125,24 @@ describe('contactDataUtils.js', ()=>{
                     maxLength: 3,
                 };
                 const result = utils.checkValidity(value, rules);
-                const expectedResult = false;
-                expect(result).toEqual(expectedResult);
+                expect(result).toBeFalsy();
+            });
+        });
+        describe('WHEN: Given a value that meets maximum length requirements, ', ()=>{
+            test('THEN: It returns TRUE.', ()=>{
+                const value = 'a';
+                const rules = {
+                    required: true,
+                    maxLength: 3,
+                };
+                const result = utils.checkValidity(value, rules);
+                expect(result).toBeTruthy();
             });
         });
     });
     describe('buildInputFieldObject()', ()=>{
-        describe('WHEN: Given valid arguments, ', ()=>{
-            test('THEN: It returns an object containing input field data.', ()=>{
+        describe('WHEN: Given arguments containing minLength, maxLength, and type, ', ()=>{
+            test('THEN: It returns an object containing that input field data.', ()=>{
                const placeholder = 'test';
                const minLength = 1;
                const maxLength = 4;
@@ -135,6 +160,27 @@ describe('contactDataUtils.js', ()=>{
                         required: true,
                         minLength: minLength,
                         maxLength: maxLength
+                    },
+                    valid: false,
+                    touched: false,
+                };
+                expect(result).toEqual(expectedResult);
+            });
+        });
+        describe('WHEN: Given arguments without minLength, maxLength, or type, ', ()=>{
+            test('THEN: It returns an object containing all the other input field data.', ()=>{
+               const placeholder = 'test';
+
+                const result = utils.buildInputFieldObject(placeholder);
+                const expectedResult = {
+                    elementType: 'input',
+                    elementConfig: {
+                        type: 'text',
+                        placeholder: placeholder,
+                    },
+                    value: '',
+                    validation: {
+                        required: true,
                     },
                     valid: false,
                     touched: false,
