@@ -13,12 +13,10 @@ export const buildFetchedOrders = (serverResponseObject) => {
 }
 
 export const getContent = ({ orders }) => {
-    console.log('orders: ', orders);
     const result = orders.map(({ingredients, price}, key) => (
         <Order key={key}
                ingredients={ingredients}
                price={price}/>
     ));
-    console.log('getContent() result: ', result);
     return result;
 }
