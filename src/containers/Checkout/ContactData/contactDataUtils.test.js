@@ -1,10 +1,6 @@
 import React from 'react';
 import * as utils from './contactDataUtils';
 import Spinner from "../../../components/UI/Spinner/Spinner";
-import Enzyme, { shallow, render } from 'enzyme';
-import EnzymeAdapter from 'enzyme-adapter-react-16';
-
-Enzyme.configure({ adapter: new EnzymeAdapter()});
 
 const formElementsArray = [
     {id: "name",
