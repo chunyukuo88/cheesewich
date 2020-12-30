@@ -3,8 +3,6 @@ import classes from './ContactData.css';
 import { purchaseCheesewichFailed,
         purchaseCheesewichStart,
         purchaseCheesewichSuccess } from '../../../store/actions/order';
-import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler';
-
 import { buildForm,
          buildFormData,
          buildInputFieldObject,
@@ -13,6 +11,10 @@ import { buildForm,
          getDeliveryMethodObject,
          mapOrderFormToArray } from './contactDataUtils';
 import { connect } from 'react-redux';
+import axios from '../../../axios-orders';
+import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler';
+
+
 
 class ContactData extends Component {
     state = {
@@ -32,7 +34,7 @@ class ContactData extends Component {
         event.preventDefault();
         const formData = buildFormData(this.state);
         const order = buildOrderForAxios(this.props, formData);
-
+        this.props.onCheesewichOrder(order);
     }
 
     inputChangedHandler = (event, inputIdentifier) => {
@@ -73,5 +75,10 @@ const mapStateToProps = (state) => {
     };
 };
 
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onCheesewichOrder: (orderData) => dispatch(purchaseCheesewichStart(orderData)),
+    };
+};
 
-export default connect(mapStateToProps)(ContactData);
+export default connect(mapStateToProps)(withErrorHandler(ContactData, axios));
