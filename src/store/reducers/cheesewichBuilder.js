@@ -1,8 +1,12 @@
-import { ADD_INGREDIENT, NIX_INGREDIENT } from '../actions/actionTypes';
+import { ADD_INGREDIENT,
+        NIX_INGREDIENT,
+        SET_INGREDIENTS,
+        FETCH_INGREDIENTS_FAILED } from '../actions/actionTypes';
 
 const initialState = {
     ingredients: null,
     price: 0,
+    error: false
 };
 
 const INGREDIENT_PRICES = {
@@ -31,6 +35,20 @@ const reducer = (state = initialState, action) => {
                     [action.ingredientName]: state.ingredients[action.ingredientName] - 1,
                 },
                 price: state.price - INGREDIENT_PRICES[action.ingredientName],
+            };
+        case SET_INGREDIENTS:
+            return {
+                ...state,
+                ingredients: {
+                    ...state,
+                    ingredients: action.ingredients,
+                    error: false,
+                },
+            };
+        case FETCH_INGREDIENTS_FAILED:
+            return {
+                ...state,
+                error: true,
             };
         default: return state;
     }

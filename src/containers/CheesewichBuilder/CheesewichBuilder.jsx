@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from '../../../src/axios-instance';
 import { connect } from 'react-redux';
 import * as utils from './builderUtils';
-import { addIngredient, nixIngredient } from '../../store/actions/cheesewichBuilder';
+import {addIngredient, initIngredients, nixIngredient} from '../../store/actions/cheesewichBuilder';
 
 import Aux from '../../hoc/auxilliary';
 import Cheesewich from '../../components/Cheesewich/Cheesewich.jsx';
@@ -19,7 +19,9 @@ class CheesewichBuilder extends Component {
         userHasPlacedOrder: false,
     };
 
-    componentDidMount() {}
+    componentDidMount() {
+        this.props.onInitIngredients();
+    }
 
     orderHandler = () => this.setState({userHasPlacedOrder: true});
     orderCancellationHandler = () => this.setState({userHasPlacedOrder: false});
@@ -28,7 +30,7 @@ class CheesewichBuilder extends Component {
     render(){
         const disabledInfo = utils.produceDisabledInfoObject(this.props.ings);
         let orderSummary = null;
-        let cheesewichAndControls = getStringOrSpinner(this.state.error);
+        let cheesewichAndControls = getStringOrSpinner(this.props.error);
         if (this.props.ings) {
            cheesewichAndControls = (
                 <Aux>
@@ -67,6 +69,7 @@ const mapStateToProps = (state) => {
     return {
         ings: state.ingredients,
         price: state.price,
+        error: state.error,
     };
 };
 
@@ -74,6 +77,7 @@ const mapDispatchToProps = dispatch => {
     return {
         onIngredientAdded: (ingName)=> dispatch(addIngredient(ingName)),
         onIngredientNixed: (ingName)=> dispatch(nixIngredient(ingName)),
+        onInitIngredients: () => dispatch(initIngredients()),
     };
 };
 

@@ -19,10 +19,10 @@ export const nixIngredient = (ingName) => {
     };
 };
 
-export const setFetchIngredientError = (error) => {
+export const setFetchIngredientError = () => {
     return {
         type: FETCH_INGREDIENTS_FAILED,
-        error: error
+        error: true
     };
 };
 
@@ -36,7 +36,11 @@ export const setIngredients = (ingredients) => {
 export const initIngredients = () => {
     return dispatch => {
         axios.get(urls.firebaseIngredients)
-            .then(res => dispatch(setIngredients(res.data)))
-            .catch(error => dispatch(setFetchIngredientError(error)));
+            .then(response => {
+                dispatch(setIngredients(response.data));
+            })
+            .catch(error => {
+                dispatch(setFetchIngredientError())
+            });
     };
 };
