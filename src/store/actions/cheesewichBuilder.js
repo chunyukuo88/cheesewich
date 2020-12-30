@@ -26,10 +26,10 @@ export const setFetchIngredientError = () => {
     };
 };
 
-export const setIngredients = (ingredients) => {
+export const setIngredients = (fetchedIngredients) => {
     return {
       type: SET_INGREDIENTS,
-      ingredients: ingredients
+      ingredients: fetchedIngredients
     };
 };
 
