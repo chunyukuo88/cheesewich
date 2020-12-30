@@ -1,29 +1,25 @@
 import React, { Component } from 'react';
 import axios from '../../../src/axios-instance';
+import { connect } from 'react-redux';
+import * as utils from './builderUtils';
+import { addIngredient, nixIngredient } from '../../store/actions/cheesewichBuilder';
+
 import Aux from '../../hoc/auxilliary';
- import * as utils from './builderUtils';
 import Cheesewich from '../../components/Cheesewich/Cheesewich.jsx';
 import UserControls from '../../components/Cheesewich/UserControls/UserControls.jsx';
-import Modal from '../../components/UI/Modal/Modal.jsx';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 import Spinner from '../../components/UI/Spinner/Spinner';
+import Modal from '../../components/UI/Modal/Modal.jsx';
 import OrderSummary from '../../components/Cheesewich/OrderSummary/OrderSummary';
-import urls from '../../urls';
-import { connect } from 'react-redux';
-import { addIngredient, nixIngredient } from '../../store/actions/cheesewichBuilder';
+
+
 
 class CheesewichBuilder extends Component {
     state = {
         userHasPlacedOrder: false,
-        loading: false,
-        error: null
     };
 
-    componentDidMount() {
-        axios.get(urls.firebaseIngredients)
-             .then(res => this.setState({ingredients : res.data}))
-             .catch(error => this.setState({error: error}));
-    }
+    componentDidMount() {}
 
     orderHandler = () => this.setState({userHasPlacedOrder: true});
     orderCancellationHandler = () => this.setState({userHasPlacedOrder: false});
@@ -49,9 +45,6 @@ class CheesewichBuilder extends Component {
                                          orderCancelled={this.orderCancellationHandler}
                                          goToCheckout={this.proceedToCheckoutHandler}
                                          price={this.props.price}/>;
-        }
-        if (this.state.loading) {
-            orderSummary = <Spinner />;
         }
 
         return (

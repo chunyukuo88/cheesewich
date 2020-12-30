@@ -1,12 +1,7 @@
 import { ADD_INGREDIENT, NIX_INGREDIENT } from '../actions/actionTypes';
 
 const initialState = {
-    ingredients: {
-        cheese: 0,
-        shallots: 0,
-        bacon: 0,
-        mustard: 0,
-    },
+    ingredients: null,
     price: 0,
 };
 
