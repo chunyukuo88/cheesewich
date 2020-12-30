@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import classes from './ContactData.css';
-import axios from '../../../axios-orders';
+import { purchaseCheesewichFailed,
+        purchaseCheesewichStart,
+        purchaseCheesewichSuccess } from '../../../store/actions/order';
+import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler';
+
 import { buildForm,
          buildFormData,
          buildInputFieldObject,
@@ -26,17 +30,9 @@ class ContactData extends Component {
 
     orderHandler = ( event ) => {
         event.preventDefault();
-        this.setState( { loading: true } );
         const formData = buildFormData(this.state);
         const order = buildOrderForAxios(this.props, formData);
-        axios.post( '/orders.json', order )
-            .then( response => {
-                this.setState( { loading: false } );
-                this.props.history.push( '/' );
-            } )
-            .catch( error => {
-                this.setState( { loading: false } );
-            } );
+
     }
 
     inputChangedHandler = (event, inputIdentifier) => {
