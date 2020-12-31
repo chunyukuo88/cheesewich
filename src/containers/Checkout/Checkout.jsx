@@ -30,7 +30,7 @@ const buildSummary = (props, checkoutCancelFn, checkoutContinueFn) => (
 
 const mapStateToProps = (state) => {
     return {
-        ingredients: state.ingredients
+        ingredients: state.builder.ingredients
     };
 };
 

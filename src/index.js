@@ -5,11 +5,17 @@ import './index.css';
 import App from './App.jsx';
 import registerServiceWorker from './registerServiceWorker';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware, compose } from 'redux';
+import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
-import reducer from './store/reducers/cheesewichBuilder';
+import cheesewichBuilderReducer from './store/reducers/cheesewichBuilder';
+import orderReducer from './store/reducers/order';
 
-const store = createStore(reducer, compose(applyMiddleware(thunk)));
+const rootReducer = combineReducers({
+    builder: cheesewichBuilderReducer,
+    order: orderReducer
+})
+
+const store = createStore(rootReducer, compose(applyMiddleware(thunk)));
 
 const app = (
     <Provider store={store}>

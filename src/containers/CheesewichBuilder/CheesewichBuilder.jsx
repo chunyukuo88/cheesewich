@@ -67,9 +67,9 @@ const getStringOrSpinner = (error) => error
 
 const mapStateToProps = (state) => {
     return {
-        ings: state.ingredients,
-        price: state.price,
-        error: state.error,
+        ings: state.builder.ingredients,
+        price: state.builder.price,
+        error: state.builder.error,
     };
 };
 
