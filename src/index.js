@@ -10,12 +10,14 @@ import thunk from 'redux-thunk';
 import cheesewichBuilderReducer from './store/reducers/cheesewichBuilder';
 import orderReducer from './store/reducers/order';
 
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
 const rootReducer = combineReducers({
     builder: cheesewichBuilderReducer,
     order: orderReducer
 })
 
-const store = createStore(rootReducer, compose(applyMiddleware(thunk)));
+const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
 
 const app = (
     <Provider store={store}>
