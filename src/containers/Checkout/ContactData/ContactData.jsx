@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import classes from './ContactData.css';
-import { purchaseCheesewichFailed,
-        purchaseCheesewichStart,
-        purchaseCheesewichSuccess } from '../../../store/actions/order';
+import { purchaseCheesewich } from '../../../store/actions/order';
 import { buildForm,
          buildFormData,
          buildInputFieldObject,
@@ -27,7 +25,6 @@ class ContactData extends Component {
             deliveryMethod: getDeliveryMethodObject()
         },
         formIsValid: false,
-        loading: false,
     }
 
     orderHandler = ( event ) => {
@@ -58,7 +55,7 @@ class ContactData extends Component {
 
     render () {
         const formElementsArray = mapOrderFormToArray(this.state.orderForm);
-        const form = buildForm(this.state, this.inputChangedHandler, this.orderHandler, formElementsArray);
+        const form = buildForm(this.state, this.inputChangedHandler, this.orderHandler, formElementsArray, this.props.loading);
         return (
             <div className={classes.ContactData}>
                 <h3>Enter Your Contact Info</h3>
@@ -72,13 +69,14 @@ const mapStateToProps = (state) => {
     return {
         ings: state.ingredients,
         price: state.price,
+        loading: state.loading,
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onCheesewichOrder: (orderData) => dispatch(purchaseCheesewichStart(orderData)),
+        onCheesewichOrder: (orderData) => dispatch(purchaseCheesewich(orderData)),
     };
 };
 
-export default connect(mapStateToProps)(withErrorHandler(ContactData, axios));
+export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(ContactData, axios));

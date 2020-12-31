@@ -16,8 +16,15 @@ export const purchaseCheesewichFailed = (error) => {
     };
 };
 
-export const purchaseCheesewichStart = (orderData) => {
+export const purchaseCheesewichStart = () => {
+    return {
+        type: actionTypes.PURCHASE_CHEESEWICH_START,
+    };
+};
+
+export const purchaseCheesewich = (orderData) => {
     return dispatch => {
+        dispatch(purchaseCheesewichStart());
         axios.post( '/orders.json', orderData )
             .then( response => {
                 console.log(response.data);
