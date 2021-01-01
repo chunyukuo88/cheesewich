@@ -5,6 +5,11 @@ import ContactData from './ContactData/ContactData';
 import { connect } from 'react-redux';
 
 class Checkout extends Component {
+
+    componentDidMount() {
+
+    }
+
     checkoutCancelledHandler = () => this.props.history.goBack();
     checkoutContinueHandler = () => this.props.history.replace('/checkout/contact-data');
 
