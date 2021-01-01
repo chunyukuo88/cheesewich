@@ -11,6 +11,7 @@ import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import Modal from '../../components/UI/Modal/Modal.jsx';
 import OrderSummary from '../../components/Cheesewich/OrderSummary/OrderSummary';
+import {purchaseInit} from "../../store/actions/order";
 
 
 
@@ -75,9 +76,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onIngredientAdded: (ingName)=> dispatch(addIngredient(ingName)),
-        onIngredientNixed: (ingName)=> dispatch(nixIngredient(ingName)),
+        onIngredientAdded: (ingName) => dispatch(addIngredient(ingName)),
+        onIngredientNixed: (ingName) => dispatch(nixIngredient(ingName)),
         onInitIngredients: () => dispatch(initIngredients()),
+        onInitPurchase: () => dispatch(purchaseInit()),
     };
 };
 

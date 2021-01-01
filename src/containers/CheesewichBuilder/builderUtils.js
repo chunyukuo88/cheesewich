@@ -18,7 +18,10 @@ export const getPurchasabilityStatus = (ingredients) => {
 };
 
 
-export const goToCheckoutHandler = (props) => props.history.push('/checkout');
+export const goToCheckoutHandler = (props) => {
+    props.onInitPurchase();
+    props.history.push('/checkout');
+}
 
 export const produceDisabledInfoObject = ingredientQuantityObject => {
     const disabledInfo = {...ingredientQuantityObject};

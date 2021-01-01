@@ -6,10 +6,6 @@ import { connect } from 'react-redux';
 
 class Checkout extends Component {
 
-    componentDidMount() {
-
-    }
-
     checkoutCancelledHandler = () => this.props.history.goBack();
     checkoutContinueHandler = () => this.props.history.replace('/checkout/contact-data');
 
@@ -20,22 +16,30 @@ class Checkout extends Component {
 }
 
 const getSummaryIfIngredientsExist = (props, checkoutCancelFn, checkoutContinueFn) => {
-    return props.ingredients ? buildSummary(props, checkoutCancelFn, checkoutContinueFn) : <Redirect to="/"/>;
+    return props.ingredients
+        ? buildSummary(props, checkoutCancelFn, checkoutContinueFn)
+        : <Redirect to="/"/>;
 };
 
-const buildSummary = (props, checkoutCancelFn, checkoutContinueFn) => (
-    <div>
-        <CheckoutSummary
-            ingredients={props.ingredients}
-            checkoutCancelled={checkoutCancelFn}
-            checkoutContinue={checkoutContinueFn}/>
-        <Route path={`${props.match.path}/contact-data`} component={ContactData} />
-    </div>
-);
+const buildSummary = (props, checkoutCancelFn, checkoutContinueFn) => {
+    console.log('Checkout.jsx props.purchase: ', props.purchased);
+    const redirectOnPurchase = props.purchased ? <Redirect to="/"/> : null;
+    return (
+        <div>
+            {redirectOnPurchase}
+            <CheckoutSummary
+                ingredients={props.ingredients}
+                checkoutCancelled={checkoutCancelFn}
+                checkoutContinue={checkoutContinueFn}/>
+            <Route path={`${props.match.path}/contact-data`} component={ContactData} />
+        </div>
+    );
+}
 
 const mapStateToProps = (state) => {
     return {
-        ingredients: state.builder.ingredients
+        ingredients: state.builder.ingredients,
+        purchased: state.order.purchaseHasBeenMade,
     };
 };
 
