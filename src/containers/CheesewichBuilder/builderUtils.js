@@ -19,6 +19,7 @@ export const getPurchasabilityStatus = (ingredients) => {
 
 
 export const goToCheckoutHandler = (props) => {
+    console.log('builderUtils.js\ngoToCheckoutHandler()\nprops: ', props);
     props.onInitPurchase();
     props.history.push('/checkout');
 }

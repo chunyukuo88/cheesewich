@@ -3,6 +3,7 @@ import { Route, Redirect } from 'react-router-dom';
 import CheckoutSummary from '../../components/Order/CheckoutSummary/CheckoutSummary';
 import ContactData from './ContactData/ContactData';
 import { connect } from 'react-redux';
+import {purchaseInit} from "../../store/actions/order";
 
 class Checkout extends Component {
 
@@ -18,11 +19,10 @@ class Checkout extends Component {
 const getSummaryIfIngredientsExist = (props, checkoutCancelFn, checkoutContinueFn) => {
     return props.ingredients
         ? buildSummary(props, checkoutCancelFn, checkoutContinueFn)
-        : <Redirect to="/"/>;
+        : <Redirect to="/" />;
 };
 
 const buildSummary = (props, checkoutCancelFn, checkoutContinueFn) => {
-    console.log('Checkout.jsx props.purchase: ', props.purchased);
     const redirectOnPurchase = props.purchased ? <Redirect to="/"/> : null;
     return (
         <div>

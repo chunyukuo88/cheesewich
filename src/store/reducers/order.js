@@ -17,12 +17,12 @@ const reducer = (state = initialState, action) => {
             const newOrder = {
                 ...action.orderData,
                 id: action.orderId,
-                purchaseHasBeenMade: true,
             };
             return {
                 ...state,
                 loading: false,
                 orders: state.orders.concat(newOrder),
+                purchaseHasBeenMade: true,
             };
         case actionTypes.PURCHASE_CHEESEWICH_FAILED:
             return {
