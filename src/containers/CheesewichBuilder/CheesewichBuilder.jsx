@@ -11,7 +11,7 @@ import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import Modal from '../../components/UI/Modal/Modal.jsx';
 import OrderSummary from '../../components/Cheesewich/OrderSummary/OrderSummary';
-import {purchaseInit} from "../../store/actions/order";
+import { purchaseInit } from '../../store/actions/order';
 
 
 

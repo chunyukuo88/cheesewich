@@ -25,6 +25,6 @@ const buildOrdersContent = ordersObject => (
     ordersObject.map(({ingredients, price}, key) => (
     <Order key={key}
            ingredients={ingredients}
-           price={price}/>
+           price={price.toFixed(2)}/>
     ))
 );

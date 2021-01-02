@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchOrders } from '../../store/actions/order';
-import { buildFetchedOrders, getContent } from './ordersUtils';
-import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
+import { getContent } from './ordersUtils';
 
 class Orders extends Component {
 
