@@ -14,7 +14,7 @@ const reducer = (state = initialState, action) => {
                 loading: true,
             };
         case actionTypes.PURCHASE_CHEESEWICH_SUCCESS:
-            const newOrder = {
+            const  newOrder = {
                 ...action.orderData,
                 id: action.orderId,
             };
@@ -33,6 +33,22 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 purchaseHasBeenMade: false,
+            };
+        case actionTypes.FETCH_ORDERS_START:
+            return {
+                ...state,
+                loading: true,
+            };
+        case actionTypes.FETCH_ORDERS_SUCCESS:
+            return {
+                ...state,
+                orders: action.orders,
+                loading: false
+            };
+        case actionTypes.FETCH_ORDERS_FAIL:
+            return {
+                ...state,
+                loading: false
             };
         default:
             return state;

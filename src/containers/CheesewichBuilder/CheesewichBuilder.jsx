@@ -66,7 +66,7 @@ const getStringOrSpinner = (error) => error
                                 ? <p>Ingredients could not be found.</p>
                                 : <Spinner />;
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
     return {
         ings: state.builder.ingredients,
         price: state.builder.price,
