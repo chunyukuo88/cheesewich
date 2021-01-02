@@ -15,16 +15,20 @@ export const buildFetchedOrders = (serverResponseObject) => {
     return fetchedOrders;
 }
 
-export const getContent = ({ orders, loading }) => {
-    return loading
+export const getContent = (props) => {
+    console.log(props.orders[0]);
+    return props.loading
         ? <Spinner/>
-        : buildOrdersContent(orders);
+        : buildOrdersContent(props.orders);
 };
 
-const buildOrdersContent = ordersObject => (
-    ordersObject.map(({ingredients, price}, key) => (
-    <Order key={key}
-           ingredients={ingredients}
-           price={price.toFixed(2)}/>
-    ))
-);
+const buildOrdersContent = ordersObject => {
+    return (
+        ordersObject.map(({ingredients, price}, key) => (
+        <Order key={key}
+               ingredients={ingredients}
+               price={price.toFixed(2)}/>
+        ))
+    );
+}
+

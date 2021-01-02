@@ -62,7 +62,7 @@ class ContactData extends Component {
                 {form}
             </div>
         );
-    }
+    };
 }
 
 const mapStateToProps = (state) => {
