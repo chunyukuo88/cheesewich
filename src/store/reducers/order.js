@@ -1,5 +1,5 @@
 import * as actionTypes from '../actions/actionTypes';
-import { updateObject } from '../utils';
+import { updateObject, purchaseCheesewichSuccess } from '../utils';
 
 const initialState = {
     orders: [],
@@ -12,16 +12,7 @@ const reducer = (state = initialState, action) => {
         case actionTypes.PURCHASE_CHEESEWICH_START:
             return updateObject(state, {loading: true});
         case actionTypes.PURCHASE_CHEESEWICH_SUCCESS:
-            const  newOrder = {
-                ...action.orderData,
-                id: action.orderId,
-            };
-            return {
-                ...state,
-                loading: false,
-                orders: state.orders.concat(newOrder),
-                purchaseHasBeenMade: true,
-            };
+            return purchaseCheesewichSuccess(state, action)
         case actionTypes.PURCHASE_CHEESEWICH_FAILED:
             return updateObject(state, {loading: false});
         case actionTypes.PURCHASE_INIT:
