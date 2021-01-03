@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Input from '../../components/UI/Input/Input.jsx';
 import Button from '../../components/UI/Button/Button.jsx';
 import classes from './Auth.css';
+import * as authActions from '../../store/actions/auth';
+import { connect } from 'react-redux';
 
 class Auth extends Component {
     state = {
@@ -37,9 +39,16 @@ class Auth extends Component {
         },
     }
 
+    submitHandler = (event) => {
+        event.prevent.default();
+        const email = this.state.controls.email;
+        const password = this.state.controls.password;
+        this.props.onAuth(email, password);
+    }
+
     checkValidity = (value, rules) => {
         let isValid = true;
-        if (!rules) return isValid; //TODO
+        if (!rules) return isValid;
         if (rules.required) isValid = value.trim() !== '' && isValid;
         if (rules.minLength) isValid = value.length >= rules.minLength && isValid
         if (rules.maxLength) isValid = value.length <= rules.maxLength && isValid
@@ -69,7 +78,7 @@ class Auth extends Component {
         };
         console.log(this.state);
         const form = formElementsArray.map(formElement =>  (
-            <Input 
+            <Input
                 changed={event => this.inputChangedHandler(event, formElement.id)}
                 elementConfig={formElement.config.elementConfig}
                 elementType={formElement.config.elementType}
@@ -82,7 +91,7 @@ class Auth extends Component {
 
         return (
             <div className={classes.Auth}>
-                <form>
+                <form onSubmit={this.submitHandler}>
                     {form}
                 <Button buttonType="green">
                     Submit
@@ -93,4 +102,10 @@ class Auth extends Component {
     }
 }
 
-export default Auth;
+const mapDispatchToProps = dispatch => {
+    return {
+        onAuth: (email, password) => dispatch(authActions.auth(email, password)),
+    };
+};
+
+export default connect(null, mapDispatchToProps)(Auth);
