@@ -32,7 +32,6 @@ export const auth = (email, password) => {
         };
         axios.post(urls.auth, authData)
             .then(response => {
-                console.log(response);
                 dispatch(authSuccess(response.data));
             })
             .catch(error => {
