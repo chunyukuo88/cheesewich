@@ -19,14 +19,10 @@ const INGREDIENT_PRICES = {
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
-        case ADD_INGREDIENT:
-            return utils.addIngredient(state, action, INGREDIENT_PRICES);
-        case NIX_INGREDIENT:
-            return utils.nixIngredient(state, action, INGREDIENT_PRICES);
-        case SET_INGREDIENTS:
-            return utils.setIngredients(state, action, initialState);
-        case FETCH_INGREDIENTS_FAILED:
-            return utils.updateObject(state, {error: true});
+        case ADD_INGREDIENT: return utils.addIngredient(state, action, INGREDIENT_PRICES);
+        case NIX_INGREDIENT: return utils.nixIngredient(state, action, INGREDIENT_PRICES);
+        case SET_INGREDIENTS: return utils.setIngredients(state, action, initialState);
+        case FETCH_INGREDIENTS_FAILED: return utils.updateObject(state, {error: true});
         default: return state;
     }
 };
