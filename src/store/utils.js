@@ -1,3 +1,5 @@
+import urls from "../urls";
+
 export const updateObject = (oldObject, updatedProperties) => {
     return {
       ...oldObject,
@@ -48,3 +50,5 @@ export const purchaseCheesewichSuccess = (state, action) => {
         purchaseHasBeenMade: true,
     };
 };
+
+export const getAuthUrl = (isSignup) => (isSignup) ? urls.authSignUp : urls.authSignIn;
