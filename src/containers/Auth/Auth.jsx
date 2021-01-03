@@ -40,7 +40,6 @@ class Auth extends Component {
     }
 
     submitHandler = (event) => {
-        console.log('submitHandler() + event:', event );
         event.preventDefault();
         const email = this.state.controls.email;
         const password = this.state.controls.password;
@@ -77,7 +76,6 @@ class Auth extends Component {
                 config: this.state.controls[key]
             });
         };
-        console.log(this.state);
         const form = formElementsArray.map(formElement =>  (
             <Input
                 changed={event => this.inputChangedHandler(event, formElement.id)}
