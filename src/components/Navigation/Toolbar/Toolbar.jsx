@@ -8,7 +8,7 @@ const Toolbar = props => (
         <DrawerToggler openDrawer={props.clicked}/>
         <div>LOGO</div>
         <nav className={classes.desktop_only}>
-            <NavItems />
+            <NavItems isAuthenticated={props.isAuth} />
         </nav>
     </header>
 );

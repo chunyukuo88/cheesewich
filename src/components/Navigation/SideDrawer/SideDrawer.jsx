@@ -12,7 +12,7 @@ const SideDrawer = props => {
             <div className={getClasses(props).join(' ')}>
                 {/* Logo */}
                 <nav>
-                    <NavItems />
+                    <NavItems isAuthenticated={props.isAuth} />
                 </nav>
             </div>
         </Aux>
@@ -20,7 +20,7 @@ const SideDrawer = props => {
 }
 
 export const getClasses = (props) => {
-    return props.open 
+    return props.open
         ? [classes.side_drawer, classes.open]
         : [classes.side_drawer, classes.closed];
 };
