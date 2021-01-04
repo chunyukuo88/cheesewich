@@ -1,5 +1,5 @@
 import * as actionTypes from '../actions/actionTypes';
-import { authStart, authSuccess, authFail } from '../utils';
+import {updateObject} from "../utils";
 
 const initialState = {
     token: null,
@@ -16,6 +16,29 @@ const reducer = (state = initialState, action) => {
         default: return state;
     };
 };
+
+const authStart = (state) => {
+    return updateObject(state, { error: null, loading: true });
+};
+
+const authSuccess = (state, action) => {
+    return updateObject(state, {
+        token: action.idToken,
+        userId: action.userId,
+        error: null,
+        loading: false
+    });
+};
+
+const authFail = (state, action) => {
+    return updateObject(state, {
+        token: null,
+        userId: null,
+        error: action.error,
+        loading: false
+    });
+};
+
 
 
 

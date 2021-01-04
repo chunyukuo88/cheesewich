@@ -1,6 +1,6 @@
 import axios from 'axios';
 import * as actionTypes from './actionTypes';
-import { getAuthUrl, getAuthData } from '../utils';
+import urls from '../../urls';
 
 export const authStart = () => {
     return {
@@ -25,7 +25,7 @@ export const authFail = (error) => {
 export const auth = (email, password, isSignup) => {
     return dispatch => {
         dispatch(authStart());
-        const authData = getAuthData(email, password);
+        const authData = buildAuthData(email, password);
         const url = getAuthUrl(isSignup);
         axios.post(url, authData)
             .then(response => {
@@ -37,3 +37,13 @@ export const auth = (email, password, isSignup) => {
             });
     };
 };
+
+const getAuthUrl = (isSignup) => (isSignup) ? urls.authSignIn : urls.authSignUp;
+
+const buildAuthData = (email, password) => {
+    return {
+        email: email,
+        password: password,
+        returnSecureToken: true,
+    };
+}
