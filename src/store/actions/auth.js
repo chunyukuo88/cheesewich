@@ -32,9 +32,9 @@ export const auth = (email, password, isSignup) => {
             .then(response => {
                 dispatch(authSuccess(response.data));
             })
-            .catch(error => {
-                console.log(error);
-                dispatch(authFail(error));
+            .catch(err => {
+                console.log('====\n', typeof err, '\n====');
+                dispatch(authFail(err));
             });
     };
 };

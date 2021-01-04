@@ -86,11 +86,13 @@ class Auth extends Component {
                 config: this.state.controls[key]
             });
         };
-        const form = getFormContent(this.props, formElementsArray);
+        const form = getFormContent(this.props, formElementsArray, this.inputChangedHandler);
+        const error = getError(this.props.error);
 
         return (
             <div className={classes.Auth}>
                 <div>{getTitle(this.state.isSignup)}</div>
+                {error}
                 <form onSubmit={this.submitHandler}>
                     {form}
                     <Button buttonType="green">Submit</Button>
@@ -101,12 +103,14 @@ class Auth extends Component {
     }
 }
 
-const getFormContent = (props, formArray) => {
+const getError = (error) => (error) ? <p>{error}</p> : null;
+
+const getFormContent = (props, formArray, inputChangedHandler) => {
     return (props.loading)
         ? <Spinner/>
         : formArray.map(formElement =>  (
             <Input
-                changed={event => this.inputChangedHandler(event, formElement.id)}
+                changed={event => inputChangedHandler(event, formElement.id)}
                 elementConfig={formElement.config.elementConfig}
                 elementType={formElement.config.elementType}
                 invalid={!formElement.config.valid}
@@ -124,6 +128,7 @@ const getSwitchOption = (isSignup) => isSignup ? 'Sign up' : 'Sign in';
 const mapStateToProps = state => {
     return {
         loading: state.auth.loading,
+        error: state.auth.error
     };
 };
 
