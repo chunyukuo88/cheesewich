@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Input from '../../components/UI/Input/Input.jsx';
 import Button from '../../components/UI/Button/Button.jsx';
+import Spinner from '../../components/UI/Spinner/Spinner';
 import classes from './Auth.css';
 import * as authActions from '../../store/actions/auth';
 import { connect } from 'react-redux';
@@ -85,7 +86,9 @@ class Auth extends Component {
                 config: this.state.controls[key]
             });
         };
-        const form = formElementsArray.map(formElement =>  (
+        const form = (this.props.loading)
+            ? <Spinner/>
+            : formElementsArray.map(formElement =>  (
             <Input
                 changed={event => this.inputChangedHandler(event, formElement.id)}
                 elementConfig={formElement.config.elementConfig}
@@ -114,10 +117,16 @@ const getTitle = (isSignup) => (!isSignup) ? 'Sign up!' : 'Sign in!';
 
 const getSwitchOption = (isSignup) => isSignup ? 'Sign up' : 'Sign in';
 
+const mapStateToProps = state => {
+    return {
+        loading: state.auth.loading,
+    };
+};
+
 const mapDispatchToProps = dispatch => {
     return {
         onAuth: (email, password, isSignup) => dispatch(authActions.auth(email, password, isSignup)),
     };
 };
 
-export default connect(null, mapDispatchToProps)(Auth);
+export default connect(mapStateToProps, mapDispatchToProps)(Auth);
