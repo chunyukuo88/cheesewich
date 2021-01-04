@@ -86,19 +86,7 @@ class Auth extends Component {
                 config: this.state.controls[key]
             });
         };
-        const form = (this.props.loading)
-            ? <Spinner/>
-            : formElementsArray.map(formElement =>  (
-            <Input
-                changed={event => this.inputChangedHandler(event, formElement.id)}
-                elementConfig={formElement.config.elementConfig}
-                elementType={formElement.config.elementType}
-                invalid={!formElement.config.valid}
-                key={formElement.id}
-                shouldValidate={formElement.config.validation}
-                touched={formElement.config.touched}
-                value={formElement.config.value}/>
-        ));
+        const form = getFormContent(this.props, formElementsArray);
 
         return (
             <div className={classes.Auth}>
@@ -112,6 +100,22 @@ class Auth extends Component {
         );
     }
 }
+
+const getFormContent = (props, formArray) => {
+    return (props.loading)
+        ? <Spinner/>
+        : formArray.map(formElement =>  (
+            <Input
+                changed={event => this.inputChangedHandler(event, formElement.id)}
+                elementConfig={formElement.config.elementConfig}
+                elementType={formElement.config.elementType}
+                invalid={!formElement.config.valid}
+                key={formElement.id}
+                shouldValidate={formElement.config.validation}
+                touched={formElement.config.touched}
+                value={formElement.config.value}/>
+        ));
+};
 
 const getTitle = (isSignup) => (!isSignup) ? 'Sign up!' : 'Sign in!';
 
