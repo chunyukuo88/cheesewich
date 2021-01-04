@@ -22,10 +22,10 @@ export const purchaseCheesewichStart = () => {
     };
 };
 
-export const purchaseCheesewich = (orderData) => {
+export const purchaseCheesewich = (orderData, token) => {
     return dispatch => {
         dispatch(purchaseCheesewichStart());
-        axios.post( '/orders.json', orderData )
+        axios.post( `/orders.json?auth=${token}`, orderData )
             .then( response => {
                 dispatch(purchaseCheesewichSuccess(response.data, orderData));
             } )

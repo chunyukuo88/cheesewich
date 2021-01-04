@@ -31,7 +31,8 @@ class ContactData extends Component {
         event.preventDefault();
         const formData = buildFormData(this.state);
         const order = buildOrderForAxios(this.props, formData);
-        this.props.onCheesewichOrder(order);
+        const token = this.props.token;
+        this.props.onCheesewichOrder(order, token);
     }
 
     inputChangedHandler = (event, inputIdentifier) => {
@@ -70,12 +71,13 @@ const mapStateToProps = (state) => {
         ings: state.builder.ingredients,
         price: state.builder.price,
         loading: state.order.loading,
+        token: state.auth.token,
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onCheesewichOrder: (orderData) => dispatch(purchaseCheesewich(orderData)),
+        onCheesewichOrder: (orderData, token) => dispatch(purchaseCheesewich(orderData, token)),
     };
 };
 
