@@ -14,7 +14,7 @@ export const addIngredient = (state, action, INGREDIENT_PRICES) => {
             ...state.ingredients,
             [action.ingredientName]: state.ingredients[action.ingredientName] + 1,
         },
-        price: state.price - INGREDIENT_PRICES[action.ingredientName],
+        price: state.price + INGREDIENT_PRICES[action.ingredientName],
     };
 };
 
