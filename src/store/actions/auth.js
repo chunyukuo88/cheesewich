@@ -33,8 +33,7 @@ export const auth = (email, password, isSignup) => {
                 dispatch(authSuccess(response.data));
             })
             .catch(err => {
-                console.log('====\n', typeof err, '\n====');
-                dispatch(authFail(err));
+                dispatch(authFail(err.message));
             });
     };
 };
