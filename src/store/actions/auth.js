@@ -29,7 +29,6 @@ export const auth = (email, password, isSignup) => {
         dispatch(authStart());
         const authData = getAuthData(email, password);
         const url = getAuthUrl(isSignup);
-        console.log('url: ', url);
         axios.post(url, authData)
             .then(response => {
                 dispatch(authSuccess(response.data));

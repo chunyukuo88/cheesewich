@@ -51,6 +51,28 @@ export const purchaseCheesewichSuccess = (state, action) => {
     };
 };
 
+export const authStart = (state) => {
+    return updateObject(state, { error: null, loading: true });
+};
+
+export const authSuccess = (state, action) => {
+    return updateObject(state, {
+        token: action.idToken,
+        userId: action.userId,
+        error: null,
+        loading: false
+    });
+};
+
+export const authFail = (state, action) => {
+    return updateObject(state, {
+        token: null,
+        userId: null,
+        error: action.error,
+        loading: false
+    });
+};
+
 export const getAuthUrl = (isSignup) => (isSignup) ? urls.authSignIn : urls.authSignUp;
 
 export const getAuthData = (email, password) => {
