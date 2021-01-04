@@ -27,7 +27,6 @@ export const purchaseCheesewich = (orderData) => {
         dispatch(purchaseCheesewichStart());
         axios.post( '/orders.json', orderData )
             .then( response => {
-                console.log(response.data);
                 dispatch(purchaseCheesewichSuccess(response.data, orderData));
             } )
             .catch( error => {

@@ -2,8 +2,6 @@ import React from 'react';
 import Order from '../../components/Order/Order';
 import Spinner from '../../components/UI/Spinner/Spinner.jsx';
 
-
-
 export const buildFetchedOrders = (serverResponseObject) => {
     const fetchedOrders = [];
     for(const key in serverResponseObject.data){
@@ -16,7 +14,6 @@ export const buildFetchedOrders = (serverResponseObject) => {
 }
 
 export const getContent = (props) => {
-    console.log(props.orders[0]);
     return props.loading
         ? <Spinner/>
         : buildOrdersContent(props.orders);

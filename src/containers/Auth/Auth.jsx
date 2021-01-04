@@ -111,6 +111,7 @@ class Auth extends Component {
 }
 
 const getTitle = (isSignup) => (!isSignup) ? 'Sign up!' : 'Sign in!';
+
 const getSwitchOption = (isSignup) => isSignup ? 'Sign up' : 'Sign in';
 
 const mapDispatchToProps = dispatch => {
