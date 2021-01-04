@@ -51,4 +51,12 @@ export const purchaseCheesewichSuccess = (state, action) => {
     };
 };
 
-export const getAuthUrl = (isSignup) => (isSignup) ? urls.authSignUp : urls.authSignIn;
+export const getAuthUrl = (isSignup) => (isSignup) ? urls.authSignIn : urls.authSignUp;
+
+export const getAuthData = (email, password) => {
+    return {
+        email: email,
+        password: password,
+        returnSecureToken: true,
+    };
+}

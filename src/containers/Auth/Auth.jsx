@@ -44,9 +44,7 @@ class Auth extends Component {
         event.preventDefault();
         const email = this.state.controls.email.value;
         const password = this.state.controls.password.value;
-        console.log(email);
-        console.log(password);
-        this.props.onAuth(email, password);
+        this.props.onAuth(email, password, this.state.isSignup);
     };
 
     switchAuthMode = () => {
@@ -101,21 +99,23 @@ class Auth extends Component {
 
         return (
             <div className={classes.Auth}>
+                <div>{getTitle(this.state.isSignup)}</div>
                 <form onSubmit={this.submitHandler}>
                     {form}
                     <Button buttonType="green">Submit</Button>
                 </form>
-                <Button clicked={this.switchAuthMode} buttonType="red">Switch to {showInOrUp(this.state.isSignup)}</Button>
+                <Button clicked={this.switchAuthMode} buttonType="red">Switch to {getSwitchOption(this.state.isSignup)}</Button>
             </div>
         );
     }
 }
 
-const showInOrUp = (isSignup) => isSignup ? 'Sign in' : 'Sign up';
+const getTitle = (isSignup) => (!isSignup) ? 'Sign up!' : 'Sign in!';
+const getSwitchOption = (isSignup) => isSignup ? 'Sign up' : 'Sign in';
 
 const mapDispatchToProps = dispatch => {
     return {
-        onAuth: (email, password) => dispatch(authActions.auth(email, password)),
+        onAuth: (email, password, isSignup) => dispatch(authActions.auth(email, password, isSignup)),
     };
 };
 

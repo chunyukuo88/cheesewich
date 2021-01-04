@@ -1,6 +1,8 @@
 import axios from 'axios';
 import * as actionTypes from './actionTypes';
-import { getAuthUrl } from "../utils";
+import {
+    getAuthUrl,
+    getAuthData } from '../utils';
 
 export const authStart = () => {
     return {
@@ -25,12 +27,9 @@ export const authFail = (error) => {
 export const auth = (email, password, isSignup) => {
     return dispatch => {
         dispatch(authStart());
-        const authData = {
-            email: email,
-            password: password,
-            returnSecureToken: true,
-        };
+        const authData = getAuthData(email, password);
         const url = getAuthUrl(isSignup);
+        console.log('url: ', url);
         axios.post(url, authData)
             .then(response => {
                 dispatch(authSuccess(response.data));
