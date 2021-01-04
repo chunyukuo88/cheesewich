@@ -39,7 +39,4 @@ const authFail = (state, action) => {
     });
 };
 
-
-
-
 export default reducer;

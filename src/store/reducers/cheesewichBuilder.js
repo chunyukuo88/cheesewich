@@ -27,7 +27,7 @@ const reducer = (state = initialState, action) => {
     }
 };
 
-export const addIngredient = (state, action, INGREDIENT_PRICES) => {
+const addIngredient = (state, action, INGREDIENT_PRICES) => {
     return {
         ...state,
         ingredients: {
@@ -38,7 +38,7 @@ export const addIngredient = (state, action, INGREDIENT_PRICES) => {
     };
 };
 
-export const nixIngredient = (state, action, INGREDIENT_PRICES) => {
+const nixIngredient = (state, action, INGREDIENT_PRICES) => {
     return {
         ...state,
         ingredients: {
@@ -49,7 +49,7 @@ export const nixIngredient = (state, action, INGREDIENT_PRICES) => {
     };
 };
 
-export const setIngredients = (state, action, initialState) => {
+const setIngredients = (state, action, initialState) => {
     const updatedProperties = {
         ingredients: action.ingredients,
         error: false,

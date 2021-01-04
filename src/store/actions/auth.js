@@ -8,10 +8,11 @@ export const authStart = () => {
     };
 };
 
-export const authSuccess = (authData) => {
+export const authSuccess = ({ idToken, userId }) => {
     return {
         type: actionTypes.AUTH_SUCCESS,
-        authData: authData,
+        idToken: idToken,
+        userId: userId
     };
 };
 
