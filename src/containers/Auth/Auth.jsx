@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import Input from '../../components/UI/Input/Input.jsx';
 import Button from '../../components/UI/Button/Button.jsx';
 import Spinner from '../../components/UI/Spinner/Spinner';
-import classes from './Auth.css';
+import Input from '../../components/UI/Input/Input.jsx';
 import * as authActions from '../../store/actions/auth';
+import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux';
+import classes from './Auth.css';
 
 class Auth extends Component {
     state = {
@@ -88,9 +89,11 @@ class Auth extends Component {
         };
         const form = getFormContent(this.props, formElementsArray, this.inputChangedHandler);
         const error = getError(this.props.error);
+        const redirect = getRedirectWhenSignedOut(this.props);
 
         return (
             <div className={classes.Auth}>
+                {redirect}
                 <div>{getTitle(this.state.isSignup)}</div>
                 {error}
                 <form onSubmit={this.submitHandler}>
@@ -103,7 +106,13 @@ class Auth extends Component {
     }
 }
 
-const getError = (error) => (error) ? <p>{error}</p> : null;
+const getRedirectWhenSignedOut = ({ isAuthenticated }) => (isAuthenticated)
+    ? <Redirect to="/"/>
+    : null;
+
+const getError = (error) => (error)
+    ? <p>{error}</p>
+    : null;
 
 const getFormContent = (props, formArray, inputChangedHandler) => {
     return (props.loading)
@@ -128,7 +137,8 @@ const getSwitchOption = (isSignup) => isSignup ? 'Sign up' : 'Sign in';
 const mapStateToProps = state => {
     return {
         loading: state.auth.loading,
-        error: state.auth.error
+        error: state.auth.error,
+        isAuthenticated: state.auth.token !== null
     };
 };
 
