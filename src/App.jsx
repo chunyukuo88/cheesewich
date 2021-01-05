@@ -5,6 +5,7 @@ import CheesewichBuilder from './containers/CheesewichBuilder/CheesewichBuilder.
 import Checkout from './containers/Checkout/Checkout.jsx';
 import Orders from './containers/Orders/Orders.jsx';
 import Auth from './containers/Auth/Auth.jsx';
+import Logout from './containers/Auth/Logout/Logout';
 
 const App = () => (
     <Layout>
@@ -13,6 +14,7 @@ const App = () => (
             <Route path='/auth' component={Auth}/>
             <Route path='/checkout' component={Checkout}/>
             <Route path='/orders' component={Orders}/>
+            <Route path='/logout' component={Logout}/>
         </Switch>
     </Layout>
 );
