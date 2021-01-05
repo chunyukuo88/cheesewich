@@ -89,7 +89,7 @@ class Auth extends Component {
         };
         const form = getFormContent(this.props, formElementsArray, this.inputChangedHandler);
         const error = getError(this.props.error);
-        const redirect = getRedirectWhenSignedOut(this.props);
+        const redirect = getRedirectWhenSignedOut(this.props.isAuthenticated);
 
         return (
             <div className={classes.Auth}>
@@ -106,7 +106,7 @@ class Auth extends Component {
     }
 }
 
-const getRedirectWhenSignedOut = ({ isAuthenticated }) => (isAuthenticated)
+const getRedirectWhenSignedOut = (isAuthenticated) => (isAuthenticated)
     ? <Redirect to="/"/>
     : null;
 

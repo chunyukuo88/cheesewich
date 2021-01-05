@@ -8,8 +8,10 @@ const UserControls = (props) => (
         {getIngredientsDisplay(props, ingredients)}
         <button className={classes['order-button']}
                 disabled={!props.purchasable}
-                onClick={props.ordered}>Place order!</button>
+                onClick={props.ordered}>{getButtonLabel(props.isAuth)}</button>
     </div>
 );
+
+const getButtonLabel = (isAuth) => (isAuth) ? 'Place order!' : 'Sign Up to Order';
 
 export default UserControls;

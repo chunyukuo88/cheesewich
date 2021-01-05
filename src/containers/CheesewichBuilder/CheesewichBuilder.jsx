@@ -22,10 +22,18 @@ class CheesewichBuilder extends Component {
 
     componentDidMount() {
         this.props.onInitIngredients();
-    }
+    };
 
-    orderHandler = () => this.setState({userHasPlacedOrder: true});
+    orderHandler = () => {
+        if (this.props.isAuthenticated) {
+            this.setState({userHasPlacedOrder: true});
+        } else {
+            this.props.history.push('/auth');
+        };
+    };
+
     orderCancellationHandler = () => this.setState({userHasPlacedOrder: false});
+
     proceedToCheckoutHandler = () => utils.goToCheckoutHandler(this.props);
 
     render(){
@@ -39,9 +47,10 @@ class CheesewichBuilder extends Component {
                     <UserControls addIngredient={this.props.onIngredientAdded}
                                   removeIngredient={this.props.onIngredientNixed}
                                   disabled={disabledInfo}
+                                  isAuth={this.props.isAuthenticated}
+                                  ordered={this.orderHandler}
                                   price={this.props.price}
-                                  purchasable={utils.getPurchasabilityStatus(this.props.ings)}
-                                  ordered={this.orderHandler}/>
+                                  purchasable={utils.getPurchasabilityStatus(this.props.ings)}/>
                 </Aux>
             );
             orderSummary = <OrderSummary ingredients={this.props.ings}
@@ -71,6 +80,7 @@ const mapStateToProps = state => {
         ings: state.builder.ingredients,
         price: state.builder.price,
         error: state.builder.error,
+        isAuthenticated: state.auth.token !== null
     };
 };
 
