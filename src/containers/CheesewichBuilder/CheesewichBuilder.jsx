@@ -12,6 +12,7 @@ import Spinner from '../../components/UI/Spinner/Spinner';
 import Modal from '../../components/UI/Modal/Modal.jsx';
 import OrderSummary from '../../components/Cheesewich/OrderSummary/OrderSummary';
 import { purchaseInit } from '../../store/actions/order';
+import {setAuthRedirectPath} from "../../store/actions/auth";
 
 
 
@@ -28,6 +29,7 @@ class CheesewichBuilder extends Component {
         if (this.props.isAuthenticated) {
             this.setState({userHasPlacedOrder: true});
         } else {
+            this.props.onSetAuthRedirectPath('/checkout');
             this.props.history.push('/auth');
         };
     };
@@ -90,6 +92,7 @@ const mapDispatchToProps = dispatch => {
         onIngredientNixed: (ingName) => dispatch(nixIngredient(ingName)),
         onInitIngredients: () => dispatch(initIngredients()),
         onInitPurchase: () => dispatch(purchaseInit()),
+        onSetAuthRedirectPath: (path) => dispatch(setAuthRedirectPath(path)),
     };
 };
 

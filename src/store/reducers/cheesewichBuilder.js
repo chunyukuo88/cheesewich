@@ -7,7 +7,8 @@ import { updateObject } from '../utils';
 const initialState = {
     ingredients: null,
     price: 0,
-    error: false
+    error: false,
+    cheesewichIsBeingBuilt: false
 };
 
 const INGREDIENT_PRICES = {
@@ -35,6 +36,7 @@ const addIngredient = (state, action, INGREDIENT_PRICES) => {
             [action.ingredientName]: state.ingredients[action.ingredientName] + 1,
         },
         price: state.price + INGREDIENT_PRICES[action.ingredientName],
+        cheesewichIsBeingBuilt: true,
     };
 };
 
@@ -46,14 +48,21 @@ const nixIngredient = (state, action, INGREDIENT_PRICES) => {
             [action.ingredientName]: state.ingredients[action.ingredientName] - 1,
         },
         price: state.price - INGREDIENT_PRICES[action.ingredientName],
+        cheesewichIsBeingBuilt: true
     };
 };
 
 const setIngredients = (state, action, initialState) => {
     const updatedProperties = {
-        ingredients: action.ingredients,
+        ingredients: {
+            shallots: action.ingredients.shallots,
+            bacon: action.ingredients.bacon,
+            cheese: action.ingredients.cheese,
+            mustard: action.ingredients.mustard,
+        },
         error: false,
-        price: initialState.price
+        price: initialState.price,
+        cheesewichIsBeingBuilt: false,
     };
     return updateObject(state, updatedProperties);
 };

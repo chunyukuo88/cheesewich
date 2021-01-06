@@ -6,6 +6,7 @@ import * as authActions from '../../store/actions/auth';
 import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux';
 import classes from './Auth.css';
+import {setAuthRedirectPath} from "../../store/actions/auth";
 
 class Auth extends Component {
     state = {
@@ -41,6 +42,12 @@ class Auth extends Component {
         },
         isSignup: true,
     }
+
+    componentDidMount() {
+        if (!this.props.cheesewichIsBeingBuilt && this.props.authRedirectPath !== '/') {
+            this.onSetAuthRedirectPath();
+        }
+    };
 
     submitHandler = (event) => {
         event.preventDefault();
@@ -89,7 +96,7 @@ class Auth extends Component {
         };
         const form = getFormContent(this.props, formElementsArray, this.inputChangedHandler);
         const error = getError(this.props.error);
-        const redirect = getRedirectWhenSignedOut(this.props.isAuthenticated);
+        const redirect = getRedirectWhenSignedOut(this.props);
 
         return (
             <div className={classes.Auth}>
@@ -106,8 +113,8 @@ class Auth extends Component {
     }
 }
 
-const getRedirectWhenSignedOut = (isAuthenticated) => (isAuthenticated)
-    ? <Redirect to="/"/>
+const getRedirectWhenSignedOut = ({isAuthenticated, authRedirectPath}) => (isAuthenticated)
+    ? <Redirect to={authRedirectPath}/>
     : null;
 
 const getError = (error) => (error)
@@ -138,13 +145,16 @@ const mapStateToProps = state => {
     return {
         loading: state.auth.loading,
         error: state.auth.error,
-        isAuthenticated: state.auth.token !== null
+        isAuthenticated: state.auth.token !== null,
+        cheesewichIsBeingBuilt: state.builder.cheesewichIsBeingBuilt,
+        authRedirectPath: state.auth.authRedirectPath,
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
         onAuth: (email, password, isSignup) => dispatch(authActions.auth(email, password, isSignup)),
+        onSetAuthRedirectPath: () => dispatch(setAuthRedirectPath('/')),
     };
 };
 
