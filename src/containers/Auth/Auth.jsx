@@ -87,33 +87,40 @@ class Auth extends Component {
     };
 
     render() {
-        const formElementsArray = [];
-        for (let key in this.state.controls) {
-            formElementsArray.push({
-                id: key,
-                config: this.state.controls[key]
-            });
-        };
+        const formElementsArray = populateElementsArray(this.state.controls);
         const form = getFormContent(this.props, formElementsArray, this.inputChangedHandler);
         const error = getError(this.props.error);
         const redirect = getRedirectWhenSignedOut(this.props);
+        const componentHeading = getComponentHeading(this.state.isSignup);
+        const switchOption = getSwitchOption(this.state.isSignup);
 
         return (
             <div className={classes.Auth}>
                 {redirect}
-                <div>{getTitle(this.state.isSignup)}</div>
+                <div>{componentHeading}</div>
                 {error}
                 <form onSubmit={this.submitHandler}>
                     {form}
                     <Button buttonType="green">Submit</Button>
                 </form>
-                <Button clicked={this.switchAuthMode} buttonType="red">Switch to {getSwitchOption(this.state.isSignup)}</Button>
+                <Button clicked={this.switchAuthMode} buttonType="red">Switch to {switchOption}</Button>
             </div>
         );
     }
 }
 
-const getRedirectWhenSignedOut = ({isAuthenticated, authRedirectPath}) => (isAuthenticated)
+const populateElementsArray = (controls) => {
+    const formElementsArray = [];
+    for (let key in controls) {
+        formElementsArray.push({
+            id: key,
+            config: controls[key]
+        });
+    };
+    return formElementsArray;
+};
+
+const getRedirectWhenSignedOut = ({ isAuthenticated, authRedirectPath }) => (isAuthenticated)
     ? <Redirect to={authRedirectPath}/>
     : null;
 
@@ -137,7 +144,7 @@ const getFormContent = (props, formArray, inputChangedHandler) => {
         ));
 };
 
-const getTitle = (isSignup) => (!isSignup) ? 'Sign up!' : 'Sign in!';
+const getComponentHeading = (isSignup) => (!isSignup) ? 'Sign up!' : 'Sign in!';
 
 const getSwitchOption = (isSignup) => isSignup ? 'Sign up' : 'Sign in';
 
