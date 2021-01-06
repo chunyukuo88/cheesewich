@@ -44,7 +44,7 @@ class Auth extends Component {
     }
 
     componentDidMount() {
-        redirectToHomeIfNotBuildingCheesewich(this.props, this.onSetAuthRedirectPath);
+        redirectToHomeIfNotBuildingCheesewich(this.props, this.props.onSetAuthRedirectPath);
     };
 
     submitHandler = (event) => {
