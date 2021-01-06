@@ -6,7 +6,7 @@ import * as authActions from '../../store/actions/auth';
 import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux';
 import classes from './Auth.css';
-import {setAuthRedirectPath} from "../../store/actions/auth";
+import { setAuthRedirectPath } from '../../store/actions/auth';
 
 class Auth extends Component {
     state = {
@@ -44,9 +44,7 @@ class Auth extends Component {
     }
 
     componentDidMount() {
-        if (!this.props.cheesewichIsBeingBuilt && this.props.authRedirectPath !== '/') {
-            this.onSetAuthRedirectPath();
-        }
+        redirectToHomeIfNotBuildingCheesewich(this.props, this.onSetAuthRedirectPath);
     };
 
     submitHandler = (event) => {
@@ -109,6 +107,12 @@ class Auth extends Component {
     }
 }
 
+const redirectToHomeIfNotBuildingCheesewich = (props, redirectCallback) => {
+    if (!props.cheesewichIsBeingBuilt && props.authRedirectPath !== '/') {
+        redirectCallback();
+    };
+};
+
 const populateElementsArray = (controls) => {
     const formElementsArray = [];
     for (let key in controls) {
@@ -146,7 +150,7 @@ const getFormContent = (props, formArray, inputChangedHandler) => {
 
 const getComponentHeading = (isSignup) => (!isSignup) ? 'Sign up!' : 'Sign in!';
 
-const getSwitchOption = (isSignup) => isSignup ? 'Sign up' : 'Sign in';
+const getSwitchOption = (isSignup) => (isSignup) ? 'Sign up' : 'Sign in';
 
 const mapStateToProps = state => {
     return {
