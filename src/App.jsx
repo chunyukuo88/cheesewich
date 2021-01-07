@@ -18,17 +18,39 @@ class App extends Component {
     render() {
         return (
             <Layout>
-                <Switch>
-                    <Route path='/' exact component={CheesewichBuilder}/>
-                    <Route path='/auth' component={Auth}/>
-                    <Route path='/checkout' component={Checkout}/>
-                    <Route path='/orders' component={Orders}/>
-                    <Route path='/logout' component={Logout}/>
-                </Switch>
+                {routes(this.props.isAuthenticated)}
             </Layout>
         );
     }
 }
+
+const routes = (isAuthenticated) => {
+  return isAuthenticated
+      ? <AuthenticatedRoutes />
+      : <UnauthenticatedRoutes />;
+};
+
+const UnauthenticatedRoutes = () => (
+    <Switch>
+        <Route path='/' exact component={CheesewichBuilder}/>
+        <Route path='/auth' component={Auth}/>
+    </Switch>
+);
+
+const AuthenticatedRoutes = () => (
+    <Switch>
+        <Route path='/' exact component={CheesewichBuilder}/>
+        <Route path='/checkout' component={Checkout}/>
+        <Route path='/logout' component={Logout}/>
+        <Route path='/orders' component={Orders}/>
+    </Switch>
+);
+
+const mapStateToProps = state => {
+    return {
+        isAuthenticated: state.auth.token !== null,
+    };
+};
 
 const mapDispatchToProps = dispatch => {
     return {
@@ -36,4 +58,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default withRouter(connect(null, mapDispatchToProps)(App));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
