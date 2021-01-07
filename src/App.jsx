@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch, withRouter } from 'react-router-dom';
+import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
 import Layout from './hoc/Layout/Layout.jsx';
 import CheesewichBuilder from './containers/CheesewichBuilder/CheesewichBuilder.jsx';
 import Checkout from './containers/Checkout/Checkout.jsx';
@@ -24,8 +24,8 @@ class App extends Component {
     }
 }
 
-const routes = (isAuthenticated) => {
-  return isAuthenticated
+const routes = (theUserIsAuthenticated) => {
+  return theUserIsAuthenticated
       ? <AuthenticatedRoutes />
       : <UnauthenticatedRoutes />;
 };
@@ -34,6 +34,7 @@ const UnauthenticatedRoutes = () => (
     <Switch>
         <Route path='/' exact component={CheesewichBuilder}/>
         <Route path='/auth' component={Auth}/>
+        <Redirect to="/"/>
     </Switch>
 );
 
