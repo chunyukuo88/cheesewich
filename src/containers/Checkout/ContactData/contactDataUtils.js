@@ -49,10 +49,11 @@ export const buildInputFieldObject = (placeholder, minLength, maxLength, type) =
     return result;
 };
 
-export const buildOrderForAxios = (ings, price, formData) => {
+export const buildOrderForAxios = (ings, price, id, formData) => {
     return {
         ingredients: ings,
         price: price,
+        userId: id,
         orderData: formData,
     };
 };

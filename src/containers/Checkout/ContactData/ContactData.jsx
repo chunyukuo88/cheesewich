@@ -30,7 +30,7 @@ class ContactData extends Component {
     orderHandler = ( event ) => {
         event.preventDefault();
         const formData = buildFormData(this.state);
-        const order = buildOrderForAxios(this.props.ings, this.props.price, formData);
+        const order = buildOrderForAxios(this.props.ings, this.props.price, this.props.userId, formData);
         const token = this.props.token;
         this.props.onCheesewichOrder(order, token);
     }
@@ -72,6 +72,7 @@ const mapStateToProps = (state) => {
         price: state.builder.price,
         loading: state.order.loading,
         token: state.auth.token,
+        userId: state.auth.userId,
     };
 };
 
