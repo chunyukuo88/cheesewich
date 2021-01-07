@@ -49,9 +49,9 @@ export const buildInputFieldObject = (placeholder, minLength, maxLength, type) =
     return result;
 };
 
-export const buildOrderForAxios = ({ingredients, price}, formData) => {
+export const buildOrderForAxios = (ings, price, formData) => {
     return {
-        ingredients: ingredients,
+        ingredients: ings,
         price: price,
         orderData: formData,
     };
