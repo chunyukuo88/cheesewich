@@ -34,7 +34,7 @@ const UnauthenticatedRoutes = () => (
     <Switch>
         <Route path='/' exact component={CheesewichBuilder}/>
         <Route path='/auth' component={Auth}/>
-        <Redirect to="/"/>
+        <Redirect to='/'/>
     </Switch>
 );
 
@@ -44,6 +44,7 @@ const AuthenticatedRoutes = () => (
         <Route path='/checkout' component={Checkout}/>
         <Route path='/logout' component={Logout}/>
         <Route path='/orders' component={Orders}/>
+        <Redirect to='/' />
     </Switch>
 );
 
