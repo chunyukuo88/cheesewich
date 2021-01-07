@@ -7,6 +7,7 @@ const UserControls = (props) => (
         <p>Current price: {props.price.toFixed(2)}</p>
         {getIngredientsDisplay(props, ingredients)}
         <button className={classes['order-button']}
+                data-test='user-controls-button'
                 disabled={!props.purchasable}
                 onClick={props.ordered}>{getButtonLabel(props.isAuth)}</button>
     </div>
