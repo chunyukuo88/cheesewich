@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchOrders } from '../../store/actions/order';
-import { getContent } from './ordersUtils';
+import { Content } from './ordersUtils';
 
 class Orders extends Component {
 
@@ -10,7 +10,7 @@ class Orders extends Component {
     }
 
     render(){
-        return <div>{getContent(this.props)}</div>;
+        return <Content {...this.props}/>;
     }
 }
 
