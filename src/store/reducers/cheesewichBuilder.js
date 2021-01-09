@@ -2,7 +2,7 @@ import { ADD_INGREDIENT,
         NIX_INGREDIENT,
         SET_INGREDIENTS,
         FETCH_INGREDIENTS_FAILED } from '../actions/actionTypes';
-import { updateObject } from '../utils';
+import { updateObject } from '../../utils/utils';
 
 const initialState = {
     ingredients: null,
