@@ -36,6 +36,12 @@ describe('NavItems.jsx', ()=>{
                 </NavigationItem>
             );
             expect(wrapper.contains(expectedContent)).toBeTruthy();
+            const nonExpectedContent = (
+                <NavigationItem link="/auth">
+                    Sign In
+                </NavigationItem>
+            );
+            expect(wrapper.contains(nonExpectedContent)).toBeFalsy();
         });
     });
 });

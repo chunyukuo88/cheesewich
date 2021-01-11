@@ -10,11 +10,9 @@ import { connect } from 'react-redux';
 import { authCheckState } from './store/actions/auth';
 
 class App extends Component {
-
     componentDidMount() {
         this.props.onTryAutoSignup();
     }
-
     render() {
         return (
             <Layout>
