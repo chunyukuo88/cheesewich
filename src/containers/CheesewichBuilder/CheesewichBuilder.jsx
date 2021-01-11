@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from '../../../src/axios-instance';
 import { connect } from 'react-redux';
 import * as utils from './builderUtils';
-import {addIngredient, initIngredients, nixIngredient} from '../../store/actions/cheesewichBuilder';
+import { addIngredient, initIngredients, nixIngredient } from '../../store/actions/cheesewichBuilder';
 
 import Aux from '../../hoc/auxilliary';
 import Cheesewich from '../../components/Cheesewich/Cheesewich.jsx';
@@ -12,11 +12,11 @@ import Spinner from '../../components/UI/Spinner/Spinner';
 import Modal from '../../components/UI/Modal/Modal.jsx';
 import OrderSummary from '../../components/Cheesewich/OrderSummary/OrderSummary';
 import { purchaseInit } from '../../store/actions/order';
-import {setAuthRedirectPath} from "../../store/actions/auth";
+import { setAuthRedirectPath } from '../../store/actions/auth';
 
 
 
-class CheesewichBuilder extends Component {
+export class CheesewichBuilder extends Component {
     state = {
         userHasPlacedOrder: false,
     };
