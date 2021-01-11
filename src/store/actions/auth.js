@@ -26,7 +26,7 @@ export const authCheckState = () => {
     return dispatch => {
         const token = localStorage.getItem('token');
         if (!token) {
-            return;
+            dispatch(logout());
         } else {
             const expirationDate = new Date(localStorage.getItem('expirationDate'));
             if (expirationDate < new Date()) {
@@ -82,12 +82,8 @@ export const checkAuthTimeout = (expirationTime) => {
 const getAuthUrl = (isSignup) => (isSignup) ? urls.authSignIn : urls.authSignUp;
 
 export const logout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('expirationDate');
     return {
-        type: actionTypes.AUTH_LOGOUT,
-        idToken: null,
-        userId: null
+        type: actionTypes.AUTH_INITIATE_LOGOUT,
     };
 };
 

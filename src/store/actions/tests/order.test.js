@@ -36,8 +36,10 @@ describe('actions/order.js', ()=>{
     });
     describe('purchaseCheesewich()', ()=>{
         test('When given orderData and a token, it creates an action.', ()=>{
-           // const orderData = {};
+           //
+            // const orderData = {};
            // expect(result).toEqual(expectedResult);
+            //
         });
     });
     describe('purchaseInit()', ()=>{
@@ -82,9 +84,9 @@ describe('actions/order.js', ()=>{
     });
     describe('fetchOrders()', ()=>{
         test('When given a token and userId, it creates an action.', ()=>{
-            const result =  order.fetchOrders({}, 123);
-            const expectedResult = {};
-            expect(result).toEqual(expectedResult);
+            // const result =  order.fetchOrders({}, 123);
+            // const expectedResult = {};
+            // expect(result).toEqual(expectedResult);
         });
     });
 });
