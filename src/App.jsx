@@ -26,11 +26,11 @@ class App extends Component {
 
 const routes = (theUserIsAuthenticated) => {
   return theUserIsAuthenticated
-      ? <AuthenticatedRoutes />
-      : <UnauthenticatedRoutes />;
+      ? authenticatedRoutes()
+      : unauthenticatedRoutes();
 };
 
-const UnauthenticatedRoutes = () => (
+const unauthenticatedRoutes = () => (
     <Switch>
         <Route path='/' exact component={CheesewichBuilder}/>
         <Route path='/auth' component={Auth}/>
@@ -38,7 +38,7 @@ const UnauthenticatedRoutes = () => (
     </Switch>
 );
 
-const AuthenticatedRoutes = () => (
+const authenticatedRoutes = () => (
     <Switch>
         <Route path='/' exact component={CheesewichBuilder}/>
         <Route path='/checkout' component={Checkout}/>

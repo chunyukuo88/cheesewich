@@ -1,9 +1,7 @@
 import React from 'react';
-import Enzyme, { shallow, render } from 'enzyme';
+import Enzyme, { shallow } from 'enzyme';
 import EnzymeAdapter from 'enzyme-adapter-react-16';
 import NavItems from './NavItems.jsx';
-import { findByTestAttr } from '../../../utils/testUtils';
-import { BrowserRouter } from 'react-router-dom';
 import NavigationItem from "../NavigationItem/NavigationItem";
 
 Enzyme.configure({ adapter: new EnzymeAdapter()});
@@ -32,7 +30,11 @@ describe('NavItems.jsx', ()=>{
             expect(children.length).toEqual(3);
         });
         test('AND: User is given the option to sign out.', ()=>{
-            const expectedContent = <NavigationItem link="/logout">Sign out</NavigationItem>;
+            const expectedContent = (
+                <NavigationItem link="/logout">
+                    Sign out
+                </NavigationItem>
+            );
             expect(wrapper.contains(expectedContent)).toBeTruthy();
         });
     });
