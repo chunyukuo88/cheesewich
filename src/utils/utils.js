@@ -6,6 +6,7 @@ export const updateObject = (oldObject, updatedProperties) => {
 };
 
 export const checkValidity = (value, rules) => {
+    //TODO: Verify email addresses with EmailValidatorPro
     let isValid = true;
     if (!rules) return isValid;
     if (rules.required) isValid = value.trim() !== '' && isValid;

@@ -1,7 +1,7 @@
 import React from 'react';
-import Spinner from "../../../components/UI/Spinner/Spinner";
-import Input from "../../../components/UI/Input/Input";
-import Button from "../../../components/UI/Button/Button";
+import Spinner from '../../../components/UI/Spinner/Spinner';
+import Input from '../../../components/UI/Input/Input';
+import Button from '../../../components/UI/Button/Button';
 
 export const buildForm = ({ formIsValid }, inputChangedHandler, orderHandler, formElementsArray, loading) => {
     return (loading)
@@ -65,7 +65,7 @@ export const getDeliveryMethodObject = () => {
             options: [
                 {value: 'fastest', displayValue: 'Fastest'},
                 {value: 'cheapest', displayValue: 'Cheapest'}
-            ]
+            ],
         },
         value: 'fastest',
         validation: {},
