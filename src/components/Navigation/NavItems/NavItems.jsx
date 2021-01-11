@@ -5,18 +5,18 @@ import NavigationItem from '../NavigationItem/NavigationItem.jsx';
 const NavItems = (props) => (
     <ul className={classes.nav_items}>
         <NavigationItem link="/" exact>Cheesewich Builder</NavigationItem>
-        <OrdersContent {...props}/>
-        <AccessOptions {...props}/>
+        {getOrders(props)}
+        {getAccessOptions(props)}
     </ul>
 );
 
-const AccessOptions = (props) => {
+const getAccessOptions = (props) => {
     return (!props.isAuthenticated)
         ? <NavigationItem link="/auth">Sign In</NavigationItem>
         : <NavigationItem link="/logout">Sign out</NavigationItem>;
 };
 
-const OrdersContent = (props) => {
+const getOrders = (props) => {
     return (props.isAuthenticated)
         ? <NavigationItem link="/orders">Orders</NavigationItem>
         : null;
