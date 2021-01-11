@@ -5,13 +5,12 @@ import { buildForm,
          buildFormData,
          buildInputFieldObject,
          buildOrderForAxios,
-         checkValidity,
          getDeliveryMethodObject,
          mapOrderFormToArray } from './contactDataUtils';
 import { connect } from 'react-redux';
 import axios from '../../../axios-orders';
 import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler';
-import { updateObject } from '../../../utils/utils';
+import {checkValidity, updateObject} from '../../../utils/utils';
 
 
 class ContactData extends Component {

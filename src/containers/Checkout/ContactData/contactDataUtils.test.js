@@ -1,6 +1,7 @@
 import React from 'react';
 import * as utils from './contactDataUtils';
 import Spinner from "../../../components/UI/Spinner/Spinner";
+import {checkValidity} from "../../../utils/utils";
 
 const formElementsArray = [
     {id: "name",
@@ -70,14 +71,14 @@ describe('contactDataUtils.js', ()=>{
             test('THEN: It returns TRUE.', ()=>{
                 const value = 'a';
                 const rules = {};
-                const result = utils.checkValidity(value, rules);
+                const result = checkValidity(value, rules);
                 expect(result).toBeTruthy();
             });
         });
         describe('WHEN: Given a  value and no rules object, ', ()=>{
             test('THEN: It returns TRUE.', ()=>{
                 const value = 'a';
-                const result = utils.checkValidity(value);
+                const result = checkValidity(value);
                 expect(result).toBeTruthy();
             });
         });
@@ -87,7 +88,7 @@ describe('contactDataUtils.js', ()=>{
                 const rules = {
                     required: true,
                 };
-                const result = utils.checkValidity(value, rules);
+                const result = checkValidity(value, rules);
                 expect(result).toBeTruthy();
             });
         });
@@ -98,7 +99,7 @@ describe('contactDataUtils.js', ()=>{
                     required: true,
                     minLength: 5,
                 };
-                const result = utils.checkValidity(value, rules);
+                const result = checkValidity(value, rules);
                 expect(result).toBeFalsy();
             });
         });
@@ -109,7 +110,7 @@ describe('contactDataUtils.js', ()=>{
                     required: true,
                     minLength: 5,
                 };
-                const result = utils.checkValidity(value, rules);
+                const result = checkValidity(value, rules);
                 expect(result).toBeTruthy();
             });
         });
@@ -120,7 +121,7 @@ describe('contactDataUtils.js', ()=>{
                     required: true,
                     maxLength: 3,
                 };
-                const result = utils.checkValidity(value, rules);
+                const result = checkValidity(value, rules);
                 expect(result).toBeFalsy();
             });
         });
@@ -131,7 +132,7 @@ describe('contactDataUtils.js', ()=>{
                     required: true,
                     maxLength: 3,
                 };
-                const result = utils.checkValidity(value, rules);
+                const result = checkValidity(value, rules);
                 expect(result).toBeTruthy();
             });
         });

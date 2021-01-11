@@ -58,15 +58,6 @@ export const buildOrderForAxios = (ings, price, id, formData) => {
     };
 };
 
-export const checkValidity = (value, rules) => {
-    let isValid = true;
-    if (!rules) return isValid; //TODO
-    if (rules.required) isValid = value.trim() !== '' && isValid;
-    if (rules.minLength) isValid = value.length >= rules.minLength && isValid
-    if (rules.maxLength) isValid = value.length <= rules.maxLength && isValid
-    return isValid;
-};
-
 export const getDeliveryMethodObject = () => {
     return {
         elementType: 'select',
