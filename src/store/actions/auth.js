@@ -78,7 +78,6 @@ export const checkAuthTimeout = (expirationTime) => {
     };
 };
 
-
 const getAuthUrl = (isSignup) => (isSignup) ? urls.authSignIn : urls.authSignUp;
 
 export const logout = () => {

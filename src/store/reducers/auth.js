@@ -38,10 +38,7 @@ const authSuccess = (state, action) => {
 };
 
 const authLogout = (state, action) => {
-    return updateObject(state, {
-        token: action.idToken,
-        userId: action.userId
-    });
+    return updateObject(state, initialState);
 }
 
 const authFail = (state, action) => {
