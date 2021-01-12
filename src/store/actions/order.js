@@ -1,9 +1,9 @@
-import * as actionTypes from './actionTypes';
+import { ORDER_ACTIONS } from './actionTypes';
 import axios from '../../axios-orders';
 
 export const purchaseCheesewichSuccess = (id, orderData) => {
     return {
-        type: actionTypes.PURCHASE_CHEESEWICH_SUCCESS,
+        type: ORDER_ACTIONS.PURCHASE_CHEESEWICH_SUCCESS,
         orderId: id,
         orderData: orderData,
     };
@@ -11,14 +11,14 @@ export const purchaseCheesewichSuccess = (id, orderData) => {
 
 export const purchaseCheesewichFailed = (error) => {
     return {
-        type: actionTypes.PURCHASE_CHEESEWICH_FAILED,
+        type: ORDER_ACTIONS.PURCHASE_CHEESEWICH_FAILED,
         error: error,
     };
 };
 
 export const purchaseCheesewichStart = () => {
     return {
-        type: actionTypes.PURCHASE_CHEESEWICH_START,
+        type: ORDER_ACTIONS.PURCHASE_CHEESEWICH_START,
     };
 };
 
@@ -37,27 +37,27 @@ export const purchaseCheesewich = (orderData, token) => {
 
 export const purchaseInit = () => {
     return {
-        type: actionTypes.PURCHASE_INIT,
+        type: ORDER_ACTIONS.PURCHASE_INIT,
     };
 };
 
 export const fetchOrdersSuccess = (orders) => {
     return {
-        type: actionTypes.FETCH_ORDERS_SUCCESS,
+        type: ORDER_ACTIONS.FETCH_ORDERS_SUCCESS,
         orders: orders
     };
 };
 
 export const fetchOrdersFail = (error) => {
     return {
-        type: actionTypes.FETCH_ORDERS_FAIL,
+        type: ORDER_ACTIONS.FETCH_ORDERS_FAIL,
         error: error
     };
 };
 
 export const fetchOrdersStart = () => {
     return {
-        type: actionTypes.FETCH_ORDERS_START,
+        type: ORDER_ACTIONS.FETCH_ORDERS_START,
     };
 };
 

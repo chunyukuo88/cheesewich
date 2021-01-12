@@ -1,4 +1,4 @@
-import * as actionTypes from '../actions/actionTypes';
+import { ORDER_ACTIONS } from '../actions/actionTypes';
 import { updateObject } from '../../utils/utils';
 
 const initialState = {
@@ -9,19 +9,19 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
-        case actionTypes.PURCHASE_CHEESEWICH_START:
+        case ORDER_ACTIONS.PURCHASE_CHEESEWICH_START:
             return updateObject(state, {loading: true});
-        case actionTypes.PURCHASE_CHEESEWICH_SUCCESS:
+        case ORDER_ACTIONS.PURCHASE_CHEESEWICH_SUCCESS:
             return purchaseCheesewichSuccess(state, action)
-        case actionTypes.PURCHASE_CHEESEWICH_FAILED:
+        case ORDER_ACTIONS.PURCHASE_CHEESEWICH_FAILED:
             return updateObject(state, {loading: false});
-        case actionTypes.PURCHASE_INIT:
+        case ORDER_ACTIONS.PURCHASE_INIT:
             return updateObject(state, {purchaseHasBeenMade: false});
-        case actionTypes.FETCH_ORDERS_START:
+        case ORDER_ACTIONS.FETCH_ORDERS_START:
             return updateObject(state, {loading: true});
-        case actionTypes.FETCH_ORDERS_SUCCESS:
+        case ORDER_ACTIONS.FETCH_ORDERS_SUCCESS:
             return updateObject(state, {orders: action.orders, loading: false});
-        case actionTypes.FETCH_ORDERS_FAIL:
+        case ORDER_ACTIONS.FETCH_ORDERS_FAIL:
             return updateObject(state, {loading: false});
         default: return state;
     };

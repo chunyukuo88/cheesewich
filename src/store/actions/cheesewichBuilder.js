@@ -1,34 +1,31 @@
-import { ADD_INGREDIENT,
-        NIX_INGREDIENT,
-        SET_INGREDIENTS,
-        FETCH_INGREDIENTS_FAILED } from './actionTypes';
+import { ING_ACTIONS } from './actionTypes';
 import urls from '../../urls';
 import axios from '../../axios-instance';
 
 export const addIngredient = (ingName) => {
     return {
-        type: ADD_INGREDIENT,
+        type: ING_ACTIONS.ADD_INGREDIENT,
         ingredientName: ingName
     };
 };
 
 export const nixIngredient = (ingName) => {
     return {
-        type: NIX_INGREDIENT,
+        type: ING_ACTIONS.NIX_INGREDIENT,
         ingredientName: ingName
     };
 };
 
 export const setFetchIngredientError = () => {
     return {
-        type: FETCH_INGREDIENTS_FAILED,
+        type: ING_ACTIONS.FETCH_INGREDIENTS_FAILED,
         error: true
     };
 };
 
 export const setIngredients = (fetchedIngredients) => {
     return {
-      type: SET_INGREDIENTS,
+      type: ING_ACTIONS.SET_INGREDIENTS,
       ingredients: fetchedIngredients
     };
 };
