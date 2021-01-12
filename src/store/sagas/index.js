@@ -1,5 +1,5 @@
 import { takeEvery } from 'redux-saga/effects';
-import * as actionTypes from '../actions/actionTypes';
+import { AUTH_ACTIONS } from '../actions/actionTypes';
 import {
     authCheckStateSaga,
     authenticateUserSaga,
@@ -8,8 +8,8 @@ import {
 } from './auth';
 
 export function* watchAuth() {
-    yield takeEvery(actionTypes.AUTH_CHECK_TIMEOUT, checkAuthTimeoutSaga);
-    yield takeEvery(actionTypes.AUTH_INITIATE_LOGOUT, logoutSaga);
-    yield takeEvery(actionTypes.AUTH_USER, authenticateUserSaga);
-    yield takeEvery(actionTypes.AUTH_CHECK_STATE, authCheckStateSaga);
+    yield takeEvery(AUTH_ACTIONS.AUTH_CHECK_TIMEOUT, checkAuthTimeoutSaga);
+    yield takeEvery(AUTH_ACTIONS.AUTH_INITIATE_LOGOUT, logoutSaga);
+    yield takeEvery(AUTH_ACTIONS.AUTH_USER, authenticateUserSaga);
+    yield takeEvery(AUTH_ACTIONS.AUTH_CHECK_STATE, authCheckStateSaga);
 }

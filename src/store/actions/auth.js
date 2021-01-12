@@ -1,8 +1,8 @@
-import * as actionTypes from './actionTypes';
+import { AUTH_ACTIONS } from './actionTypes';
 
 export const auth = (email, password, isSignup) => {
     return {
-        type: actionTypes.AUTH_USER,
+        type: AUTH_ACTIONS.AUTH_USER,
         email: email,
         password: password,
         isSignup: isSignup
@@ -11,26 +11,26 @@ export const auth = (email, password, isSignup) => {
 
 export const authCheckState = () => {
     return {
-        type: actionTypes.AUTH_CHECK_STATE,
+        type: AUTH_ACTIONS.AUTH_CHECK_STATE,
     };
 };
 
 export const authFail = (error) => {
     return {
-        type: actionTypes.AUTH_FAIL,
+        type: AUTH_ACTIONS.AUTH_FAIL,
         error: error,
     };
 };
 
 export const authStart = () => {
     return {
-        type: actionTypes.AUTH_START,
+        type: AUTH_ACTIONS.AUTH_START,
     };
 };
 
 export const authSuccess = (idToken, userId) => {
     return {
-        type: actionTypes.AUTH_SUCCESS,
+        type: AUTH_ACTIONS.AUTH_SUCCESS,
         idToken: idToken,
         userId: userId
     };
@@ -38,26 +38,26 @@ export const authSuccess = (idToken, userId) => {
 
 export const checkAuthTimeout = (expirationTime) => {
     return {
-        type: actionTypes.AUTH_CHECK_TIMEOUT,
+        type: AUTH_ACTIONS.AUTH_CHECK_TIMEOUT,
         expirationTime: expirationTime
     };
 };
 
 export const logout = () => {
     return {
-        type: actionTypes.AUTH_INITIATE_LOGOUT,
+        type: AUTH_ACTIONS.AUTH_INITIATE_LOGOUT,
     };
 };
 
 export const logoutDidOccur = () => {
     return {
-        type: actionTypes.AUTH_LOGOUT,
+        type: AUTH_ACTIONS.AUTH_LOGOUT,
     };
 };
 
 export const setAuthRedirectPath = (path) => {
     return {
-        type: actionTypes.SET_AUTH_REDIRECT_PATH,
+        type: AUTH_ACTIONS.SET_AUTH_REDIRECT_PATH,
         path: path,
     };
 };
