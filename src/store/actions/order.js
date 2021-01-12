@@ -1,66 +1,6 @@
 import { ORDER_ACTIONS } from './actionTypes';
 import axios from '../../axios-orders';
 
-export const purchaseCheesewichSuccess = (id, orderData) => {
-    return {
-        type: ORDER_ACTIONS.PURCHASE_CHEESEWICH_SUCCESS,
-        orderId: id,
-        orderData: orderData,
-    };
-};
-
-export const purchaseCheesewichFailed = (error) => {
-    return {
-        type: ORDER_ACTIONS.PURCHASE_CHEESEWICH_FAILED,
-        error: error,
-    };
-};
-
-export const purchaseCheesewichStart = () => {
-    return {
-        type: ORDER_ACTIONS.PURCHASE_CHEESEWICH_START,
-    };
-};
-
-export const purchaseCheesewich = (orderData, token) => {
-    return dispatch => {
-        dispatch(purchaseCheesewichStart());
-        axios.post( `/orders.json?auth=${token}`, orderData )
-            .then( response => {
-                dispatch(purchaseCheesewichSuccess(response.data, orderData));
-            } )
-            .catch( error => {
-                dispatch(purchaseCheesewichFailed(error));
-            } );
-    };
-};
-
-export const purchaseInit = () => {
-    return {
-        type: ORDER_ACTIONS.PURCHASE_INIT,
-    };
-};
-
-export const fetchOrdersSuccess = (orders) => {
-    return {
-        type: ORDER_ACTIONS.FETCH_ORDERS_SUCCESS,
-        orders: orders
-    };
-};
-
-export const fetchOrdersFail = (error) => {
-    return {
-        type: ORDER_ACTIONS.FETCH_ORDERS_FAIL,
-        error: error
-    };
-};
-
-export const fetchOrdersStart = () => {
-    return {
-        type: ORDER_ACTIONS.FETCH_ORDERS_START,
-    };
-};
-
 export const fetchOrders = (token, userId) => {
     return dispatch => {
         dispatch(fetchOrdersStart());
@@ -81,4 +21,65 @@ export const fetchOrders = (token, userId) => {
                 dispatch(fetchOrdersFail(error));
             } );
     };
-}
+};
+
+export const fetchOrdersFail = (error) => {
+    return {
+        type: ORDER_ACTIONS.FETCH_ORDERS_FAIL,
+        error: error
+    };
+};
+
+export const fetchOrdersStart = () => {
+    return {
+        type: ORDER_ACTIONS.FETCH_ORDERS_START,
+    };
+};
+
+export const fetchOrdersSuccess = (orders) => {
+    return {
+        type: ORDER_ACTIONS.FETCH_ORDERS_SUCCESS,
+        orders: orders
+    };
+};
+
+
+export const purchaseCheesewich = (orderData, token) => {
+    return dispatch => {
+        dispatch(purchaseCheesewichStart());
+        axios.post( `/orders.json?auth=${token}`, orderData )
+            .then( response => {
+                dispatch(purchaseCheesewichSuccess(response.data, orderData));
+            } )
+            .catch( error => {
+                dispatch(purchaseCheesewichFailed(error));
+            } );
+    };
+};
+
+export const purchaseCheesewichFailed = (error) => {
+    return {
+        type: ORDER_ACTIONS.PURCHASE_CHEESEWICH_FAILED,
+        error: error,
+    };
+};
+
+export const purchaseCheesewichStart = () => {
+    return {
+        type: ORDER_ACTIONS.PURCHASE_CHEESEWICH_START,
+    };
+};
+
+export const purchaseCheesewichSuccess = (id, orderData) => {
+    return {
+        type: ORDER_ACTIONS.PURCHASE_CHEESEWICH_SUCCESS,
+        orderId: id,
+        orderData: orderData,
+    };
+};
+
+export const purchaseInit = () => {
+    return {
+        type: ORDER_ACTIONS.PURCHASE_INIT,
+    };
+};
