@@ -8,7 +8,7 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
 import createSagaMiddleware from 'redux-saga';
-import { watchAuth } from './store/sagas';
+import { watchAuth, watchOrder } from './store/sagas';
 
 import cheesewichBuilderReducer from './store/reducers/cheesewichBuilder';
 import orderReducer from './store/reducers/order';
@@ -29,6 +29,7 @@ const store = createStore(rootReducer, composeEnhancers(
 ));
 
 sagaMiddleware.run(watchAuth);
+sagaMiddleware.run(watchOrder);
 
 const app = (
     <Provider store={store}>

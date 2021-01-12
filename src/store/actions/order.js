@@ -1,25 +1,10 @@
 import { ORDER_ACTIONS } from './actionTypes';
-import axios from '../../axios-orders';
 
 export const fetchOrders = (token, userId) => {
-    return dispatch => {
-        dispatch(fetchOrdersStart());
-        //The `orderBy` and `equalTo` query parameters are specific to this particular back end:
-        const queryParams = `?auth=${token}&orderBy="userId"&equalTo="${userId}"`;
-        axios.get( `/orders.json${queryParams}` )
-            .then( response => {
-                const fetchedOrders = [];
-                for (const key in response.data) {
-                    fetchedOrders.push({
-                       ...response.data[key],
-                       id: key
-                    });
-                };
-                dispatch(fetchOrdersSuccess(fetchedOrders));
-            } )
-            .catch( error => {
-                dispatch(fetchOrdersFail(error));
-            } );
+    return {
+        type: ORDER_ACTIONS.FETCH_ORDERS_INIT,
+        token: token,
+        userId: userId
     };
 };
 
@@ -45,15 +30,10 @@ export const fetchOrdersSuccess = (orders) => {
 
 
 export const purchaseCheesewich = (orderData, token) => {
-    return dispatch => {
-        dispatch(purchaseCheesewichStart());
-        axios.post( `/orders.json?auth=${token}`, orderData )
-            .then( response => {
-                dispatch(purchaseCheesewichSuccess(response.data, orderData));
-            } )
-            .catch( error => {
-                dispatch(purchaseCheesewichFailed(error));
-            } );
+    return {
+        type: ORDER_ACTIONS.PURCHASE_INIT,
+        orderData: orderData,
+        token: token,
     };
 };
 
