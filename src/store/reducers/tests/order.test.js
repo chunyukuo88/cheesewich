@@ -1,5 +1,5 @@
 import reducer from '../order';
-import * as actionTypes from '../../actions/actionTypes';
+import { ORDER_ACTIONS } from '../../actions/actionTypes';
 
 const state = {
     orders: [],
@@ -22,7 +22,7 @@ describe('reducer()', ()=>{
    });
    describe('WHEN: Given an action type of PURCHASE_CHEESEWICH_START,', ()=>{
       test('THEN: The state is updated to loading: true.', ()=>{
-          const action = { type: actionTypes.PURCHASE_CHEESEWICH_START};
+          const action = { type: ORDER_ACTIONS.PURCHASE_CHEESEWICH_START};
           const result = reducer(state, action);
           const expectedResult = {
               orders: [],
@@ -35,7 +35,7 @@ describe('reducer()', ()=>{
    describe('WHEN: Given an action type of PURCHASE_CHEESEWICH_SUCCESS,', ()=>{
       test('THEN: The new order is added to state.', ()=>{
           const action = {
-              type: actionTypes.PURCHASE_CHEESEWICH_SUCCESS,
+              type: ORDER_ACTIONS.PURCHASE_CHEESEWICH_SUCCESS,
               orderData: {},
               orderId: 123
           };
@@ -53,7 +53,7 @@ describe('reducer()', ()=>{
    describe('WHEN: Given an action type of PURCHASE_CHEESEWICH_FAILED,', ()=>{
       test('THEN: The new order is added to state.', ()=>{
           const action = {
-              type: actionTypes.PURCHASE_CHEESEWICH_FAILED,
+              type: ORDER_ACTIONS.PURCHASE_CHEESEWICH_FAILED,
           };
           const result = reducer(state, action);
           expect(result).toEqual(state);
@@ -62,7 +62,7 @@ describe('reducer()', ()=>{
    describe('WHEN: Given an action type of PURCHASE_INIT,', ()=>{
       test('THEN: The new order is added to state.', ()=>{
           const action = {
-              type: actionTypes.PURCHASE_INIT,
+              type: ORDER_ACTIONS.PURCHASE_INIT,
           };
           const result = reducer(state, action);
           expect(result).toEqual(state);
@@ -71,7 +71,7 @@ describe('reducer()', ()=>{
    describe('WHEN: Given an action type of FETCH_ORDERS_START,', ()=>{
       test('THEN: The new order is added to state.', ()=>{
           const action = {
-              type: actionTypes.FETCH_ORDERS_START,
+              type: ORDER_ACTIONS.FETCH_ORDERS_START,
           };
           const result = reducer(state, action);
           const expectedResult = {
@@ -85,7 +85,7 @@ describe('reducer()', ()=>{
    describe('WHEN: Given an action type of FETCH_ORDERS_SUCCESS,', ()=>{
       test('THEN: The new order is added to state.', ()=>{
           const action = {
-              type: actionTypes.FETCH_ORDERS_SUCCESS,
+              type: ORDER_ACTIONS.FETCH_ORDERS_SUCCESS,
               orders: [{}, {}],
           };
           const result = reducer(state, action);
@@ -100,7 +100,7 @@ describe('reducer()', ()=>{
    describe('WHEN: Given an action type of FETCH_ORDERS_FAIL,', ()=>{
       test('THEN: The new order is added to state.', ()=>{
           const action = {
-              type: actionTypes.FETCH_ORDERS_FAIL,
+              type: ORDER_ACTIONS.FETCH_ORDERS_FAIL,
           };
           const result = reducer(state, action);
           expect(result).toEqual(state);

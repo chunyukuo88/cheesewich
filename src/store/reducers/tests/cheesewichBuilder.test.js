@@ -1,5 +1,5 @@
 import reducer from '../cheesewichBuilder';
-import * as actionTypes from '../../actions/actionTypes';
+import { BUILDER_ACTIONS } from '../../actions/actionTypes';
 
 const initialState = {
     ingredients: null,
@@ -26,7 +26,7 @@ describe('reducer()', ()=>{
     describe('WHEN: Given an action type of ADD_INGREDIENT,', ()=>{
         test('THEN: It increments the amount of the ingredient and ups the price.', ()=> {
             const action = {
-                type: actionTypes.ADD_INGREDIENT,
+                type: BUILDER_ACTIONS.ADD_INGREDIENT,
                 ingredientName: 'bacon'
             };
             initialState.ingredients = {
@@ -60,7 +60,7 @@ describe('reducer()', ()=>{
             }
             initialState.price = 5;
             const action = {
-                type: actionTypes.NIX_INGREDIENT,
+                type: BUILDER_ACTIONS.NIX_INGREDIENT,
                 ingredientName: 'bacon'
             };
             const result = reducer(initialState, action);
@@ -88,7 +88,7 @@ describe('reducer()', ()=>{
             };
             initialState.price = 0;
             const action = {
-                type: actionTypes.SET_INGREDIENTS,
+                type: BUILDER_ACTIONS.SET_INGREDIENTS,
                 ingredients: {
                     bacon: 0,
                     cheese: 0,
@@ -103,7 +103,7 @@ describe('reducer()', ()=>{
     describe('WHEN: Given an action type of FETCH_INGREDIENTS_FAILED,', ()=>{
         test('THEN: It decrements the ingredient and reduces the price accordingly.', ()=> {
             const action = {
-                type: actionTypes.FETCH_INGREDIENTS_FAILED,
+                type: BUILDER_ACTIONS.FETCH_INGREDIENTS_FAILED,
             };
             const result = reducer(initialState, action);
             initialState.error = true;

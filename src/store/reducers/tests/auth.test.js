@@ -1,5 +1,5 @@
 import reducer from '../auth';
-import * as actionTypes from '../../actions/actionTypes';
+import { AUTH_ACTIONS } from '../../actions/actionTypes';
 
 const initialState = {
     token: null,
@@ -19,7 +19,7 @@ describe('reducer()', ()=>{
     });
     describe('WHEN: Given an action type of AUTH_START,', ()=>{
         test('THEN: The state is update accordingly.', ()=>{
-            const action = { type: actionTypes.AUTH_START};
+            const action = { type: AUTH_ACTIONS.AUTH_START};
             const result = reducer(initialState, action);
             const expectedResult = {
                 token: null,
@@ -34,7 +34,7 @@ describe('reducer()', ()=>{
     describe('WHEN: Given an action type of AUTH_SUCCESS,', ()=>{
         test('THEN: The state is update accordingly.', ()=>{
             const action = {
-                type: actionTypes.AUTH_SUCCESS,
+                type: AUTH_ACTIONS.AUTH_SUCCESS,
                 idToken: {
                     foo: 'bar'
                 },
@@ -54,7 +54,7 @@ describe('reducer()', ()=>{
     describe('WHEN: Given an action type of AUTH_FAIL,', ()=>{
         test('THEN: The state is update accordingly.', ()=>{
             const action = {
-                type: actionTypes.AUTH_FAIL,
+                type: AUTH_ACTIONS.AUTH_FAIL,
                 error: 'error!!'
             };
             const result = reducer(initialState, action);
@@ -71,12 +71,13 @@ describe('reducer()', ()=>{
     describe('WHEN: Given an action type of AUTH_LOGOUT,', ()=>{
         test('THEN: The state is update accordingly.', ()=>{
             const action = {
-                type: actionTypes.AUTH_LOGOUT,
+                type: AUTH_ACTIONS.AUTH_LOGOUT,
                 userId: 234,
             };
             const result = reducer(initialState, action);
             const expectedResult = {
-                userId: 234,
+                userId: null,
+                token: null,
                 error: null,
                 loading: false,
                 authRedirectPath: '/',
@@ -87,7 +88,7 @@ describe('reducer()', ()=>{
     describe('WHEN: Given an action type of SET_AUTH_REDIRECT_PATH,', ()=>{
         test('THEN: The state is update accordingly.', ()=>{
             const action = {
-                type: actionTypes.SET_AUTH_REDIRECT_PATH,
+                type: AUTH_ACTIONS.SET_AUTH_REDIRECT_PATH,
                 path: '/test',
             };
             const result = reducer(initialState, action);

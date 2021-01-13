@@ -1,4 +1,4 @@
-import { ING_ACTIONS } from '../actions/actionTypes';
+import { BUILDER_ACTIONS } from '../actions/actionTypes';
 import { updateObject } from '../../utils/utils';
 
 const initialState = {
@@ -17,10 +17,10 @@ const INGREDIENT_PRICES = {
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
-        case ING_ACTIONS.ADD_INGREDIENT: return addIngredient(state, action, INGREDIENT_PRICES);
-        case ING_ACTIONS.NIX_INGREDIENT: return nixIngredient(state, action, INGREDIENT_PRICES);
-        case ING_ACTIONS.SET_INGREDIENTS: return setIngredients(state, action, initialState);
-        case ING_ACTIONS.FETCH_INGREDIENTS_FAILED: return updateObject(state, {error: true});
+        case BUILDER_ACTIONS.ADD_INGREDIENT: return addIngredient(state, action, INGREDIENT_PRICES);
+        case BUILDER_ACTIONS.NIX_INGREDIENT: return nixIngredient(state, action, INGREDIENT_PRICES);
+        case BUILDER_ACTIONS.SET_INGREDIENTS: return setIngredients(state, action, initialState);
+        case BUILDER_ACTIONS.FETCH_INGREDIENTS_FAILED: return updateObject(state, {error: true});
         default: return state;
     }
 };

@@ -3,7 +3,7 @@ import { addIngredient,
         setFetchIngredientError,
         setIngredients,
         initIngredients } from '../cheesewichBuilder';
-import { ING_ACTIONS } from '../actionTypes';
+import { BUILDER_ACTIONS } from '../actionTypes';
 
 describe('cheesewichBuilder.js', ()=>{
     describe('addIngredient()', ()=>{
@@ -11,7 +11,7 @@ describe('cheesewichBuilder.js', ()=>{
             const ingName = 'asdfasdf';
             const result = addIngredient(ingName);
             const expectedResult = {
-                type: ING_ACTIONS.ADD_INGREDIENT,
+                type: BUILDER_ACTIONS.ADD_INGREDIENT,
                 ingredientName: ingName,
             };
             expect(result).toEqual(expectedResult);
@@ -22,7 +22,7 @@ describe('cheesewichBuilder.js', ()=>{
             const ingName = 'jkl;jkl;';
             const result = nixIngredient(ingName);
             const expectedResult = {
-                type: ING_ACTIONS.NIX_INGREDIENT,
+                type: BUILDER_ACTIONS.NIX_INGREDIENT,
                 ingredientName: ingName,
             };
             expect(result).toEqual(expectedResult);
@@ -32,7 +32,7 @@ describe('cheesewichBuilder.js', ()=>{
         test('WHEN: Invoked, it builds the action accordingly.', ()=>{
             const result = setFetchIngredientError();
             const expectedResult = {
-                type: ING_ACTIONS.FETCH_INGREDIENTS_FAILED,
+                type: BUILDER_ACTIONS.FETCH_INGREDIENTS_FAILED,
                 error: true,
             };
             expect(result).toEqual(expectedResult);
@@ -43,7 +43,7 @@ describe('cheesewichBuilder.js', ()=>{
             const fetchedIngredients = {};
             const result = setIngredients(fetchedIngredients);
             const expectedResult = {
-                type: ING_ACTIONS.SET_INGREDIENTS,
+                type: BUILDER_ACTIONS.SET_INGREDIENTS,
                 ingredients: fetchedIngredients,
             };
             expect(result).toEqual(expectedResult);
@@ -53,7 +53,7 @@ describe('cheesewichBuilder.js', ()=>{
         test('WHEN: Invoked, it builds the action accordingly.', ()=>{
             const result = initIngredients();
             const expectedResult = {
-                type: ING_ACTIONS.FETCH_INGREDIENTS_INIT,
+                type: BUILDER_ACTIONS.FETCH_INGREDIENTS_INIT,
             };
             expect(result).toEqual(expectedResult);
         });

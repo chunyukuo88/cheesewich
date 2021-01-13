@@ -1,35 +1,35 @@
-import { ING_ACTIONS } from './actionTypes';
+import { BUILDER_ACTIONS } from './actionTypes';
 
 export const addIngredient = (ingName) => {
     return {
-        type: ING_ACTIONS.ADD_INGREDIENT,
+        type: BUILDER_ACTIONS.ADD_INGREDIENT,
         ingredientName: ingName,
     };
 };
 
 export const nixIngredient = (ingName) => {
     return {
-        type: ING_ACTIONS.NIX_INGREDIENT,
+        type: BUILDER_ACTIONS.NIX_INGREDIENT,
         ingredientName: ingName,
     };
 };
 
 export const setFetchIngredientError = () => {
     return {
-        type: ING_ACTIONS.FETCH_INGREDIENTS_FAILED,
+        type: BUILDER_ACTIONS.FETCH_INGREDIENTS_FAILED,
         error: true,
     };
 };
 
 export const setIngredients = (fetchedIngredients) => {
     return {
-      type: ING_ACTIONS.SET_INGREDIENTS,
+      type: BUILDER_ACTIONS.SET_INGREDIENTS,
       ingredients: fetchedIngredients,
     };
 };
 
 export const initIngredients = () => {
     return {
-        type: ING_ACTIONS.FETCH_INGREDIENTS_INIT,
+        type: BUILDER_ACTIONS.FETCH_INGREDIENTS_INIT,
     };
 };

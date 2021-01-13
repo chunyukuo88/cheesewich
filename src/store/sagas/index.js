@@ -1,5 +1,5 @@
 import { takeEvery } from 'redux-saga/effects';
-import { AUTH_ACTIONS, ORDER_ACTIONS, ING_ACTIONS } from '../actions/actionTypes';
+import { AUTH_ACTIONS, ORDER_ACTIONS, BUILDER_ACTIONS } from '../actions/actionTypes';
 import { fetchOrdersSaga, purchaseCheesewichSaga } from './order';
 import { authCheckStateSaga,
         authenticateUserSaga,
@@ -16,7 +16,7 @@ export function* watchAuth() {
 };
 
 export function* watchBuilder() {
-    yield takeEvery(ING_ACTIONS.FETCH_INGREDIENTS_INIT, initIngredientsSaga);
+    yield takeEvery(BUILDER_ACTIONS.FETCH_INGREDIENTS_INIT, initIngredientsSaga);
 };
 
 export function* watchOrder() {
