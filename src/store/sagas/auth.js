@@ -1,32 +1,27 @@
 import { put, delay } from 'redux-saga/effects';
-import * as actions from '../actions/auth';
 import axios from 'axios';
-import { authFail,
-    authStart,
-    authSuccess,
-    checkAuthTimeout,
-    logout } from '../actions/auth';
 import urls from '../../urls';
+import * as actions from '../actions/auth';
 
 export function* authCheckStateSaga(){
         const token = yield localStorage.getItem('token');
         if (!token) {
-            yield put(logout());
+            yield put(actions.logout());
         } else {
             const expirationDate = yield new Date(localStorage.getItem('expirationDate'));
             if (expirationDate <= new Date()) {
-                yield put(logout());
+                yield put(actions.logout());
             } else {
                 const userId = yield localStorage.getItem('userId');
-                yield put(authSuccess(token, userId));
-                yield put(checkAuthTimeout((expirationDate.getTime() - new Date().getTime()) / 1000 ));
+                yield put(actions.authSuccess(token, userId));
+                yield put(actions.checkAuthTimeout((expirationDate.getTime() - new Date().getTime()) / 1000 ));
             };
         };
         yield token;
 }
 
 export function* authenticateUserSaga(action) {
-    yield put(authStart());
+    yield put(actions.authStart());
     const authData = buildAuthData(action.email, action.password);
     const url = getAuthUrl(action.isSignup);
     const response = yield axios.post(url, authData);
@@ -35,10 +30,10 @@ export function* authenticateUserSaga(action) {
         yield localStorage.setItem('token', response.data.idToken);
         yield localStorage.setItem('expirationDate', expirationDate);
         yield localStorage.setItem('userId', response.data.localId);
-        yield put(authSuccess(response.data.idToken, response.data.localId));
-        yield put(checkAuthTimeout(response.data.expiresIn));
+        yield put(actions.authSuccess(response.data.idToken, response.data.localId));
+        yield put(actions.checkAuthTimeout(response.data.expiresIn));
     } catch (error) {
-        yield put(authFail(error.response.data.error));
+        yield put(actions.authFail(error.response.data.error));
     }
 };
 

@@ -1,15 +1,25 @@
 import { takeEvery } from 'redux-saga/effects';
-import * as actionTypes from '../actions/actionTypes';
-import {
-    authCheckStateSaga,
-    authenticateUserSaga,
-    checkAuthTimeoutSaga,
-    logoutSaga,
-} from './auth';
+import { AUTH_ACTIONS, ORDER_ACTIONS, ING_ACTIONS } from '../actions/actionTypes';
+import { fetchOrdersSaga, purchaseCheesewichSaga } from './order';
+import { authCheckStateSaga,
+        authenticateUserSaga,
+        checkAuthTimeoutSaga,
+        logoutSaga } from './auth';
+import { initIngredientsSaga } from './cheesewichBuilder';
+
 
 export function* watchAuth() {
-    yield takeEvery(actionTypes.AUTH_CHECK_TIMEOUT, checkAuthTimeoutSaga);
-    yield takeEvery(actionTypes.AUTH_INITIATE_LOGOUT, logoutSaga);
-    yield takeEvery(actionTypes.AUTH_USER, authenticateUserSaga);
-    yield takeEvery(actionTypes.AUTH_CHECK_STATE, authCheckStateSaga);
-}
+    yield takeEvery(AUTH_ACTIONS.AUTH_CHECK_TIMEOUT, checkAuthTimeoutSaga);
+    yield takeEvery(AUTH_ACTIONS.AUTH_INITIATE_LOGOUT, logoutSaga);
+    yield takeEvery(AUTH_ACTIONS.AUTH_USER, authenticateUserSaga);
+    yield takeEvery(AUTH_ACTIONS.AUTH_CHECK_STATE, authCheckStateSaga);
+};
+
+export function* watchBuilder() {
+    yield takeEvery(ING_ACTIONS.FETCH_INGREDIENTS_INIT, initIngredientsSaga);
+};
+
+export function* watchOrder() {
+    yield takeEvery(ORDER_ACTIONS.FETCH_ORDERS_INIT, fetchOrdersSaga);
+    yield takeEvery(ORDER_ACTIONS.PURCHASE_INIT, purchaseCheesewichSaga);
+};
