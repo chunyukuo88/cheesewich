@@ -42,10 +42,10 @@ export function* checkAuthTimeoutSaga(action) {
     yield put(actions.logout());
 };
 
-export function* logoutSaga() {
-    yield call([localStorage, 'removeItem'], "token");
-    yield call([localStorage, 'removeItem'], "expirationDate");
-    yield call([localStorage, 'removeItem'], "userId");
+export function* logoutSaga(action) {
+    yield call([action.storage, 'removeItem'], "token");
+    yield call([action.storage, 'removeItem'], "expirationDate");
+    yield call([action.storage, 'removeItem'], "userId");
     yield put(actions.logoutDidOccur());
 };
 
