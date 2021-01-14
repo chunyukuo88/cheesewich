@@ -9,7 +9,7 @@ import { initIngredientsSaga } from './cheesewichBuilder';
 
 
 export function* watchAuth() {
-    //TODO: Change this back to `yield all` instead once I figure out how to unit test it.
+    //TODO: Change this back to `yield all` instead once I figure out how to unit test `yield all`.
     yield takeEvery(AUTH_ACTIONS.AUTH_CHECK_TIMEOUT, checkAuthTimeoutSaga);
     yield takeEvery(AUTH_ACTIONS.AUTH_INITIATE_LOGOUT, logoutSaga);
     yield takeEvery(AUTH_ACTIONS.AUTH_USER, authenticateUserSaga);
