@@ -38,9 +38,9 @@ export function* authenticateUserSaga(action) {
     }
 };
 
-export function* checkAuthTimeoutSaga(action) {
+export function* checkAuthTimeoutSaga(action, storage) {
     yield delay(action.expirationTime * 1000);
-    yield put(actions.logout());
+    yield put(actions.logout(storage));
 };
 
 export function* logoutSaga(action) {
