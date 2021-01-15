@@ -44,9 +44,9 @@ export function* checkAuthTimeoutSaga(action, storage) {
 };
 
 export function* logoutSaga(action) {
-    yield call([action.storage, 'removeItem'], "token");
-    yield call([action.storage, 'removeItem'], "expirationDate");
-    yield call([action.storage, 'removeItem'], "userId");
+    yield localStorage.removeItem('token');
+    yield localStorage.removeItem('expirationDate');
+    yield localStorage.removeItem('userId');
     yield put(actions.logoutDidOccur());
 };
 
