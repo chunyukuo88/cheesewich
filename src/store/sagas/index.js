@@ -1,11 +1,11 @@
-import { all, takeEvery, takeLatest } from 'redux-saga/effects';
+import { takeEvery, takeLatest } from 'redux-saga/effects';
 import { AUTH_ACTIONS, ORDER_ACTIONS, BUILDER_ACTIONS } from '../actions/actionTypes';
 import { fetchOrdersSaga, purchaseCheesewichSaga } from './order';
 import { authCheckStateSaga,
         authenticateUserSaga,
         checkAuthTimeoutSaga,
         logoutSaga } from './auth';
-import { initIngredientsSaga } from './cheesewichBuilder';
+import initIngredientsSaga from './cheesewichBuilder';
 
 
 export function* watchAuth() {

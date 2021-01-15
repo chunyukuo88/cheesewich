@@ -1,7 +1,7 @@
 import { all, takeEvery, takeLatest } from 'redux-saga/effects';
 import { watchAuth, watchBuilder, watchOrder } from '../index';
 import {AUTH_ACTIONS, BUILDER_ACTIONS, ORDER_ACTIONS} from '../../actions/actionTypes';
-import { initIngredientsSaga } from '../cheesewichBuilder';
+import initIngredientsSaga from '../cheesewichBuilder';
 import {fetchOrdersSaga, purchaseCheesewichSaga} from '../order';
 import {authCheckStateSaga, authenticateUserSaga, checkAuthTimeoutSaga, logoutSaga} from "../auth";
 

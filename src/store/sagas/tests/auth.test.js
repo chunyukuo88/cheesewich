@@ -32,7 +32,6 @@ describe('auth.js saga module', ()=>{
                 expect(result.next().value).toEqual(axios.post(urls.authSignIn, authData));
             });
             test('THEN: On the ensuing three invocations, it sets local storage data.', ()=>{
-
                 const action = {
                    email: 'test@test.com',
                    password: 'password',
