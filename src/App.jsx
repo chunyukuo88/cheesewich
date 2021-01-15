@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
 import Layout from './hoc/Layout/Layout.jsx';
 import CheesewichBuilder from './containers/CheesewichBuilder/CheesewichBuilder.jsx';
@@ -9,17 +9,16 @@ import Logout from './containers/Auth/Logout/Logout';
 import { connect } from 'react-redux';
 import { authCheckState } from './store/actions/auth';
 
-class App extends Component {
-    componentDidMount() {
-        this.props.onTryAutoSignup();
-    }
-    render() {
-        return (
-            <Layout>
-                {routes(this.props.isAuthenticated)}
-            </Layout>
-        );
-    }
+const App = (props) => {
+    useEffect(() =>{
+        props.onTryAutoSignup();
+    })
+
+    return (
+        <Layout>
+            {routes(props.isAuthenticated)}
+        </Layout>
+    );
 }
 
 const routes = (theUserIsAuthenticated) => {
