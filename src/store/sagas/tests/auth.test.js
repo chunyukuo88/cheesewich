@@ -1,11 +1,12 @@
 import { put, delay, call } from 'redux-saga/effects';
 import { authCheckStateSaga, checkAuthTimeoutSaga, logoutSaga } from '../auth';
-import { logout } from '../../actions/auth';
-import * as actions from "../../actions/auth";
+import * as actions from '../../actions/auth';
 
 describe('auth.js saga module', ()=>{
     describe('authCheckStateSaga()', ()=>{
-        test('')
+        test('', ()=>{
+           //
+        });
     });
     describe('checkAuthTimeoutSaga()', ()=>{
         describe('WHEN: Given an action with an expirationTime value,', ()=>{
@@ -24,7 +25,7 @@ describe('auth.js saga module', ()=>{
                       expirationTime: 2,
                   };
                   const generatedObject = checkAuthTimeoutSaga(action);
-                   generatedObject.next()
+                  generatedObject.next()
                   expect(generatedObject.next().value).toEqual(put(actions.logout()));
                });
            });

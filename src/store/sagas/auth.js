@@ -4,6 +4,7 @@ import urls from '../../urls';
 import * as actions from '../actions/auth';
 
 export function* authCheckStateSaga(){
+    //TODO: Pass localStorage in the way it's done in logoutSaga
         const token = yield localStorage.getItem('token');
         if (!token) {
             yield put(actions.logout());
