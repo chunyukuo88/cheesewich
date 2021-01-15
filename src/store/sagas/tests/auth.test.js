@@ -32,13 +32,16 @@ describe('auth.js saga module', ()=>{
                 expect(result.next().value).toEqual(axios.post(urls.authSignIn, authData));
             });
             test('THEN: On the ensuing three invocations, it sets local storage data.', ()=>{
-               // const action = {
-               //     email: 'test@test.com',
-               //     password: 'password',
-               //     isSignup: true
-               // };
-               //  const result = authenticateUserSaga(action);
-               //  expect(result.next().value).toEqual(put(actions.authStart()));
+
+                const action = {
+                   email: 'test@test.com',
+                   password: 'password',
+                   isSignup: true
+               };
+                const result = authenticateUserSaga(action);
+                result.next();
+                result.next();
+                expect(result.next().value).toEqual();
             });
         });
     });
