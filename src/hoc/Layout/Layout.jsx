@@ -8,7 +8,7 @@ import SideDrawer from '../../components/Navigation/SideDrawer/SideDrawer.jsx';
 const Layout = props => {
     const [showSideDrawer, setShowSideDrawer] = React.useState(false);
     const drawerCloser = () => setShowSideDrawer(false);
-    const drawerOpener = () => setShowSideDrawer(false);
+    const drawerOpener = () => setShowSideDrawer(true);
     return (
         <Aux>
             <Toolbar
