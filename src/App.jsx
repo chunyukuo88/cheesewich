@@ -12,7 +12,7 @@ import { authCheckState } from './store/actions/auth';
 const App = (props) => {
     useEffect(() =>{
         props.onTryAutoSignup();
-    })
+    }, [])
 
     return (
         <Layout>
