@@ -18,7 +18,6 @@ describe('Cheesewich.jsx', ()=>{
         };
         //TODO: Figure out how to fix the Router issue with this render.
         const wrapper = render(<Cheesewich {...props}/>);
-        console.log(wrapper);
         expect(true).toBeTruthy();
     });
     describe('getIngredients()', ()=>{

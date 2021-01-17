@@ -10,9 +10,11 @@ import { connect } from 'react-redux';
 import { authCheckState } from './store/actions/auth';
 
 const App = (props) => {
+    const { onTryAutoSignup } = props;
+
     useEffect(() =>{
-        props.onTryAutoSignup();
-    }, [])
+        onTryAutoSignup();
+    }, [onTryAutoSignup])
 
     return (
         <Layout>
