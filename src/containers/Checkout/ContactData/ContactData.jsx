@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import classes from './ContactData.css';
 import { purchaseCheesewich } from '../../../store/actions/order';
-import { buildInputFieldObject, getDeliveryMethodObject } from './contactDataUtils';
 import { connect } from 'react-redux';
 import axios from '../../../axios-orders';
 import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler';
@@ -9,16 +8,6 @@ import { checkValidity, updateObject } from '../../../utils/utils';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import Input from '../../../components/UI/Input/Input';
 import Button from '../../../components/UI/Button/Button';
-
-
-const initialOrderForm = {
-    name: buildInputFieldObject('Your name'),
-    street: buildInputFieldObject('Street'),
-    zipCode: buildInputFieldObject('ZIP Code', 5, 5),
-    country: buildInputFieldObject('Country'),
-    email: buildInputFieldObject('Email', null, null, 'email'),
-    deliveryMethod: getDeliveryMethodObject(),
-};
 
 const ContactData = (props) => {
     const [ orderForm, setOrderForm ] = useState(initialOrderForm);
@@ -58,6 +47,48 @@ const ContactData = (props) => {
             {form}
         </div>
     );
+};
+
+const deliveryMethodObject = {
+    elementType: 'select',
+    elementConfig: {
+        options: [
+            {value: 'fastest', displayValue: 'Fastest'},
+            {value: 'cheapest', displayValue: 'Cheapest'}
+        ],
+    },
+    value: 'fastest',
+    validation: {},
+    valid: true
+};
+
+const buildInputFieldObject = (placeholder, minLength, maxLength, type) => {
+    const result = {
+        elementType: 'input',
+        elementConfig: {
+            type: 'text',
+            placeholder: placeholder,
+        },
+        value: '',
+        validation: {
+            required: true,
+        },
+        valid: false,
+        touched: false,
+    };
+    if (minLength) result.validation.minLength = minLength;
+    if (maxLength) result.validation.maxLength = maxLength;
+    if (type) result.elementConfig.type = type;
+    return result;
+};
+
+const initialOrderForm = {
+    name: buildInputFieldObject('Your name'),
+    street: buildInputFieldObject('Street'),
+    zipCode: buildInputFieldObject('ZIP Code', 5, 5),
+    country: buildInputFieldObject('Country'),
+    email: buildInputFieldObject('Email', null, null, 'email'),
+    deliveryMethod: deliveryMethodObject,
 };
 
 const buildForm = (formIsValid, inputChangedHandler, orderHandler, formElementsArray, loading) => {
