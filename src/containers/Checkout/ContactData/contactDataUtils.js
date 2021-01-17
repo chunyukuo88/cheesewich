@@ -21,7 +21,7 @@ export const buildForm = ({ formIsValid }, inputChangedHandler, orderHandler, fo
         </form>;
 };
 
-export const buildFormData = ({ orderForm }) => {
+export const buildFormData = (orderForm) => {
     const formData = {};
     for (let formElementIdentifier in orderForm) {
         formData[formElementIdentifier] = orderForm[formElementIdentifier].value;
