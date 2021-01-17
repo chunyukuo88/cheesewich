@@ -1,33 +1,4 @@
 import React from 'react';
-import Spinner from '../../../components/UI/Spinner/Spinner';
-import Input from '../../../components/UI/Input/Input';
-import Button from '../../../components/UI/Button/Button';
-
-export const buildForm = (formIsValid, inputChangedHandler, orderHandler, formElementsArray, loading) => {
-    return (loading)
-        ? <Spinner/>
-        : <form onSubmit={orderHandler} autoComplete="off">
-            {formElementsArray.map(formElement => (
-                <Input  changed={(event) => inputChangedHandler(event, formElement.id)}
-                        elementConfig={formElement.config.elementConfig}
-                        elementType={formElement.config.elementType}
-                        invalid={!formElement.config.valid}
-                        key={formElement.id}
-                        shouldValidate={formElement.config.validation}
-                        touched={formElement.config.touched}
-                        value={formElement.config.value} />
-            ))}
-            <Button btnType="Success" disabled={!formIsValid}>ORDER</Button>
-        </form>;
-};
-
-export const buildFormData = (orderForm) => {
-    const formData = {};
-    for (let formElementIdentifier in orderForm) {
-        formData[formElementIdentifier] = orderForm[formElementIdentifier].value;
-    };
-    return formData;
-};
 
 export const buildInputFieldObject = (placeholder, minLength, maxLength, type) => {
     const result = {
@@ -49,15 +20,6 @@ export const buildInputFieldObject = (placeholder, minLength, maxLength, type) =
     return result;
 };
 
-export const buildOrderForAxios = (ings, price, id, formData) => {
-    return {
-        ingredients: ings,
-        price: price,
-        userId: id,
-        orderData: formData,
-    };
-};
-
 export const getDeliveryMethodObject = () => {
     return {
         elementType: 'select',
@@ -71,15 +33,4 @@ export const getDeliveryMethodObject = () => {
         validation: {},
         valid: true
     };
-};
-
-export const mapOrderFormToArray = (orderFormObject) => {
-    const formElementsArray = [];
-    for (let key in orderFormObject) {
-        formElementsArray.push({
-            id: key,
-            config: orderFormObject[key]
-        });
-    }
-    return formElementsArray;
 };
