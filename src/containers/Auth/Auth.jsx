@@ -9,92 +9,84 @@ import classes from './Auth.css';
 import { setAuthRedirectPath } from '../../store/actions/auth';
 import { updateObject, checkValidity } from '../../utils/utils';
 
-class Auth extends Component {
-    state = {
-        controls: {
-            email: {
-                elementType: 'input',
-                elementConfig: {
-                    type: 'email',
-                    placeholder: 'Mail address',
-                },
-                value: '',
-                validation: {
-                    required: true,
-                    isEmail: true,
-                },
-                valid: false,
-                touched: false,
-            },
-            password: {
-                elementType: 'input',
-                elementConfig: {
-                    type: 'password',
-                    placeholder: 'Password',
-                },
-                value: '',
-                validation: {
-                    required: true,
-                    validPassword: true,
-                },
-                valid: false,
-                touched: false,
-            },
+const initialControls = {
+    email: {
+        elementType: 'input',
+        elementConfig: {
+            type: 'email',
+            placeholder: 'Mail address',
         },
-        isSignup: true,
-    }
+        value: '',
+        validation: {
+            required: true,
+            isEmail: true,
+        },
+        valid: false,
+        touched: false,
+    },
+    password: {
+        elementType: 'input',
+        elementConfig: {
+            type: 'password',
+            placeholder: 'Password',
+        },
+        value: '',
+        validation: {
+            required: true,
+            validPassword: true,
+        },
+        valid: false,
+        touched: false,
+    },
+};
 
-    componentDidMount() {
-        redirectToHomeIfNotBuildingCheesewich(this.props, this.props.onSetAuthRedirectPath);
-    };
+const Auth = props => {
+    const [ controls, setControls] = React.useState(initialControls);
+    const [ isSignup, setIsSignup ] = React.useState(true);
 
-    submitHandler = (event) => {
+    React.useEffect(()=>{
+        redirectToHomeIfNotBuildingCheesewich(props, props.onSetAuthRedirectPath);
+    })
+
+    const submitHandler = (event) => {
         event.preventDefault();
-        const email = this.state.controls.email.value;
-        const password = this.state.controls.password.value;
-        this.props.onAuth(email, password, this.state.isSignup);
+        const email = controls.email.value;
+        const password = controls.password.value;
+        props.onAuth(email, password, isSignup);
     };
 
-    switchAuthMode = () => {
-        this.setState(prevState => {
-            return {
-                isSignup: !prevState.isSignup,
-            };
-        });
-    };
+    const switchAuthMode = (prevState) => setIsSignup(!prevState.isSignup);
 
-    inputChangedHandler = (event, controlName) => {
-        const updatedControls = updateObject(this.state.controls, {
-            [controlName]: updateObject(this.state.controls[controlName],{
+    const inputChangedHandler = (event, controlName) => {
+        const updatedControls = updateObject(controls, {
+            [controlName]: updateObject(controls[controlName],{
                 value: event.target.value,
-                valid: checkValidity(event.target.value, this.state.controls[controlName].validation),
+                valid: checkValidity(event.target.value, controls[controlName].validation),
                 touched: true,
             }),
         });
-        this.setState({ controls: updatedControls });
+        setControls(updatedControls);
     };
 
-    render() {
-        const formElementsArray = populateElementsArray(this.state.controls);
-        const form = getFormContent(this.props, formElementsArray, this.inputChangedHandler);
-        const error = getError(this.props.error);
-        const redirect = getRedirectWhenSignedOut(this.props);
-        const componentHeading = getComponentHeading(this.state.isSignup);
-        const switchOption = getSwitchOption(this.state.isSignup);
+    const formElementsArray = populateElementsArray(controls);
+    const form = getFormContent(props, formElementsArray, inputChangedHandler);
+    const error = getError(props.error);
+    const redirect = getRedirectWhenSignedOut(props);
+    const componentHeading = getComponentHeading(isSignup);
+    const switchOption = getSwitchOption(isSignup);
 
-        return (
-            <div className={classes.Auth}>
-                {redirect}
-                <div>{componentHeading}</div>
-                {error}
-                <form onSubmit={this.submitHandler}>
-                    {form}
-                    <Button buttonType="green">Submit</Button>
-                </form>
-                <Button clicked={this.switchAuthMode} buttonType="red">Switch to {switchOption}</Button>
-            </div>
-        );
-    }
+    return (
+        <div className={classes.Auth}>
+            {redirect}
+            <div>{componentHeading}</div>
+            {error}
+            <form onSubmit={submitHandler}>
+                {form}
+                <Button buttonType="green">Submit</Button>
+            </form>
+            <Button clicked={switchAuthMode} buttonType="red">Switch to {switchOption}</Button>
+        </div>
+    );
 }
 
 const redirectToHomeIfNotBuildingCheesewich = (props, redirectCallback) => {
@@ -114,13 +106,12 @@ const populateElementsArray = (controls) => {
     return formElementsArray;
 };
 
-const getRedirectWhenSignedOut = ({ isAuthenticated, authRedirectPath }) => (isAuthenticated)
-    ? <Redirect to={authRedirectPath}/>
-    : null;
+const getRedirectWhenSignedOut = ({ isAuthenticated, authRedirectPath }) => (isAuthenticated) && <Redirect to={authRedirectPath}/>;
 
-const getError = (error) => (error)
-    ? <p>{error}</p>
-    : null;
+const getError = (error) => {
+    console.log('getError()');
+    return (error) && <p>{error}</p>;
+}
 
 const getFormContent = (props, formArray, inputChangedHandler) => {
     return (props.loading)
@@ -155,6 +146,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         onAuth: (email, password, isSignup) => dispatch(authActions.auth(email, password, isSignup)),
+        //TODO: Add functionality for the authFail action creator.
         onSetAuthRedirectPath: () => dispatch(setAuthRedirectPath('/')),
     };
 };
