@@ -3,7 +3,7 @@ import Spinner from '../../../components/UI/Spinner/Spinner';
 import Input from '../../../components/UI/Input/Input';
 import Button from '../../../components/UI/Button/Button';
 
-export const buildForm = ({ formIsValid }, inputChangedHandler, orderHandler, formElementsArray, loading) => {
+export const buildForm = (formIsValid, inputChangedHandler, orderHandler, formElementsArray, loading) => {
     return (loading)
         ? <Spinner/>
         : <form onSubmit={orderHandler} autoComplete="off">
