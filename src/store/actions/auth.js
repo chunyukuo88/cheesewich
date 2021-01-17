@@ -1,6 +1,7 @@
 import { AUTH_ACTIONS } from './actionTypes';
 
 export const auth = (email, password, isSignup) => {
+    console.log('isSignup: ', isSignup);
     return {
         type: AUTH_ACTIONS.AUTH_USER,
         email: email,

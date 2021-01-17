@@ -1,10 +1,11 @@
 import React from 'react';
-import * as utils from './contactDataUtils';
-import Spinner from "../../../components/UI/Spinner/Spinner";
-import {checkValidity} from "../../../utils/utils";
+import * as utils from './ContactData.jsx';
+import Spinner from '../../../components/UI/Spinner/Spinner';
+import { checkValidity } from '../../../utils/utils';
 
 const formElementsArray = [
-    {id: "name",
+    {
+     id: "name",
      config: {
              elementConfig: {
                  placeholder: "Your name",
@@ -21,7 +22,7 @@ const formElementsArray = [
      },
 ];
 
-describe('contactDataUtils.js', ()=>{
+describe('ContactData.jsx', ()=>{
     describe('buildFormData()', ()=>{
         describe('WHEN: Given state containing an orderForm object, ', ()=>{
             test('THEN: It returns an object containing form data, ', ()=>{

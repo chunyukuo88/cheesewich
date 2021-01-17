@@ -1,28 +1,23 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import CheckoutSummary from '../../components/Order/CheckoutSummary/CheckoutSummary';
 import ContactData from './ContactData/ContactData';
 import { connect } from 'react-redux';
 
-class Checkout extends Component {
 
-    checkoutCancelledHandler = () => this.props.history.goBack();
-    checkoutContinueHandler = () => this.props.history.replace('/checkout/contact-data');
-
-    render(){
-        const summary = getSummaryIfIngredientsExist(this.props, this.checkoutCancelledHandler, this.checkoutContinueHandler);
-        return summary;
-    };
+const Checkout = (props) => {
+    const checkoutCancelledHandler = () => props.history.goBack();
+    const checkoutContinueHandler = () => props.history.replace('/checkout/contact-data');
+    const summary = getSummaryIfIngredientsExist(props, checkoutCancelledHandler, checkoutContinueHandler);
+    return summary;
 }
 
-const getSummaryIfIngredientsExist = (props, checkoutCancelFn, checkoutContinueFn) => {
-    return props.ingredients
-        ? buildSummary(props, checkoutCancelFn, checkoutContinueFn)
-        : <Redirect to="/" />;
-};
+const getSummaryIfIngredientsExist = (props, checkoutCancelFn, checkoutContinueFn) => props.ingredients
+    ? buildSummary(props, checkoutCancelFn, checkoutContinueFn)
+    : <Redirect to="/" />;
 
 const buildSummary = (props, checkoutCancelFn, checkoutContinueFn) => {
-    const redirectOnPurchase = props.purchased ? <Redirect to="/"/> : null;
+    const redirectOnPurchase = props.purchased && <Redirect to="/"/>;
     return (
         <div>
             {redirectOnPurchase}

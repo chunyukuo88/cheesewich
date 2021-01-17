@@ -1,6 +1,5 @@
 import React from 'react';
 import classes from './Modal.css';
-import { modalStyle, childrenOrShowHaveChanged } from './modalUtils';
 import Backdrop from '../Backdrop/Backdrop.jsx';
 import Aux from '../../../hoc/auxilliary.js';
 
@@ -13,6 +12,17 @@ const Modal = props => (
         </div>
     </Aux>
 );
+
+const childrenOrShowHaveChanged = (prevProps, nextProps) => (
+    prevProps.show === nextProps.show && prevProps.children === nextProps.children
+);
+
+const modalStyle = modalShouldBeDisplayed => {
+    return {
+        transform: modalShouldBeDisplayed  ? 'translateY(0)' : 'translateY(-100vh)',
+        opacity: modalShouldBeDisplayed ? '1' : '0'
+    };
+};
 
 export default React.memo(Modal, (previousProps, nextProps) => {
     childrenOrShowHaveChanged(previousProps, nextProps);

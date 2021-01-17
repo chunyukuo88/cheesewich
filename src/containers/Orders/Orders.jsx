@@ -1,18 +1,16 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { fetchOrders } from '../../store/actions/order';
+import axios from '../../axios-orders';
 import { Content } from './ordersUtils';
+import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 
-class Orders extends Component {
-
-    componentDidMount() {
-        this.props.onFetchOrders(this.props.token, this.props.userId);
-    }
-
-    render(){
-        return <Content {...this.props}/>;
-    }
-}
+const Orders = (props) => {
+    useEffect(() => {
+        props.onFetchOrders(props.token, props.userId);
+    }, []);
+    return <Content {...props}/>;
+};
 
 const mapStateToProps = state => {
     return {
@@ -29,5 +27,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-
-export default connect(mapStateToProps, mapDispatchToProps)(Orders);
+export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(Orders, axios));

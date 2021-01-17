@@ -1,46 +1,33 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import classes from './ContactData.css';
 import { purchaseCheesewich } from '../../../store/actions/order';
-import { buildForm,
-         buildFormData,
-         buildInputFieldObject,
-         buildOrderForAxios,
-         getDeliveryMethodObject,
-         mapOrderFormToArray } from './contactDataUtils';
 import { connect } from 'react-redux';
 import axios from '../../../axios-orders';
 import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler';
-import {checkValidity, updateObject} from '../../../utils/utils';
+import { checkValidity, updateObject } from '../../../utils/utils';
+import Spinner from '../../../components/UI/Spinner/Spinner';
+import Input from '../../../components/UI/Input/Input';
+import Button from '../../../components/UI/Button/Button';
 
+const ContactData = (props) => {
+    const [ orderForm, setOrderForm ] = useState(initialOrderForm);
+    const [ formIsValid, setFormIsValid ] = useState(false);
 
-class ContactData extends Component {
-    state = {
-        orderForm: {
-            name: buildInputFieldObject('Your name'),
-            street: buildInputFieldObject('Street'),
-            zipCode: buildInputFieldObject('ZIP Code', 5, 5),
-            country: buildInputFieldObject('Country'),
-            email: buildInputFieldObject('Email', null, null, 'email'),
-            deliveryMethod: getDeliveryMethodObject()
-        },
-        formIsValid: false,
-    }
-
-    orderHandler = ( event ) => {
+    const orderHandler = ( event ) => {
         event.preventDefault();
-        const formData = buildFormData(this.state);
-        const order = buildOrderForAxios(this.props.ings, this.props.price, this.props.userId, formData);
-        const token = this.props.token;
-        this.props.onCheesewichOrder(order, token);
+        const formData = buildFormData(orderForm);
+        const order = buildOrderForAxios(props.ings, props.price, props.userId, formData);
+        const token = props.token;
+        props.onCheesewichOrder(order, token);
     }
 
-    inputChangedHandler = (event, inputIdentifier) => {
-        const updatedFormElement = updateObject(this.state.orderForm[inputIdentifier], {
+    const inputChangedHandler = (event, inputIdentifier) => {
+        const updatedFormElement = updateObject(orderForm[inputIdentifier], {
             value: event.target.value,
-            valid: checkValidity(event.target.value, this.state.orderForm[inputIdentifier].validation),
+            valid: checkValidity(event.target.value, orderForm[inputIdentifier].validation),
             touched: true,
         });
-        const updatedOrderForm = updateObject(this.state.orderForm, {
+        const updatedOrderForm = updateObject(orderForm, {
             [inputIdentifier]: updatedFormElement,
         });
 
@@ -48,20 +35,107 @@ class ContactData extends Component {
         for (let inputIdentifier in updatedOrderForm) {
             formIsValid = updatedOrderForm[inputIdentifier].valid && formIsValid;
         }
-        this.setState({orderForm: updatedOrderForm, formIsValid: formIsValid});
+        setOrderForm(updatedOrderForm);
+        setFormIsValid(formIsValid);
     }
 
-    render () {
-        const formElementsArray = mapOrderFormToArray(this.state.orderForm);
-        const form = buildForm(this.state, this.inputChangedHandler, this.orderHandler, formElementsArray, this.props.loading);
-        return (
-            <div className={classes.ContactData}>
-                <h3>Enter Your Contact Info</h3>
-                {form}
-            </div>
-        );
+    const formElementsArray = mapOrderFormToArray(orderForm);
+    const form = buildForm(formIsValid, inputChangedHandler, orderHandler, formElementsArray, props.loading);
+    return (
+        <div className={classes.ContactData}>
+            <h3>Enter Your Contact Info</h3>
+            {form}
+        </div>
+    );
+};
+
+const deliveryMethodObject = {
+    elementType: 'select',
+    elementConfig: {
+        options: [
+            {value: 'fastest', displayValue: 'Fastest'},
+            {value: 'cheapest', displayValue: 'Cheapest'}
+        ],
+    },
+    value: 'fastest',
+    validation: {},
+    valid: true
+};
+
+const buildInputFieldObject = (placeholder, minLength, maxLength, type) => {
+    const result = {
+        elementType: 'input',
+        elementConfig: {
+            type: 'text',
+            placeholder: placeholder,
+        },
+        value: '',
+        validation: {
+            required: true,
+        },
+        valid: false,
+        touched: false,
     };
-}
+    if (minLength) result.validation.minLength = minLength;
+    if (maxLength) result.validation.maxLength = maxLength;
+    if (type) result.elementConfig.type = type;
+    return result;
+};
+
+const initialOrderForm = {
+    name: buildInputFieldObject('Your name'),
+    street: buildInputFieldObject('Street'),
+    zipCode: buildInputFieldObject('ZIP Code', 5, 5),
+    country: buildInputFieldObject('Country'),
+    email: buildInputFieldObject('Email', null, null, 'email'),
+    deliveryMethod: deliveryMethodObject,
+};
+
+const buildForm = (formIsValid, inputChangedHandler, orderHandler, formElementsArray, loading) => {
+    return (loading)
+        ? <Spinner/>
+        : <form onSubmit={orderHandler} autoComplete="off">
+            {formElementsArray.map(formElement => (
+                <Input  changed={(event) => inputChangedHandler(event, formElement.id)}
+                        elementConfig={formElement.config.elementConfig}
+                        elementType={formElement.config.elementType}
+                        invalid={!formElement.config.valid}
+                        key={formElement.id}
+                        shouldValidate={formElement.config.validation}
+                        touched={formElement.config.touched}
+                        value={formElement.config.value} />
+            ))}
+            <Button btnType="Success" disabled={!formIsValid}>ORDER</Button>
+        </form>;
+};
+
+const buildFormData = (orderForm) => {
+    const formData = {};
+    for (let formElementIdentifier in orderForm) {
+        formData[formElementIdentifier] = orderForm[formElementIdentifier].value;
+    };
+    return formData;
+};
+
+const buildOrderForAxios = (ings, price, id, formData) => {
+    return {
+        ingredients: ings,
+        price: price,
+        userId: id,
+        orderData: formData,
+    };
+};
+
+const mapOrderFormToArray = (orderFormObject) => {
+    const formElementsArray = [];
+    for (let key in orderFormObject) {
+        formElementsArray.push({
+            id: key,
+            config: orderFormObject[key]
+        });
+    }
+    return formElementsArray;
+};
 
 const mapStateToProps = (state) => {
     return {

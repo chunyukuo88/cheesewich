@@ -1,81 +1,47 @@
-import React, { Component } from 'react';
+import React, {useEffect, useState} from 'react';
 import axios from '../../../src/axios-instance';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import * as utils from './builderUtils';
+import {getControls, getSummary} from './builderUtils';
 import { addIngredient, initIngredients, nixIngredient } from '../../store/actions/cheesewichBuilder';
-
 import Aux from '../../hoc/auxilliary';
-import Cheesewich from '../../components/Cheesewich/Cheesewich.jsx';
-import UserControls from '../../components/Cheesewich/UserControls/UserControls.jsx';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
-import Spinner from '../../components/UI/Spinner/Spinner';
 import Modal from '../../components/UI/Modal/Modal.jsx';
-import OrderSummary from '../../components/Cheesewich/OrderSummary/OrderSummary';
-import { purchaseInit } from '../../store/actions/order';
+import {purchaseInit} from '../../store/actions/order';
 import { setAuthRedirectPath } from '../../store/actions/auth';
 
+const CheesewichBuilder = (props) => {
+    const [ userHasPlacedOrder, setUserHasPlacedOrder] = useState(false);
 
+    useEffect(()=>{
+        props.onInitIngredients();
+    }, []);
 
-export class CheesewichBuilder extends Component {
-    state = {
-        userHasPlacedOrder: false,
-    };
-
-    componentDidMount() {
-        this.props.onInitIngredients();
-    };
-
-    orderHandler = () => {
-        if (this.props.isAuthenticated) {
-            this.setState({userHasPlacedOrder: true});
+    const orderHandler = () => {
+        if (props.isAuthenticated) {
+            setUserHasPlacedOrder(true);
         } else {
-            this.props.onSetAuthRedirectPath('/checkout');
-            this.props.history.push('/auth');
+            props.onSetAuthRedirectPath('/checkout');
+            props.history.push('/auth');
         };
     };
 
-    orderCancellationHandler = () => this.setState({userHasPlacedOrder: false});
+    const orderCancellationHandler = () => setUserHasPlacedOrder(false);
+    const proceedToCheckoutHandler = () => utils.goToCheckoutHandler(props);
+    const disabledInfo = utils.produceDisabledInfoObject(props.ings);
+    const cheesewichAndControls = getControls(props, disabledInfo, orderHandler);
+    const orderSummary = getSummary(props, orderCancellationHandler, proceedToCheckoutHandler);
 
-    proceedToCheckoutHandler = () => utils.goToCheckoutHandler(this.props);
-
-    render(){
-        const disabledInfo = utils.produceDisabledInfoObject(this.props.ings);
-        let orderSummary = null;
-        let cheesewichAndControls = getStringOrSpinner(this.props.error);
-        if (this.props.ings) {
-           cheesewichAndControls = (
-                <Aux>
-                    <Cheesewich ingredients={this.props.ings} />
-                    <UserControls addIngredient={this.props.onIngredientAdded}
-                                  removeIngredient={this.props.onIngredientNixed}
-                                  disabled={disabledInfo}
-                                  isAuth={this.props.isAuthenticated}
-                                  ordered={this.orderHandler}
-                                  price={this.props.price}
-                                  purchasable={utils.getPurchasabilityStatus(this.props.ings)}/>
-                </Aux>
-            );
-            orderSummary = <OrderSummary ingredients={this.props.ings}
-                                         orderCancelled={this.orderCancellationHandler}
-                                         goToCheckout={this.proceedToCheckoutHandler}
-                                         price={this.props.price}/>;
-        }
-
-        return (
-            <Aux>
-                <Modal show={this.state.userHasPlacedOrder}
-                       modalClosed={this.orderCancellationHandler}>
-                    {orderSummary}
-                </Modal>
-                {cheesewichAndControls}
-            </Aux>
-        );
-    }
+    return (
+        <Aux>
+            <Modal show={userHasPlacedOrder}
+                   modalClosed={orderCancellationHandler}>
+                   {orderSummary}
+            </Modal>
+            {cheesewichAndControls}
+        </Aux>
+    );
 }
-
-const getStringOrSpinner = (error) => error
-                                ? <p>Ingredients could not be found.</p>
-                                : <Spinner />;
 
 const mapStateToProps = state => {
     return {

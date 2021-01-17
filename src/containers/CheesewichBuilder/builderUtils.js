@@ -1,3 +1,10 @@
+import OrderSummary from "../../components/Cheesewich/OrderSummary/OrderSummary";
+import React from "react";
+import Aux from "../../hoc/auxilliary";
+import Cheesewich from "../../components/Cheesewich/Cheesewich";
+import UserControls from "../../components/Cheesewich/UserControls/UserControls";
+import Spinner from "../../components/UI/Spinner/Spinner";
+
 export const getOrderDataForCheckout = (state, customerInfo) => {
     return {
         ingredients: state.ingredients,
@@ -11,7 +18,7 @@ export const getPurchasabilityStatus = (ingredients) => {
                       .map( igKey => {
                           return ingredients[igKey];
                       })
-                      .reduce( (sum, el) => {
+                      .reduce((sum, el) => {
                         return sum + el;
                       }, 0);
     return sum > 0;
@@ -35,3 +42,28 @@ const _replaceQuantitiesWithBooleans = ingredientsObject => {
     };
 };
 
+export const getSummary = (props, cancelFn, checkoutFn) => {
+    return (props.ings) &&
+        <OrderSummary ingredients={props.ings}
+                      orderCancelled={cancelFn}
+                      goToCheckout={checkoutFn}
+                      price={props.price}/>;
+};
+
+export const getControls = (props, disabledInfo, orderHandler) => {
+    return (props.ings)
+        ? (
+            <Aux>
+                <Cheesewich ingredients={props.ings}/>
+                <UserControls addIngredient={props.onIngredientAdded}
+                              removeIngredient={props.onIngredientNixed}
+                              disabled={disabledInfo}
+                              isAuth={props.isAuthenticated}
+                              ordered={orderHandler}
+                              price={props.price}
+                              purchasable={getPurchasabilityStatus(props.ings)}/>
+            </Aux>
+        )
+        : getStringOrSpinner(props.error);
+};
+const getStringOrSpinner = (error) => error ? <p>Ingredients not found.</p> : <Spinner/>;
