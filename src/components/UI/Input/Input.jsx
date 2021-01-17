@@ -1,12 +1,12 @@
 import React from 'react';
 import classes from './Input.css';
 
-const Input = props => {
-    return (<div>
-                <label data-test="inputLabel">{props.label}</label>
-                {Content(props)}
-            </div>);
-};
+const Input = props => (
+    <div>
+        <label data-test="inputLabel">{props.label}</label>
+        <Content {...props}/>
+    </div>
+);
 
 const Content = props => {
     let inputElement = null;
@@ -20,7 +20,6 @@ const checkForInvalidity = ({ invalid, shouldValidate, touched }, classArray) =>
 };
 
 const buildInputElement = (props, inputElement, inputClasses) => {
-    //TODO: Improve this after converting everything to classes AND adding Redux to the project.
     switch (props.elementType) {
         case ('textarea'):
             inputElement = <textarea className={inputClasses.join(' ')}
