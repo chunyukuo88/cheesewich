@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Button from '../../components/UI/Button/Button.jsx';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import Input from '../../components/UI/Input/Input.jsx';
@@ -8,37 +8,6 @@ import { connect } from 'react-redux';
 import classes from './Auth.css';
 import { setAuthRedirectPath } from '../../store/actions/auth';
 import { updateObject, checkValidity } from '../../utils/utils';
-
-const initialControls = {
-    email: {
-        elementType: 'input',
-        elementConfig: {
-            type: 'email',
-            placeholder: 'Mail address',
-        },
-        value: '',
-        validation: {
-            required: true,
-            isEmail: true,
-        },
-        valid: false,
-        touched: false,
-    },
-    password: {
-        elementType: 'input',
-        elementConfig: {
-            type: 'password',
-            placeholder: 'Password',
-        },
-        value: '',
-        validation: {
-            required: true,
-            validPassword: true,
-        },
-        valid: false,
-        touched: false,
-    },
-};
 
 const Auth = props => {
     const [ controls, setControls] = React.useState(initialControls);
@@ -94,6 +63,37 @@ const Auth = props => {
         </div>
     );
 }
+
+const initialControls = {
+    email: {
+        elementType: 'input',
+        elementConfig: {
+            type: 'email',
+            placeholder: 'Mail address',
+        },
+        value: '',
+        validation: {
+            required: true,
+            isEmail: true,
+        },
+        valid: false,
+        touched: false,
+    },
+    password: {
+        elementType: 'input',
+        elementConfig: {
+            type: 'password',
+            placeholder: 'Password',
+        },
+        value: '',
+        validation: {
+            required: true,
+            validPassword: true,
+        },
+        valid: false,
+        touched: false,
+    },
+};
 
 const redirectToHomeIfNotBuildingCheesewich = (props, redirectCallback) => {
     if (!props.cheesewichIsBeingBuilt && props.authRedirectPath !== '/') {
