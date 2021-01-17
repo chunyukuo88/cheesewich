@@ -13,9 +13,11 @@ const Auth = props => {
     const [ controls, setControls] = React.useState(initialControls);
     const [ isSignup, setIsSignup ] = React.useState(true);
 
+    const { cheesewichIsBeingBuilt, authRedirectPath, onSetAuthRedirectPath } = props;
+
     React.useEffect(()=>{
-        redirectToHomeIfNotBuildingCheesewich(props, props.onSetAuthRedirectPath);
-    }, []);
+        redirectToHomeIfNotBuildingCheesewich(props);
+    }, [cheesewichIsBeingBuilt, authRedirectPath, onSetAuthRedirectPath]);
 
     const submitHandler = (event) => {
         event.preventDefault();
@@ -95,9 +97,10 @@ const initialControls = {
     },
 };
 
-const redirectToHomeIfNotBuildingCheesewich = (props, redirectCallback) => {
-    if (!props.cheesewichIsBeingBuilt && props.authRedirectPath !== '/') {
-        redirectCallback();
+const redirectToHomeIfNotBuildingCheesewich = (props) => {
+    const { cheesewichIsBeingBuilt, authRedirectPath, onSetAuthRedirectPath } = props;
+    if (!cheesewichIsBeingBuilt && authRedirectPath !== '/') {
+        onSetAuthRedirectPath();
     };
 };
 
