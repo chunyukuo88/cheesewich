@@ -46,7 +46,7 @@ const Auth = props => {
 
     React.useEffect(()=>{
         redirectToHomeIfNotBuildingCheesewich(props, props.onSetAuthRedirectPath);
-    })
+    }, []);
 
     const submitHandler = (event) => {
         event.preventDefault();
@@ -55,7 +55,13 @@ const Auth = props => {
         props.onAuth(email, password, isSignup);
     };
 
-    const switchAuthMode = (prevState) => setIsSignup(!prevState.isSignup);
+    const switchAuthMode = () => {
+        if (isSignup) {
+            setIsSignup(false);
+        } else {
+            setIsSignup(true);
+        };
+    }
 
     const inputChangedHandler = (event, controlName) => {
         const updatedControls = updateObject(controls, {
@@ -108,10 +114,7 @@ const populateElementsArray = (controls) => {
 
 const getRedirectWhenSignedOut = ({ isAuthenticated, authRedirectPath }) => (isAuthenticated) && <Redirect to={authRedirectPath}/>;
 
-const getError = (error) => {
-    console.log('getError()');
-    return (error) && <p>{error}</p>;
-}
+const getError = (error) => (error) && <p>{error}</p>;
 
 const getFormContent = (props, formArray, inputChangedHandler) => {
     return (props.loading)
