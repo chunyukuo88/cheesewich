@@ -4,6 +4,7 @@ import Aux from "../../hoc/auxilliary";
 import Cheesewich from "../../components/Cheesewich/Cheesewich";
 import UserControls from "../../components/Cheesewich/UserControls/UserControls";
 import Spinner from "../../components/UI/Spinner/Spinner";
+import {purchaseInit} from "../../store/actions/order";
 
 export const getOrderDataForCheckout = (state, customerInfo) => {
     return {
@@ -25,8 +26,8 @@ export const getPurchasabilityStatus = (ingredients) => {
 };
 
 
-export const goToCheckoutHandler = (props) => {
-    props.onInitPurchase();
+export const goToCheckoutHandler = (props, purchaseInitializer) => {
+    purchaseInitializer();
     props.history.push('/checkout');
 }
 
@@ -42,12 +43,12 @@ const _replaceQuantitiesWithBooleans = ingredientsObject => {
     };
 };
 
-export const getSummary = (props, cancelFn, checkoutFn) => {
-    return (props.ings) &&
-        <OrderSummary ingredients={props.ings}
+export const getSummary = (ings, price, cancelFn, checkoutFn) => {
+    return (ings) &&
+        <OrderSummary ingredients={ings}
                       orderCancelled={cancelFn}
                       goToCheckout={checkoutFn}
-                      price={props.price}/>;
+                      price={price}/>;
 };
 
 export const getControls = (props, disabledInfo, orderHandler) => {
@@ -55,8 +56,8 @@ export const getControls = (props, disabledInfo, orderHandler) => {
         ? (
             <Aux>
                 <Cheesewich ingredients={props.ings}/>
-                <UserControls addIngredient={props.onIngredientAdded}
-                              removeIngredient={props.onIngredientNixed}
+                <UserControls addIngredient={props.ingredientAdder}
+                              removeIngredient={props.ingredientNixer}
                               disabled={disabledInfo}
                               isAuth={props.isAuthenticated}
                               ordered={orderHandler}
