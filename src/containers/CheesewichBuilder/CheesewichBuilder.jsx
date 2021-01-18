@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import axios from '../../../src/axios-instance';
 import {connect} from 'react-redux';
 import * as utils from './builderUtils';
-import {getControls, getSummary} from './builderUtils';
+import { getControls, getSummary } from './builderUtils';
 import { addIngredient, initIngredients, nixIngredient } from '../../store/actions/cheesewichBuilder';
 import Aux from '../../hoc/auxilliary';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
