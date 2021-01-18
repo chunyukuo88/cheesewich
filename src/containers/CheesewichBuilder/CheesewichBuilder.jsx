@@ -12,10 +12,11 @@ import { setAuthRedirectPath } from '../../store/actions/auth';
 
 const CheesewichBuilder = (props) => {
     const [ userHasPlacedOrder, setUserHasPlacedOrder] = useState(false);
+    const { onInitIngredients } = props;
 
     useEffect(()=>{
-        props.onInitIngredients();
-    }, []);
+        onInitIngredients();
+    }, [onInitIngredients]);
 
     const orderHandler = () => {
         if (props.isAuthenticated) {

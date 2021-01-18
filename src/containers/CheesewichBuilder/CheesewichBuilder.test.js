@@ -1,5 +1,5 @@
 /**
- * Note that CheesewichBuilder can be a default import or a named import.
+ * Note that CheesewichBuilder can be a default import OR a named import.
  * Here, it is is a named import so as to not be connected to the global store.
  * */
 import React from 'react';

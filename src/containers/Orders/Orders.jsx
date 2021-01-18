@@ -6,9 +6,12 @@ import { Content } from './ordersUtils';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 
 const Orders = (props) => {
+    const { token, userId, onFetchOrders } = props;
+
     useEffect(() => {
-        props.onFetchOrders(props.token, props.userId);
-    }, []);
+        onFetchOrders(token, userId);
+    }, [onFetchOrders]);
+
     return <Content {...props}/>;
 };
 
