@@ -1,37 +1,45 @@
 import React, {useEffect, useState} from 'react';
 import axios from '../../../src/axios-instance';
-import {connect} from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import * as utils from './builderUtils';
-import {getControls, getSummary} from './builderUtils';
+import { getControls, getSummary } from './builderUtils';
 import { addIngredient, initIngredients, nixIngredient } from '../../store/actions/cheesewichBuilder';
 import Aux from '../../hoc/auxilliary';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 import Modal from '../../components/UI/Modal/Modal.jsx';
-import {purchaseInit} from '../../store/actions/order';
+import { purchaseInit } from '../../store/actions/order';
 import { setAuthRedirectPath } from '../../store/actions/auth';
 
 const CheesewichBuilder = (props) => {
     const [ userHasPlacedOrder, setUserHasPlacedOrder] = useState(false);
-    const { onInitIngredients } = props;
+    const dispatch = useDispatch();
+    const ings = useSelector(state => state.builder.ingredients);
+    const price = useSelector(state => state.builder.price);
+    const error = useSelector(state => state.builder.error);
+    const isAuthenticated = useSelector(state => state.auth.token !== null);
+    const ingredientAdder = (ingName) => dispatch(addIngredient(ingName));
+    const ingredientNixer = (ingName) => dispatch(nixIngredient(ingName));
+    const purchaseInitializer = () => dispatch(purchaseInit());
+    const propsForGetControls = { ings, price, error, isAuthenticated, ingredientAdder, ingredientNixer };
 
     useEffect(()=>{
-        onInitIngredients();
-    }, [onInitIngredients]);
+        dispatch(initIngredients());
+    }, [initIngredients]);
 
     const orderHandler = () => {
-        if (props.isAuthenticated) {
+        if (isAuthenticated) {
             setUserHasPlacedOrder(true);
         } else {
-            props.onSetAuthRedirectPath('/checkout');
+            dispatch(setAuthRedirectPath('/checkout'));
             props.history.push('/auth');
         };
     };
 
     const orderCancellationHandler = () => setUserHasPlacedOrder(false);
-    const proceedToCheckoutHandler = () => utils.goToCheckoutHandler(props);
-    const disabledInfo = utils.produceDisabledInfoObject(props.ings);
-    const cheesewichAndControls = getControls(props, disabledInfo, orderHandler);
-    const orderSummary = getSummary(props, orderCancellationHandler, proceedToCheckoutHandler);
+    const proceedToCheckoutHandler = () => utils.goToCheckoutHandler(props, purchaseInitializer);
+    const disabledInfo = utils.produceDisabledInfoObject(ings);
+    const cheesewichAndControls = getControls(propsForGetControls, disabledInfo, orderHandler);
+    const orderSummary = getSummary(ings, price, orderCancellationHandler, proceedToCheckoutHandler);
 
     return (
         <Aux>
@@ -44,23 +52,4 @@ const CheesewichBuilder = (props) => {
     );
 }
 
-const mapStateToProps = state => {
-    return {
-        ings: state.builder.ingredients,
-        price: state.builder.price,
-        error: state.builder.error,
-        isAuthenticated: state.auth.token !== null
-    };
-};
-
-const mapDispatchToProps = dispatch => {
-    return {
-        onIngredientAdded: (ingName) => dispatch(addIngredient(ingName)),
-        onIngredientNixed: (ingName) => dispatch(nixIngredient(ingName)),
-        onInitIngredients: () => dispatch(initIngredients()),
-        onInitPurchase: () => dispatch(purchaseInit()),
-        onSetAuthRedirectPath: (path) => dispatch(setAuthRedirectPath(path)),
-    };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(CheesewichBuilder, axios));
+export default withErrorHandler(CheesewichBuilder, axios);
