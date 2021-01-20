@@ -1,54 +1,22 @@
-.foot, .turtle {
-    width: 100%;
+.optional {
     height: auto;
-}
-
-.bacon {
-  background: linear-gradient(#bf3813, #c45e38);
-  height: 3%;
-  margin: 2% auto;
-  width: 80%;
-}
-
-.bread-bottom {
-    background: linear-gradient(#F08E4A, #e27b36);
-    border-radius: 0 0 30px 30px;
-    box-shadow: inset -15px 0 #c15711;
-    height: 13%;
-    margin: 2% auto;
+    margin-top: -14rem;
     width: 80%;
+    z-index: 2
 }
 
-.bread-top {
-    background: linear-gradient(#bc581e, #e27b36);
-    border-radius: 50% 50% 0 0;
-    box-shadow: inset -15px 0 #c15711;
-    height: 20%;
-    margin: 2% auto;
-    position: relative;
-    width: 80%;
-}
+/*.mustard {*/
+/*    background: linear-gradient(#7f3608, #702e05);*/
+/*    border-radius: 15px;*/
+/*    height: 8%;*/
+/*    margin: 2% auto;*/
+/*    width: 80%;*/
+/*}*/
 
-.cheese {
-    background: linear-gradient(#f4d004, #d6bb22);
-    border-radius: 20px;
-    height: 4.5%;
-    margin: 2% auto;
-    width: 90%;
-}
-
-.mustard {
-    background: linear-gradient(#7f3608, #702e05);
-    border-radius: 15px;
-    height: 8%;
-    margin: 2% auto;
-    width: 80%;
-}
-
-.shallots {
-    background: linear-gradient(#8c331dad,#8c331d73);
-    border-radius: 20px;
-    height: 7%;
-    margin: 2% auto;
-    width: 85%;
-}
+/*.shallots {*/
+/*    background: linear-gradient(#8c331dad,#8c331d73);*/
+/*    border-radius: 20px;*/
+/*    height: 7%;*/
+/*    margin: 2% auto;*/
+/*    width: 85%;*/
+/*}*/

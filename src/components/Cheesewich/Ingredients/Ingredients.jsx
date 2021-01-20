@@ -1,13 +1,13 @@
 import React from 'react';
 import classes from './Ingredients.css';
 import PropTypes from 'prop-types';
-import foot from './images/foot.png';
-import turtle from './images/turtle.png';
+import cheese from './images/cheese.png';
+import bacon from './images/bacon.png';
 
 const Ingredient = ({ type }) => {
     switch (type) {
-        case 'cheese': return <img className={classes.foot} src={foot}/>;
-        case 'bacon': return <img className={classes.turtle} src={turtle}/>;
+        case 'cheese': return <img className={classes.optional} src={cheese}/>;
+        case 'bacon': return <img className={classes.optional} src={bacon}/>;
         default: return type && <div className={classes[type]}/>;
     }
 }
