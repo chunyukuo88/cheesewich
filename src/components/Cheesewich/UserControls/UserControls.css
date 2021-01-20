@@ -46,20 +46,23 @@
 }
 
 .user-control {
+    align-items: center;
     background-color: #f8f5f5;
+    border-radius: 7px;
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    margin: 5px 0;
+    margin: 5px 5px 5px 5px;
+    padding: 5px;
 }
 
 .user-control button {
+    border: 1px solid #AA6817;
+    border-radius: 7px;
     display: block;
     font: inherit;
     padding: 5px;
-    margin: 0 5px;
+    margin: 5px;
     width: 80px;
-    border: 1px solid #AA6817;
     cursor: pointer;
     outline: none;
 }
