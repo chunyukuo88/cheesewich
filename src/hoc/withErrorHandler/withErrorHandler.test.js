@@ -2,7 +2,7 @@ import React from 'react';
 import Enzyme from 'enzyme';
 import EnzymeAdapter from 'enzyme-adapter-react-16';
 import withErrorHandler from './withErrorHandler';
-import axios from '../../axios-instance';
+import axiosInstance from '../../axios-instance';
 
 Enzyme.configure({ adapter: new EnzymeAdapter()});
 
@@ -15,8 +15,8 @@ describe('withErrorHandler.jsx', ()=>{
                     return jest.fn(()=> {});
                 });
                 const axios = require('../../../src/axios-instance');
-                const resultantFunction = withErrorHandler(toBeWrapped, axios);
-                const result = new resultantFunction();
+                const expectedError = withErrorHandler(toBeWrapped, axiosInstance);
+                const result = new expectedError('error!');
                 expect(result.state.error).toBe(null);
             });
         });
