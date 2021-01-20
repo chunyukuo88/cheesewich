@@ -4,7 +4,6 @@ import Aux from "../../hoc/auxilliary";
 import Cheesewich from "../../components/Cheesewich/Cheesewich";
 import UserControls from "../../components/Cheesewich/UserControls/UserControls";
 import Spinner from "../../components/UI/Spinner/Spinner";
-import {purchaseInit} from "../../store/actions/order";
 
 export const getOrderDataForCheckout = (state, customerInfo) => {
     return {
