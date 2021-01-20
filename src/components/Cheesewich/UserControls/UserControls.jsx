@@ -13,6 +13,8 @@ const UserControls = (props) => (
     </div>
 );
 
-const getButtonLabel = (isAuth) => (isAuth) ? 'Place order!' : 'Sign Up to Order';
+const getButtonLabel = (isAuth) => (isAuth)
+    ? 'Place order!'
+    : 'Sign Up to Order';
 
 export default UserControls;

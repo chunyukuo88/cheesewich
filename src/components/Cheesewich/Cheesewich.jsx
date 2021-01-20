@@ -4,7 +4,6 @@ import Ingredient from '../Cheesewich/Ingredients/Ingredients.jsx';
 import { OptionalIngredients, checkForIngredients, reduceIngredients } from './OptionalIngredients';
 
 const Cheesewich = props => {
-
     const ingredients = getIngredients(props)
     return (
         <div className={classes.cheesewich}>
