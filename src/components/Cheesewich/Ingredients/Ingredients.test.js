@@ -14,21 +14,25 @@ describe('Ingredient.jsx', ()=>{
             const wrapper = shallow(<Ingredient {...props}/>);
             expect(wrapper.length).toBe(1);
         });
-    });
-    describe('_buildIngredientDisplay()', ()=>{
-        describe('WHEN: given a valid string, ', ()=>{
-            test('THEN: It returns an ingredient corresponding to that string.', ()=>{
-                const ingredient = 'cheese';
-                const result = _buildIngredientDisplay(ingredient);
-                const cheese = <div className="cheese"/>;
-                expect(result).toEqual(cheese);
-            });
+        test('It can return crunchybits.', ()=>{
+            props.type = 'crunchybits';
+            const wrapper = shallow(<Ingredient {...props}/>);
+            expect(wrapper.length).toBe(1);
         });
-        describe('WHEN: Given nothing, ', ()=>{
-            test('THEN: It returns null.', ()=>{
-                const result = _buildIngredientDisplay();
-                expect(result).toBeNull();
-            });
+        test('It can return olives.', ()=>{
+            props.type = 'olives';
+            const wrapper = shallow(<Ingredient {...props}/>);
+            expect(wrapper.length).toBe(1);
+        });
+        test('It can return marinara.', ()=>{
+            props.type = 'marinara';
+            const wrapper = shallow(<Ingredient {...props}/>);
+            expect(wrapper.length).toBe(1);
+        });
+        test('When given a weird ingredient, does not crash.', ()=>{
+            props.type = 'garbage';
+            const wrapper = shallow(<Ingredient {...props}/>);
+            expect(wrapper.length).toBe(1);
         });
     });
 });
