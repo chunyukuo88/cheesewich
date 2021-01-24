@@ -4,7 +4,7 @@ import QuantityAdjuster from "./QuantityAdjuster/QuantityAdjuster";
 
 const ingredients = [
     { label: 'Olives', type: 'olives'},
-    { label: 'Crunchy Bits', type: 'crunchy bits'},
+    { label: 'Crunchy Bits', type: 'crunchybits'},
     { label: 'Cheese', type: 'cheese'},
     { label: 'Marinara', type: 'marinara'},
 ];
