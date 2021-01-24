@@ -9,10 +9,10 @@ const initialState = {
 };
 
 const INGREDIENT_PRICES = {
-    bacon: 0.5,
+    crunchybits: 0.5,
     cheese: 0.4,
-    mustard: 1.35,
-    shallots: 0.55,
+    marinara: 1.35,
+    olives: 0.55,
 };
 
 const reducer = (state = initialState, action) => {
@@ -52,10 +52,10 @@ const nixIngredient = (state, action, INGREDIENT_PRICES) => {
 const setIngredients = (state, action, initialState) => {
     const updatedProperties = {
         ingredients: {
-            shallots: action.ingredients.shallots,
-            bacon: action.ingredients.bacon,
+            olives: action.ingredients.olives,
+            crunchybits: action.ingredients.crunchybits,
             cheese: action.ingredients.cheese,
-            mustard: action.ingredients.mustard,
+            marinara: action.ingredients.marinara,
         },
         error: false,
         price: initialState.price,
