@@ -1,6 +1,5 @@
 import React from 'react';
 import Aux from '../../../hoc/auxilliary';
-import * as utils from './orderSummaryUtils';
 import Button from '../../UI/Button/Button.jsx';
 
 const OrderSummary = (props) => (
@@ -17,7 +16,20 @@ const OrderSummary = (props) => (
     </Aux>
 );
 
-const ingredientSummary = ingredients => utils._getIngredientSummary(ingredients);
+const ingredientSummary = ingredients => _getIngredientSummary(ingredients);
+
+const _getSummaryItem = (ingrsObject, ingr) => (
+    <li key={ingr}>
+            {ingr}: {ingrsObject[ingr]}
+    </li>
+);
+
+const _getIngredientSummary = ingredients => (
+    Object.keys(ingredients)
+            .map(ingredient => {
+                    return _getSummaryItem(ingredients, ingredient);
+            })
+);
 
 
 export default OrderSummary;

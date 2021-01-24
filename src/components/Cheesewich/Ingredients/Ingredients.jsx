@@ -8,10 +8,18 @@ import marinara from './images/marinara.png';
 
 const Ingredient = ({ type }) => {
     switch (type) {
-        case 'cheese': return <img className={classes.optional} src={cheese} alt="cheese"/>;
-        case 'crunchybits': return <img className={classes.optional} src={crunchybits} alt="crunchybits"/>;
-        case 'olives': return <img className={classes.optional} src={olives} alt="olives"/>;
-        case 'marinara': return <img className={classes.optional} src={marinara} alt="marinara"/>;
+        case 'cheese': return <img className={classes.optional}
+                                   src={cheese}
+                                   alt="cheese"/>;
+        case 'crunchybits': return <img className={classes.optional}
+                                        src={crunchybits}
+                                        alt="crunchybits"/>;
+        case 'olives': return <img className={classes.optional}
+                                   src={olives}
+                                   alt="olives"/>;
+        case 'marinara': return <img className={classes.optional}
+                                     src={marinara}
+                                     alt="marinara"/>;
         default: return null;
     }
 }
