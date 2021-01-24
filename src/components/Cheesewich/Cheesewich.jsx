@@ -1,15 +1,15 @@
 import React from 'react';
 import classes from './Cheesewich.css';
-import Ingredient from '../Cheesewich/Ingredients/Ingredients.jsx';
 import { OptionalIngredients, checkForIngredients, reduceIngredients } from './OptionalIngredients';
+import bread_top from '../../../src/components/Cheesewich/Ingredients/images/bread_top.png';
 
 const Cheesewich = props => {
     const ingredients = getIngredients(props)
     return (
         <div className={classes.cheesewich}>
-            <Ingredient type="bread-top"/>
+            <img className={classes.bread_top} src={bread_top} alt="bread top"/>
                 {ingredients}
-            <Ingredient type="bread-bottom"/>
+            <img className={classes.bread_bottom} src={bread_top} alt="bread bottom"/>
         </div>
     );
 };

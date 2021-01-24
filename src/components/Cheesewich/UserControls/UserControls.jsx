@@ -1,6 +1,13 @@
 import React from 'react';
 import classes from './UserControls.css';
-import { ingredients, getIngredientsDisplay } from './userControlsUtils';
+import QuantityAdjuster from "./QuantityAdjuster/QuantityAdjuster";
+
+const ingredients = [
+    { label: 'Olives', type: 'olives'},
+    { label: 'Crunchy Bits', type: 'crunchybits'},
+    { label: 'Cheese', type: 'cheese'},
+    { label: 'Marinara', type: 'marinara'},
+];
 
 const UserControls = (props) => (
     <div className={classes['user-control']}>
@@ -16,5 +23,18 @@ const UserControls = (props) => (
 const getButtonLabel = (isAuth) => (isAuth)
     ? 'Place order!'
     : 'Sign Up to Order';
+
+
+const getIngredientsDisplay = (props, ingredientArray) => {
+    return ingredientArray.map(ingredient => {
+        return (
+            <QuantityAdjuster key={ingredient.label}
+                              label={ingredient.label}
+                              added={()=> props.addIngredient(ingredient.type)}
+                              removed={()=> props.removeIngredient(ingredient.type)}
+                              disabled={props.disabled[ingredient.type]}/>
+        );
+    });
+};
 
 export default UserControls;

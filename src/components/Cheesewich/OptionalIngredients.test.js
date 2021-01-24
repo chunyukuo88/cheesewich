@@ -23,7 +23,7 @@ describe('OptionalIngredients.js', ()=>{
                     'cheese': 2
                 };
                 const key = 'cheese';
-                const result = OI._buildArrayOfSingleIngredient(ingredients, key);
+                const result = OI.buildArrayOfSingleIngredient(ingredients, key);
                 expect(result.length).toEqual(2);
             })
         });
@@ -33,7 +33,7 @@ describe('OptionalIngredients.js', ()=>{
             test('THEN: It returns an instance of that Ingredient with a key.', ()=>{
                 const key = 'meat';
                 const integer = 0;
-                const result = OI._buildIngredient(key, integer);
+                const result = OI.buildIngredient(key, integer);
                 const expectedResult = <Ingredient key={key + integer} type={key}/>;
                 expect(result).toEqual(expectedResult);
             })
