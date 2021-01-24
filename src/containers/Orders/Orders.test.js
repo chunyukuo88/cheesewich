@@ -14,14 +14,7 @@ describe('Orders.js', ()=>{
             expect(wrapper.length).toEqual(1);
         });
         describe('It renders with the relevant props given to it', ()=>{
-            beforeEach(()=> {
-                moxios.install();
-            })
-            afterEach(()=>{
-                moxios.uninstall();
-            })
-            const wrapper = shallow(<Orders/>);
-            expect(wrapper.length).toEqual(1);
+
         });
     });
 });
