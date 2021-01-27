@@ -7,7 +7,7 @@ const OrderSummary = (props) => (
         <h3>Your Order:</h3>
         <p>A scrumptious cheesewich with the following ingredients:</p>
         <ul>
-            {ingredientSummary(props.ingredients)}
+            <IngredientSummary {...props}/>
         </ul>
         <p>Total price: {props.price.toFixed(2)}</p>
         <p>Proceed to checkout?</p>
@@ -16,18 +16,18 @@ const OrderSummary = (props) => (
     </Aux>
 );
 
-const ingredientSummary = ingredients => _getIngredientSummary(ingredients);
+const IngredientSummary = ({ ingredients }) => getIngredientSummary(ingredients);
 
-const _getSummaryItem = (ingrsObject, ingr) => (
+const getSummaryItem = (ingrsObject, ingr) => (
     <li key={ingr}>
             {ingr}: {ingrsObject[ingr]}
     </li>
 );
 
-const _getIngredientSummary = ingredients => (
+const getIngredientSummary = ingredients => (
     Object.keys(ingredients)
             .map(ingredient => {
-                    return _getSummaryItem(ingredients, ingredient);
+                    return getSummaryItem(ingredients, ingredient);
             })
 );
 
