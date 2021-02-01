@@ -1,5 +1,4 @@
 import * as utils from './builderUtils';
-import INGREDIENT_PRICES from '../../components/Cheesewich/Ingredients/ingredientPrices';
 
 describe('utils.js', ()=>{
     describe('getOrderDataForCheckout()', ()=>{
