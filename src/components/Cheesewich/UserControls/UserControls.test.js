@@ -38,7 +38,8 @@ describe('UserControls.jsx', ()=>{
                removeIngredient: jest.fn(),
            };
            const wrapper = shallow(<UserControls {...props}/>);
-           expect(wrapper.length).toBe(1);
+           const addCheese = findByTestAttr(wrapper, 'add-Cheese');
+           expect(addCheese.length).toBe(1);
        });
     });
     describe('WHEN: The user is authenticated,', ()=>{

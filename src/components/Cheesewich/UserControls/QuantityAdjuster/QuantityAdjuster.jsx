@@ -2,7 +2,7 @@ import React from 'react';
 import classes from '../UserControls.css';
 
 const QuantityAdjuster = (props) => (
-    <div className={classes.user_control}>
+    <div>
         <div className={classes.label}>{props.label}</div>
         <button className={classes.more}
                 data-test={`add-${props.label}`}
