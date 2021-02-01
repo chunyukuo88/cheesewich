@@ -26,8 +26,6 @@ const getButtonLabel = (isAuth) => (isAuth)
 
 
 const getIngredientsDisplay = (props, ingredientArray) => {
-    console.log(props.addIngredient);
-    // console.log(props.removeIngredient);
     return ingredientArray.map(ingredient => {
         return (
             <QuantityAdjuster key={ingredient.label}

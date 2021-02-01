@@ -2,7 +2,9 @@ import React from 'react';
 import Aux from '../../../hoc/auxilliary';
 import Button from '../../UI/Button/Button.jsx';
 
-const OrderSummary = (props) => (
+const OrderSummary = (props) => {
+    console.log(props)
+return (
     <Aux>
         <h3>Your Order:</h3>
         <p>A scrumptious cheesewich with the following ingredients:</p>
@@ -15,6 +17,7 @@ const OrderSummary = (props) => (
         <Button buttonType="red" clicked={props.orderCancelled}>Nope!</Button>
     </Aux>
 );
+}
 
 const IngredientSummary = ({ ingredients }) => getIngredientSummary(ingredients);
 
