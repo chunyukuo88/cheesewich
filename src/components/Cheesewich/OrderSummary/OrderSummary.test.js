@@ -18,4 +18,9 @@ describe('OrderSummary()', ()=>{
         const wrapper = shallow(<OrderSummary {...props}/>);
         expect(wrapper.length).toBe(1);
     });
+    describe('WHEN: ', ()=>{
+        describe('THEN: ', ()=>{
+
+        });
+    });
 });
