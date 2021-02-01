@@ -2,14 +2,14 @@
     background-color: chartreuse;
     padding: 5px;
     border: 5px;
-    z-index: 1000000;
+    /*z-index: 1000000;*/
     transition: 2s;
 }
 
 .optional {
     height: auto;
-    margin-top: -14rem;
+    /*margin-top: -14rem;*/
     width: 80%;
-    z-index: 2
+    /*z-index: 2*/
 }
 

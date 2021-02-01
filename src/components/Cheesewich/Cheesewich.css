@@ -1,10 +1,10 @@
 .bread_top {
-    z-index: 10000;
+    /*z-index: 10000;*/
 }
 
 .bread_bottom{
-    margin-top: -20rem;
-    z-index: 0;
+    /*margin-top: -20rem;*/
+    /*z-index: 0;*/
 }
 
 .cheesewich {
