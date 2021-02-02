@@ -1,38 +1,48 @@
+:root {
+    --decrementor-button: #D39952;
+    --incrementor-button: #966909;
+    --order-button: #DAD735;
+    --order-button-hover: #A0DB41;
+    --user-control-background: #d2b2b2;
+    --user-control-disabled: #AC9980;
+    --user-control-text: #ccc;
+}
+
+.ingredients-display {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+}
 .label {
     padding: 10px;
     font-weight: bold;
     width: 80px;
 }
-
 .order-button {
-    background-color: #DAD735;
-    outline: none;
+    background-color: var(--order-button);
+    border: 1px solid var(--incrementor-button);
+    box-shadow: 2px 2px 2px var(--incrementor-button);
     cursor: pointer;
-    border: 1px solid #966909;
-    color: #966909;
+    color: var(--incrementor-button);
     font-family: inherit;
     font-size: 1.2em;
+    outline: none;
     padding: 15px 30px;
-    box-shadow: 2px 2px 2px #966909;
 }
-
 .order-button:hover, .order-button:active {
-    background-color: #A0DB41;
-    border: 1px solid #966909;
-    color: #966909;
+    background-color: var(--order-button-hover);
+    border: 1px solid var(--incrementor-button);
+    color: var(--incrementor-button);
 }
-
 .order-button:disabled {
     background-color: #C7C6C6;
     cursor: not-allowed;
-    border: 1px solid #ccc;
+    border: 1px solid var(--user-control-text);;
     color: #888888;
 }
-
 .order-button:not(:disabled) {
     animation: enable 0.3s linear;
 }
-
 @keyframes enable {
     0% {
         transform: scale(1);
@@ -44,17 +54,16 @@
         transform: scale(1);
     }
 }
-
 .user-control {
     align-items: center;
-    background-color: #d2b2b2;
+    background-color: var(--user-control-background);
     border-radius: 7px;
+    box-shadow: inset 4px 4px #c8aeae;
     display: flex;
     justify-content: space-between;
     margin: 5px 5px 5px 5px;
     padding: 5px;
 }
-
 .user-control button {
     border: 1px solid #AA6817;
     border-radius: 7px;
@@ -66,37 +75,51 @@
     cursor: pointer;
     outline: none;
 }
-
 .user-control button:disabled {
-    background-color: #AC9980;
+    background-color: var(--user-control-disabled);
     border: 1px solid #7E7365;
-    color: #ccc;
+    color: var(--user-control-text);
     cursor: default;
 }
-
 .user-control button:hover:disabled {
-    background-color: #AC9980;
-    color: #ccc;
+    background-color: var(--user-control-disabled);
+    color: var(--user-control-text);
     cursor: not-allowed;
 }
-
-
 .user-control .less {
-    background-color: #D39952;
+    background-color: var(--decrementor-button);
     color: white;
 }
-
 .user-control .more {
     background-color: #8F5E1E;
+    box-shadow: inset 2px 2px #9d6625;
     color: white;
 }
-
 .user-control .less:hover, .user-control .less:active {
     background-color: #DAA972;
+    box-shadow: inset 2px 2px #D39952;
     color: white;
 }
-
 .user-control .more:hover,.user-control .more:active {
     background-color: #99703F;
     color: white;
+}
+.user-control {
+    align-items: center;
+    background-color: var(--user-control-background);
+    border-radius: 7px;
+    display: flex;
+    justify-content: space-between;
+    margin: 5px 5px 5px 5px;
+    padding: 5px;
+}
+@media (max-width: 600px) {
+    .order-button {
+        color: black;
+        width: 200px;
+    }
+    .user-control {
+        display: flex;
+        flex-direction: column;
+    }
 }

@@ -1,9 +1,9 @@
-import OrderSummary from "../../components/Cheesewich/OrderSummary/OrderSummary";
-import React from "react";
-import Aux from "../../hoc/auxilliary";
-import Cheesewich from "../../components/Cheesewich/Cheesewich";
-import UserControls from "../../components/Cheesewich/UserControls/UserControls";
-import Spinner from "../../components/UI/Spinner/Spinner";
+import OrderSummary from '../../components/Cheesewich/OrderSummary/OrderSummary';
+import React from 'react';
+import Aux from '../../hoc/auxilliary';
+import Cheesewich from '../../components/Cheesewich/Cheesewich';
+import UserControls from '../../components/Cheesewich/UserControls/UserControls';
+import Spinner from '../../components/UI/Spinner/Spinner';
 
 export const getOrderDataForCheckout = (state, customerInfo) => {
     return {
@@ -14,13 +14,9 @@ export const getOrderDataForCheckout = (state, customerInfo) => {
 };
 
 export const getPurchasabilityStatus = (ingredients) => {
-    const sum = Object.keys( ingredients )
-                      .map( igKey => {
-                          return ingredients[igKey];
-                      })
-                      .reduce((sum, el) => {
-                        return sum + el;
-                      }, 0);
+    const sum = Object.keys(ingredients)
+                      .map(igKey => ingredients[igKey])
+                      .reduce((sum, el) => sum + el);
     return sum > 0;
 };
 

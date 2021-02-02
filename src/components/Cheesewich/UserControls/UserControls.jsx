@@ -12,8 +12,10 @@ const ingredients = [
 const UserControls = (props) => {
     return (
         <div className={classes['user-control']}>
-            <p>Current price: {props.price.toFixed(2)}</p>
-            {getIngredientsDisplay(props, ingredients)}
+            <p className={classes['current-price']}>Current price: {props.price.toFixed(2)}</p>
+            <div className={classes['ingredients-display']}>
+                {getIngredientsDisplay(props, ingredients)}
+            </div>
             <button className={classes['order-button']}
                     data-test='user-controls-button'
                     disabled={!props.purchasable}
@@ -30,6 +32,7 @@ const getIngredientsDisplay = (props, ingredientsArray) => {
     return ingredientsArray.map(ingredient => {
         return (
             <QuantityAdjuster key={ingredient.label}
+                              className={classes[`adjuster-${ingredient.label}`]}
                               label={ingredient.label}
                               data-test="quantity-adjuster"
                               added={()=> props.addIngredient(ingredient.type)}
