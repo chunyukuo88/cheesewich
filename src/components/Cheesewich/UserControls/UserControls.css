@@ -8,12 +8,16 @@
     --user-control-text: #ccc;
 }
 
+.ingredients-display {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+}
 .label {
     padding: 10px;
     font-weight: bold;
     width: 80px;
 }
-
 .order-button {
     background-color: var(--order-button);
     border: 1px solid var(--incrementor-button);
@@ -54,6 +58,7 @@
     align-items: center;
     background-color: var(--user-control-background);
     border-radius: 7px;
+    box-shadow: inset 4px 4px #c8aeae;
     display: flex;
     justify-content: space-between;
     margin: 5px 5px 5px 5px;
@@ -87,10 +92,12 @@
 }
 .user-control .more {
     background-color: #8F5E1E;
+    box-shadow: inset 2px 2px #9d6625;
     color: white;
 }
 .user-control .less:hover, .user-control .less:active {
     background-color: #DAA972;
+    box-shadow: inset 2px 2px #D39952;
     color: white;
 }
 .user-control .more:hover,.user-control .more:active {
@@ -107,11 +114,6 @@
     padding: 5px;
 }
 @media (max-width: 600px) {
-    .ingredients-display {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: 1fr 1fr;
-    }
     .order-button {
         color: black;
         width: 200px;

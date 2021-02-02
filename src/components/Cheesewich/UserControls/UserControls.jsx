@@ -32,6 +32,7 @@ const getIngredientsDisplay = (props, ingredientsArray) => {
     return ingredientsArray.map(ingredient => {
         return (
             <QuantityAdjuster key={ingredient.label}
+                              className={classes[`adjuster-${ingredient.label}`]}
                               label={ingredient.label}
                               data-test="quantity-adjuster"
                               added={()=> props.addIngredient(ingredient.type)}
