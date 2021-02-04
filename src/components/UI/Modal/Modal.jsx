@@ -24,7 +24,6 @@ const modalStyle = modalShouldBeDisplayed => {
 const propsHaveChanged = (prevProps, nextProps) => {
     const result = prevProps.show === nextProps.show
                 && prevProps.children === nextProps.children;
-    console.log('props have changed: ', result);
     return result;
 };
 
