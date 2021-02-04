@@ -53,7 +53,7 @@
   "scripts": {
     "start": "node -r dotenv/config scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js --env=jsdom",
+    "test": "react-scripts test --env=jsdom",
     "test:coverage": "set CI=true && react-scripts test --coverage",
     "coverage": "jest --coverage --colors --silent --verbose"
   },
@@ -74,7 +74,7 @@
       "<rootDir>/src/**/__tests__/**/*.{js,jsx,mjs}",
       "<rootDir>/src/**/?(*.)(spec|test).{js,jsx,mjs}"
     ],
-    "testEnvironment": "node",
+    "testEnvironment": "jsdom",
     "testURL": "http://localhost",
     "transform": {
       "^.+\\.(js|jsx|mjs)$": "<rootDir>/node_modules/babel-jest",
