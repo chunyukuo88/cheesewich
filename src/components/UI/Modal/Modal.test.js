@@ -45,10 +45,6 @@ describe('Modal.jsx', () => {
                children: 'old children',
            };
            const { rerender } = render(<MemoizedModal {...oldProps}/>);
-<<<<<<< HEAD
-=======
-           //Two ways of making essentially the same assertion. I am keeping these here for reference.
->>>>>>> 3a81b39308f447e29bbc111f19f7cecf9b1f7ea2
            expect(screen.getByTestId('children-container').textContent).toBe('old children');
            rerender(<MemoizedModal {...newProps}/>);
            expect(screen.getByTestId('children-container')).toHaveTextContent('old children');
