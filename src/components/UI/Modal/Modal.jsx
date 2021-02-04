@@ -1,20 +1,17 @@
-import React from 'react';
+import React, { memo } from 'react';
 import classes from './Modal.css';
 import Backdrop from '../Backdrop/Backdrop.jsx';
 import Aux from '../../../hoc/auxilliary.js';
 
-const Modal = props => (
+export const Modal = props => (
     <Aux>
         <Backdrop show={props.show} clicked={props.modalClosed}/>
         <div className={classes.Modal}
-            style={modalStyle(props.show)}>
+             style={modalStyle(props.show)}
+             data-testid="children-container">
             {props.children}
         </div>
     </Aux>
-);
-
-const childrenOrShowHaveChanged = (prevProps, nextProps) => (
-    prevProps.show === nextProps.show && prevProps.children === nextProps.children
 );
 
 const modalStyle = modalShouldBeDisplayed => {
@@ -24,6 +21,14 @@ const modalStyle = modalShouldBeDisplayed => {
     };
 };
 
-export default React.memo(Modal, (previousProps, nextProps) => {
-    childrenOrShowHaveChanged(previousProps, nextProps);
+const propsHaveChanged = (prevProps, nextProps) => {
+    const result = prevProps.show === nextProps.show
+                && prevProps.children === nextProps.children;
+    return result;
+};
+
+
+
+export default memo(Modal, (previousProps, nextProps) => {
+    propsHaveChanged(previousProps, nextProps);
 });
