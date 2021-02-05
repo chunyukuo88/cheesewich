@@ -4,9 +4,9 @@ This is the front end of a fun, full-stack application that allows users to cust
 
 - Token-based authentication
 - React Router
-- Redux
+- Redux Sagas
 - CSS Modules
-- Jest & Enzyme
+- Enzyme & React Testing Library
 
 ## Fun tools:
 
@@ -16,4 +16,5 @@ This site reliably converts JPG to PNG:
 This site reliably removes the background from PNG:
 - https://www.remove.bg/
 
-...and that's how I made the art for Cheesewich!
+This handy package helped me test out certain sagas:
+- https://www.npmjs.com/package/jest-localstorage-mock
