@@ -3,11 +3,11 @@ import moxios from 'moxios';
 import urls from '../../../urls';
 import initIngredientsSaga from '../cheesewichBuilder';
 import { put } from 'redux-saga/effects';
-import {setFetchIngredientError, setIngredients} from '../../actions/cheesewichBuilder';
+import { setFetchIngredientError, setIngredients } from '../../actions/cheesewichBuilder';
 
 const { firebaseIngredients } = urls;
 
-beforeEach(function () {
+beforeEach(() => {
     moxios.install();
     moxios.stubRequest(firebaseIngredients, {
        status: 200,
@@ -16,12 +16,11 @@ beforeEach(function () {
        },
     });
 });
-afterEach(function () {
+afterEach(() => {
     moxios.uninstall()
 });
 
 describe('initIngredientsSaga()', ()=>{
-
     test('On its first invocation, it gets the ingredients from the back end.', ()=>{
         const result = initIngredientsSaga();
         expect(result.next().value).toEqual(axios.get(urls.firebaseIngredients));
@@ -30,12 +29,14 @@ describe('initIngredientsSaga()', ()=>{
         const result = initIngredientsSaga();
         result.next();
         setTimeout(() => {
-            expect(result.next().value).toEqual(put(setIngredients(result.next().data)));
-        }, 100)
+            expect(1).toEqual(2);
+        }, 1000);
     });
-    test('On its third invocation, it yields an error.', ()=>{
-        const result = initIngredientsSaga();
-        result.next();
-        expect(result.next().value).toEqual(put(setFetchIngredientError()));
+    describe('IF: There is an error,', ()=>{
+        test('THEN: On its second invocation, it yields an error.', ()=>{
+            const result = initIngredientsSaga();
+            result.next();
+            expect(result.next().value).toEqual(put(setFetchIngredientError()));
+        });
     });
 });
