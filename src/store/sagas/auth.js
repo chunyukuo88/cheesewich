@@ -3,6 +3,8 @@ import axios from 'axios';
 import urls from '../../urls';
 import * as actions from '../actions/auth';
 
+const { authSignIn, authSignUp } = urls;
+
 export function* authCheckStateSaga(){
     //TODO: Pass localStorage in the way it's done in logoutSaga
         const token = yield localStorage.getItem('token');
@@ -43,13 +45,12 @@ export function* checkAuthTimeoutSaga(action, storage) {
     yield put(actions.logout(storage));
 };
 
-export function* logoutSaga(action) {
+export function* logoutSaga() {
     yield localStorage.removeItem('token');
     yield localStorage.removeItem('expirationDate');
     yield localStorage.removeItem('userId');
     yield put(actions.logoutDidOccur());
 };
-
 
 const buildAuthData = (email, password) => {
     return {
@@ -59,4 +60,4 @@ const buildAuthData = (email, password) => {
     };
 };
 
-const getAuthUrl = (isSignup) => (isSignup) ? urls.authSignIn : urls.authSignUp;
+const getAuthUrl = (isSignup) => (isSignup) ? authSignIn : authSignUp;
