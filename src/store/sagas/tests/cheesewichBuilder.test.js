@@ -36,7 +36,6 @@ describe('initIngredientsSaga()', ()=>{
     test('On its third invocation, it yields an error.', ()=>{
         const result = initIngredientsSaga();
         result.next();
-        result.next();
         expect(result.next().value).toEqual(put(setFetchIngredientError()));
     });
 });
