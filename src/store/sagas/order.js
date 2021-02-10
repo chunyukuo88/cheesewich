@@ -1,6 +1,5 @@
 import axios from '../../axios-orders';
 import { put } from 'redux-saga/effects';
-import { runSaga } from 'redux-saga';
 import * as actions from '../actions/order';
 
 export function* fetchOrdersSaga(action){
@@ -22,12 +21,12 @@ export function* fetchOrdersSaga(action){
     };
 };
 
-// export function* purchaseCheesewichSaga(action){
-//     yield put(actions.purchaseCheesewichStart());
-//     try {
-//         const response = yield axios.post( `/orders.json?auth=${action.token}`, action.orderData );
-//         yield put(actions.purchaseCheesewichSuccess(response.data.name, action.orderData));
-//     } catch (error) {
-//         yield put(actions.purchaseCheesewichFailed(error));
-//     };
-// };
+export function* purchaseCheesewichSaga(action){
+    yield put(actions.purchaseCheesewichStart());
+    try {
+        const response = yield axios.post( `/orders.json?auth=${action.token}`, action.orderData );
+        yield put(actions.purchaseCheesewichSuccess(response.data.name, action.orderData));
+    } catch (error) {
+        yield put(actions.purchaseCheesewichFailed(error));
+    };
+};
