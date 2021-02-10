@@ -68,7 +68,7 @@ const Auth = () => {
                 {form}
                 <Button buttonType="green">Submit</Button>
             </form>
-            <Button clicked={switchAuthMode} buttonType="red">Switch to {switchOption}</Button>
+            <Button data-test="switcher" clicked={switchAuthMode} buttonType="red">Switch to {switchOption}</Button>
         </div>
     );
 }
