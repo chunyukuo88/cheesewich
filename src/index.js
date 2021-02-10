@@ -27,14 +27,6 @@ const store = createStore(rootReducer, composeEnhancers(
     applyMiddleware(sagaMiddleware)
 ));
 
-// const Root = ({ children, store }) => {
-//     return (
-//         <Provider store={store}>
-//             {children}
-//         </Provider>
-//     )
-// }
-
 sagaMiddleware.run(watchAuth);
 sagaMiddleware.run(watchOrder);
 sagaMiddleware.run(watchBuilder);
