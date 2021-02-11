@@ -10,7 +10,7 @@ import { setAuthRedirectPath } from '../../store/actions/auth';
 import { updateObject, checkValidity } from '../../utils/utils';
 
 const Auth = () => {
-    const [ controls, setControls] = React.useState(initialControls);
+    const [ controls, setControls] = React.useState(inputBoxData);
     const [ isSignup, setIsSignup ] = React.useState(true);
     const dispatch = useDispatch();
     const loading = useSelector(state => state.auth.loading);
@@ -39,7 +39,7 @@ const Auth = () => {
         } else {
             setIsSignup(true);
         };
-    }
+    };
 
     const inputChangedHandler = (event, controlName) => {
         const updatedControls = updateObject(controls, {
@@ -66,14 +66,14 @@ const Auth = () => {
             {errorMessage}
             <form onSubmit={submitHandler}>
                 {form}
-                <Button buttonType="green">Submit</Button>
+                <Button data-test="submit-button" buttonType="green">Submit</Button>
             </form>
             <Button data-test="switcher" clicked={switchAuthMode} buttonType="red">Switch to {switchOption}</Button>
         </div>
     );
 }
 
-const initialControls = {
+const inputBoxData = {
     email: {
         elementType: 'input',
         elementConfig: {
@@ -121,9 +121,10 @@ const getError = (error) => (error) && <p>{error}</p>;
 
 const getFormContent = (loading, formArray, inputChangedHandler) => {
     return (loading)
-        ? <Spinner/>
-        : formArray.map(formElement =>  (
+        ? <div data-test="spinner"><Spinner/></div>
+        : formArray.map(formElement => (
             <Input
+                data-test={formElement.id}
                 changed={event => inputChangedHandler(event, formElement.id)}
                 elementConfig={formElement.config.elementConfig}
                 elementType={formElement.config.elementType}
@@ -132,7 +133,7 @@ const getFormContent = (loading, formArray, inputChangedHandler) => {
                 shouldValidate={formElement.config.validation}
                 touched={formElement.config.touched}
                 value={formElement.config.value}/>
-        ));
+    ));
 };
 
 const getComponentHeading = (isSignup) => (!isSignup) ? 'Sign up!' : 'Sign in!';
