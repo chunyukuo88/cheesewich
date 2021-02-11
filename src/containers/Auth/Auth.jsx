@@ -64,7 +64,7 @@ const Auth = () => {
             {redirect}
             <div>{componentHeading}</div>
             {errorMessage}
-            <form onSubmit={submitHandler}>
+            <form data-test="form" onSubmit={submitHandler}>
                 {form}
                 <Button data-test="submit-button" buttonType="green">Submit</Button>
             </form>
@@ -115,9 +115,11 @@ const populateElementsArray = (controls) => {
     return formElementsArray;
 };
 
-const getRedirectWhenSignedOut = (isAuthenticated, authRedirectPath) => (isAuthenticated) && <Redirect to={authRedirectPath}/>;
+const getRedirectWhenSignedOut = (isAuthenticated, authRedirectPath) => {
+    return (isAuthenticated) && <Redirect to={authRedirectPath}/>;
+}
 
-const getError = (error) => (error) && <p>{error}</p>;
+const getError = (error) => (error) && <p data-test="auth-error">{error}</p>;
 
 const getFormContent = (loading, formArray, inputChangedHandler) => {
     return (loading)

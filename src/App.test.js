@@ -10,13 +10,10 @@ import Orders from './containers/Orders/Orders';
 Enzyme.configure({ adapter: new Adapter() });
 
 const props = {};
-let wrapper;
-beforeEach(()=>{
-  wrapper = shallow(<App/>);
-})
 
 describe('App()', ()=>{
   it('renders without crashing', () => {
+    const wrapper = shallow(<App/>);
     expect(wrapper.length).toBe(1);
   });
   describe('WHEN: The user is authenticated,', ()=>{
