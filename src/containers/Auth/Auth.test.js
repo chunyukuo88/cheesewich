@@ -45,7 +45,7 @@ describe('Auth()', ()=>{
     test('The component contains two buttons', ()=>{
         const buttons = wrapper.find(Button);
         expect(buttons.length).toEqual(2);
-    })s
+    });
     describe('WHEN: The user clicks the switch button, ', ()=>{
         test('THEN: It switches between "sign in" and "sign up"', ()=>{
             const switcher = findByTestAttr(wrapper, 'switcher');

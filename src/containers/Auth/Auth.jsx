@@ -3,7 +3,7 @@ import Button from '../../components/UI/Button/Button.jsx';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import Input from '../../components/UI/Input/Input.jsx';
 import * as authActions from '../../store/actions/auth';
-import { Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import classes from './Auth.css';
 import { setAuthRedirectPath } from '../../store/actions/auth';
