@@ -12,8 +12,9 @@ const ingredients = [
 const UserControls = (props) => {
     return (
         <div className={classes['user-control']}>
-            <div className={classes['current-price']}>
-                <p>Current price: {props.price.toFixed(2)}</p>
+            <div className={classes['current-price-wrapper']}>
+                <p className={classes['price-label']}>Current price:</p>
+                <div className={classes['price']}>{props.price.toFixed(2)}</div>
             </div>
             <div className={classes['ingredients-display']}>
                 {getIngredientsDisplay(props, ingredients)}
@@ -32,13 +33,15 @@ const getButtonLabel = (isAuth) => (isAuth)
 const getIngredientsDisplay = (props, ingredientsArray) => {
     return ingredientsArray.map(ingredient => {
         return (
-            <QuantityAdjuster key={ingredient.label}
-                              className={classes[`adjuster-${ingredient.label}`]}
-                              label={ingredient.label}
-                              data-test="quantity-adjuster"
-                              added={()=> props.addIngredient(ingredient.type)}
-                              removed={()=> props.removeIngredient(ingredient.type)}
-                              disabled={props.disabled[ingredient.type]}/>
+            <div className={classes['adjuster-wrapper']}>
+                <QuantityAdjuster key={ingredient.label}
+                                  className={classes[`adjuster-${ingredient.label}`]}
+                                  label={ingredient.label}
+                                  data-test="quantity-adjuster"
+                                  added={()=> props.addIngredient(ingredient.type)}
+                                  removed={()=> props.removeIngredient(ingredient.type)}
+                                  disabled={props.disabled[ingredient.type]}/>
+            </div>
         );
     });
 };
