@@ -51,11 +51,12 @@
     "whatwg-fetch": "2.0.3"
   },
   "scripts": {
-    "start": "node -r dotenv/config scripts/start.js",
     "build": "node scripts/build.js",
+    "coverage": "jest --coverage --colors --silent --verbose",
+    "deploy": "aws s3 sync build/ s3://cheesewich.cafe",
+    "start": "node -r dotenv/config scripts/start.js",
     "test": "react-scripts test --env=jsdom",
-    "test:coverage": "set CI=true && react-scripts test --coverage",
-    "coverage": "jest --coverage --colors --silent --verbose"
+    "test:coverage": "set CI=true && react-scripts test --coverage"
   },
   "jest": {
     "collectCoverageFrom": [
