@@ -7,10 +7,13 @@
 }
 
 .cheesewich {
+    background-color: #707070;
     display: flex;
     flex-direction: column;
     font-size: 1.2rem;
     font-weight: bold;
+    justify-content: flex-end;
+    height: 300px;
     margin: auto;
     overflow: auto;
     padding: 10px;

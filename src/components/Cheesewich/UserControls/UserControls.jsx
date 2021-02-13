@@ -12,14 +12,16 @@ const ingredients = [
 const UserControls = (props) => {
     return (
         <div className={classes['user-control']}>
-            <p className={classes['current-price']}>Current price: {props.price.toFixed(2)}</p>
+            <div className={classes['current-price-wrapper']}>
+                <p className={classes['price-label']}>Current price:</p>
+                <div className={classes['price']}>{props.price.toFixed(2)}</div>
+            </div>
             <div className={classes['ingredients-display']}>
                 {getIngredientsDisplay(props, ingredients)}
             </div>
-            <button className={classes['order-button']}
-                    data-test='user-controls-button'
-                    disabled={!props.purchasable}
-                    onClick={props.ordered}>{getButtonLabel(props.isAuth)}</button>
+            <div className={classes['order-button-wrapper']}>
+                <button className={classes['order-button']} data-test='user-controls-button' disabled={!props.purchasable} onClick={props.ordered}>{getButtonLabel(props.isAuth)}</button>
+            </div>
         </div>
     )
 };
@@ -31,13 +33,15 @@ const getButtonLabel = (isAuth) => (isAuth)
 const getIngredientsDisplay = (props, ingredientsArray) => {
     return ingredientsArray.map(ingredient => {
         return (
-            <QuantityAdjuster key={ingredient.label}
-                              className={classes[`adjuster-${ingredient.label}`]}
-                              label={ingredient.label}
-                              data-test="quantity-adjuster"
-                              added={()=> props.addIngredient(ingredient.type)}
-                              removed={()=> props.removeIngredient(ingredient.type)}
-                              disabled={props.disabled[ingredient.type]}/>
+            <div className={classes['adjuster-wrapper']}>
+                <QuantityAdjuster key={ingredient.label}
+                                  className={classes[`adjuster-${ingredient.label}`]}
+                                  label={ingredient.label}
+                                  data-test="quantity-adjuster"
+                                  added={()=> props.addIngredient(ingredient.type)}
+                                  removed={()=> props.removeIngredient(ingredient.type)}
+                                  disabled={props.disabled[ingredient.type]}/>
+            </div>
         );
     });
 };
