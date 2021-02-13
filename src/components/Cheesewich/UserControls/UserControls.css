@@ -3,31 +3,41 @@
     --incrementor-button: #966909;
     --order-button: #DAD735;
     --order-button-hover: #A0DB41;
-    --user-control-background: #d2b2b2;
+    --user-control-background: #d4a90d;
     --user-control-disabled: #AC9980;
     --user-control-text: #ccc;
+}
+
+.adjuster-wrapper {
+    margin: 5px;
+}
+
+.current-price-wrapper {
+    margin: auto;
+    width: 15%;
 }
 
 .ingredients-display {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
+    margin: auto;
+    width: auto;
 }
 .label {
     padding: 10px;
     font-weight: bold;
+    text-align: center;
     width: 80px;
 }
 .order-button {
     background-color: var(--order-button);
     border: 1px solid var(--incrementor-button);
-    box-shadow: 2px 2px 2px var(--incrementor-button);
+    box-shadow: 10px 5px 5px var(--incrementor-button);
     cursor: pointer;
     color: var(--incrementor-button);
     font-family: inherit;
     font-size: 1.2em;
-    outline: none;
-    padding: 15px 30px;
 }
 .order-button:hover, .order-button:active {
     background-color: var(--order-button-hover);
@@ -39,9 +49,14 @@
     cursor: not-allowed;
     border: 1px solid var(--user-control-text);;
     color: #888888;
+
 }
 .order-button:not(:disabled) {
     animation: enable 0.3s linear;
+}
+.order-button-wrapper {
+    margin: auto;
+    width: 15%;
 }
 @keyframes enable {
     0% {
@@ -54,15 +69,24 @@
         transform: scale(1);
     }
 }
+.price {
+    font-size: 35px;
+    text-align: center;
+}
+
+.price-label {
+    text-align: center;
+}
+
 .user-control {
     align-items: center;
     background-color: var(--user-control-background);
     border-radius: 7px;
-    box-shadow: inset 4px 4px #c8aeae;
     display: flex;
+    height: 300px;
     justify-content: space-between;
     margin: 5px 5px 5px 5px;
-    padding: 5px;
+    padding: 45px;
 }
 .user-control button {
     border: 1px solid #AA6817;
@@ -88,12 +112,17 @@
 }
 .user-control .less {
     background-color: var(--decrementor-button);
+    border-radius: 0 0 10px 10px;
+    box-shadow: 10px 5px 5px var(--incrementor-button);
     color: white;
+    margin: auto;
 }
 .user-control .more {
     background-color: #8F5E1E;
-    box-shadow: inset 2px 2px #9d6625;
+    border-radius: 10px 10px 0 0;
+    box-shadow: 10px 5px 5px var(--incrementor-button);
     color: white;
+    margin: auto;
 }
 .user-control .less:hover, .user-control .less:active {
     background-color: #DAA972;
@@ -118,8 +147,12 @@
         color: black;
         width: 200px;
     }
+    .order-button-wrapper {
+        margin: 20px;
+    }
     .user-control {
         display: flex;
         flex-direction: column;
+        height: 400px;
     }
 }
