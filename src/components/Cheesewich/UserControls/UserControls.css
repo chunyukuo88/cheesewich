@@ -8,14 +8,21 @@
     --user-control-text: #ccc;
 }
 
+.current-price, .order-button-wrapper {
+    margin: auto;
+    width: 15%;
+}
+
 .ingredients-display {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
+    margin: auto
 }
 .label {
     padding: 10px;
     font-weight: bold;
+    text-align: center;
     width: 80px;
 }
 .order-button {
@@ -26,8 +33,6 @@
     color: var(--incrementor-button);
     font-family: inherit;
     font-size: 1.2em;
-    outline: none;
-    padding: 15px 30px;
 }
 .order-button:hover, .order-button:active {
     background-color: var(--order-button-hover);
@@ -88,12 +93,16 @@
 }
 .user-control .less {
     background-color: var(--decrementor-button);
+    border-radius: 0 0 10px 10px;
     color: white;
+    margin: auto;
 }
 .user-control .more {
     background-color: #8F5E1E;
+    border-radius: 10px 10px 0 0;
     box-shadow: inset 2px 2px #9d6625;
     color: white;
+    margin: auto;
 }
 .user-control .less:hover, .user-control .less:active {
     background-color: #DAA972;
