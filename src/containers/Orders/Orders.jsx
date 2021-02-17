@@ -22,18 +22,15 @@ const Orders = () => {
     return <Content {...contentProps}/>;
 };
 
-const Content = (props) => props.loading
-    ? <Spinner/>
-    : buildOrdersContent(props.orders);
+const Content = (props) => (props.loading)
+        ? <Spinner/>
+        : <OrdersContent {...props.orders}/>;
 
-const buildOrdersContent = ordersObject => (
-    ordersObject.map(({ingredients, price}, key) => (
-        <Order key={key}
-               ingredients={ingredients}
-               price={price.toFixed(2)}/>
-    ))
-);
-
-
+const OrdersContent = orders => (orders.length > 0)
+    && orders.map(({ingredients, price}, key) => (
+         <Order key={key}
+                ingredients={ingredients}
+                price={price.toFixed(2)}/>
+));
 
 export default withErrorHandler(Orders, axios);

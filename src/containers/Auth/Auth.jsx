@@ -25,7 +25,6 @@ const Auth = () => {
         };
     }, [cheesewichIsBeingBuilt, authRedirectPath]);
 
-
     const submitHandler = (event) => {
         event.preventDefault();
         const email = controls.email.value;
