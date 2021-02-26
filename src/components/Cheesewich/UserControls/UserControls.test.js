@@ -26,20 +26,7 @@ describe('UserControls.jsx', ()=>{
     });
     describe('WHEN: Given an addIngredient function and an array of ingredients,', ()=>{
        test('THEN: It can add that ingredient.', ()=>{
-           const props = {
-               price: 123,
-               disabled: {
-                   cheese: true,
-                   crunchybits: true,
-                   marinara: true,
-                   olives: true,
-               },
-               addIngredient: jest.fn(),
-               removeIngredient: jest.fn(),
-           };
-           const wrapper = shallow(<UserControls {...props}/>);
-           const addCheese = findByTestAttr(wrapper, 'add-Cheese');
-           expect(addCheese.length).toBe(1);
+            //TODO: Simulate click, then assert that the amount of an ingredient has increased.
        });
     });
     describe('WHEN: The user is authenticated,', ()=>{
