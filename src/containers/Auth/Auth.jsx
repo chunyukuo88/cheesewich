@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Button from '../../components/UI/Button/Button.jsx';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import Input from '../../components/UI/Input/Input.jsx';
@@ -6,7 +6,6 @@ import * as authActions from '../../store/actions/auth';
 import { Redirect } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import classes from './Auth.css';
-import { setAuthRedirectPath } from '../../store/actions/auth';
 import { updateObject, checkValidity } from '../../utils/utils';
 
 const Auth = () => {
@@ -19,12 +18,11 @@ const Auth = () => {
     const cheesewichIsBeingBuilt = useSelector(state => state.builder.cheesewichIsBeingBuilt);
     const authRedirectPath = useSelector(state => state.auth.authRedirectPath);
 
-    React.useEffect(()=>{
+    useEffect(()=>{
         if (!cheesewichIsBeingBuilt && authRedirectPath !== '/') {
-            dispatch(setAuthRedirectPath('/'));
+            dispatch(authActions.setAuthRedirectPath('/'));
         };
     }, [cheesewichIsBeingBuilt, authRedirectPath]);
-
 
     const submitHandler = (event) => {
         event.preventDefault();
@@ -34,11 +32,7 @@ const Auth = () => {
     };
 
     const switchAuthMode = () => {
-        if (isSignup) {
-            setIsSignup(false);
-        } else {
-            setIsSignup(true);
-        };
+        (isSignup ? setIsSignup(false) : setIsSignup(true));
     };
 
     const inputChangedHandler = (event, controlName) => {

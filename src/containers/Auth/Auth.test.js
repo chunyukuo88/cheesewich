@@ -35,8 +35,8 @@ beforeEach(()=>{
 });
 
 describe('Auth()', ()=>{
-    test('The component renders without crashing', ()=>{
-       expect(wrapper.length).toEqual(1);
+    test('The component, which is wrapped in a Root which contains a provider, renders without crashing', ()=>{
+       expect(wrapper.children().length).toEqual(1);
     });
     test('The form contains two inputs and a button', ()=>{
        const form = findByTestAttr(wrapper, 'form');

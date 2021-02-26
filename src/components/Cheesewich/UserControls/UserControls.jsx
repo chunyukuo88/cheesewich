@@ -17,25 +17,27 @@ const UserControls = (props) => {
                 <div className={classes['price']}>{props.price.toFixed(2)}</div>
             </div>
             <div className={classes['ingredients-display']}>
-                {getIngredientsDisplay(props, ingredients)}
+                <IngredientsDisplay {...props}/>
             </div>
             <div className={classes['order-button-wrapper']}>
-                <button className={classes['order-button']} data-test='user-controls-button' disabled={!props.purchasable} onClick={props.ordered}>{getButtonLabel(props.isAuth)}</button>
+                <button className={classes['order-button']}
+                        data-test='user-controls-button'
+                        disabled={!props.purchasable}
+                        onClick={props.ordered}>
+                  <ButtonLabel {...props} />
+                </button>
             </div>
         </div>
     )
 };
 
-const getButtonLabel = (isAuth) => (isAuth)
-    ? 'Place order!'
-    : 'Sign Up to Order';
+const ButtonLabel = ({ isAuth }) => (isAuth) ? 'Place order!' : 'Sign Up to Order';
 
-const getIngredientsDisplay = (props, ingredientsArray) => {
-    return ingredientsArray.map(ingredient => {
+const IngredientsDisplay = (props) => {
+    return ingredients.map(ingredient => {
         return (
-            <div className={classes['adjuster-wrapper']}>
-                <QuantityAdjuster key={ingredient.label}
-                                  className={classes[`adjuster-${ingredient.label}`]}
+            <div key={ingredient.label} className={classes['adjuster-wrapper']}>
+                <QuantityAdjuster className={classes[`adjuster-${ingredient.label}`]}
                                   label={ingredient.label}
                                   data-test="quantity-adjuster"
                                   added={()=> props.addIngredient(ingredient.type)}
