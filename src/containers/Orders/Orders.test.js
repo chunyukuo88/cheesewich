@@ -9,7 +9,7 @@ import cheesewichBuilderReducer from '../../store/reducers/cheesewichBuilder';
 import orderReducer from '../../store/reducers/order';
 import authReducer from '../../store/reducers/auth';
 import Root from '../../Root';
-import Spinner from "../../components/UI/Spinner/Spinner";
+import Spinner from '../../components/UI/Spinner/Spinner';
 import Orders from '../Orders/Orders.jsx';
 
 Enzyme.configure({ adapter: new EnzymeAdapter()});

@@ -6,7 +6,6 @@ import * as authActions from '../../store/actions/auth';
 import { Redirect } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import classes from './Auth.css';
-import { setAuthRedirectPath } from '../../store/actions/auth';
 import { updateObject, checkValidity } from '../../utils/utils';
 
 const Auth = () => {
@@ -21,7 +20,7 @@ const Auth = () => {
 
     useEffect(()=>{
         if (!cheesewichIsBeingBuilt && authRedirectPath !== '/') {
-            dispatch(setAuthRedirectPath('/'));
+            dispatch(authActions.setAuthRedirectPath('/'));
         };
     }, [cheesewichIsBeingBuilt, authRedirectPath]);
 
