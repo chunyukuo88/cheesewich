@@ -1,8 +1,8 @@
 import { put, delay, call } from 'redux-saga/effects';
 import { authenticateUserSaga, checkAuthTimeoutSaga, logoutSaga } from '../auth';
 import * as actions from '../../actions/auth';
-import axios from "axios";
-import urls from "../../../urls";
+import axios from 'axios';
+import urls from '../../../urls';
 
 describe('auth.js saga module', ()=>{
     describe('authenticateUserSaga()', ()=>{

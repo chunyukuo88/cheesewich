@@ -4,21 +4,20 @@ import urls from '../../urls';
 import * as actions from '../actions/auth';
 
 export function* authCheckStateSaga(){
-    //TODO: Pass localStorage in the way it's done in logoutSaga
-        const token = yield localStorage.getItem('token');
-        if (!token) {
+    const token = yield localStorage.getItem('token');
+    if (!token) {
+        yield put(actions.logout());
+    } else {
+        const expirationDate = yield new Date(localStorage.getItem('expirationDate'));
+        if (expirationDate <= new Date()) {
             yield put(actions.logout());
         } else {
-            const expirationDate = yield new Date(localStorage.getItem('expirationDate'));
-            if (expirationDate <= new Date()) {
-                yield put(actions.logout());
-            } else {
-                const userId = yield localStorage.getItem('userId');
-                yield put(actions.authSuccess(token, userId));
-                yield put(actions.checkAuthTimeout((expirationDate.getTime() - new Date().getTime()) / 1000 ));
-            };
+            const userId = yield localStorage.getItem('userId');
+            yield put(actions.authSuccess(token, userId));
+            yield put(actions.checkAuthTimeout((expirationDate.getTime() - new Date().getTime()) / 1000 ));
         };
-        yield token;
+    };
+    yield token;
 }
 
 export function* authenticateUserSaga(action) {
@@ -43,7 +42,7 @@ export function* checkAuthTimeoutSaga(action, storage) {
     yield put(actions.logout(storage));
 };
 
-export function* logoutSaga(action) {
+export function* logoutSaga() {
     yield localStorage.removeItem('token');
     yield localStorage.removeItem('expirationDate');
     yield localStorage.removeItem('userId');

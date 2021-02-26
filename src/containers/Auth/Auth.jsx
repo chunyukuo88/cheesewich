@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Button from '../../components/UI/Button/Button.jsx';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import Input from '../../components/UI/Input/Input.jsx';
@@ -19,7 +19,7 @@ const Auth = () => {
     const cheesewichIsBeingBuilt = useSelector(state => state.builder.cheesewichIsBeingBuilt);
     const authRedirectPath = useSelector(state => state.auth.authRedirectPath);
 
-    React.useEffect(()=>{
+    useEffect(()=>{
         if (!cheesewichIsBeingBuilt && authRedirectPath !== '/') {
             dispatch(setAuthRedirectPath('/'));
         };
@@ -33,11 +33,7 @@ const Auth = () => {
     };
 
     const switchAuthMode = () => {
-        if (isSignup) {
-            setIsSignup(false);
-        } else {
-            setIsSignup(true);
-        };
+        (isSignup ? setIsSignup(false) : setIsSignup(true));
     };
 
     const inputChangedHandler = (event, controlName) => {
