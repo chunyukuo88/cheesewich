@@ -43,10 +43,9 @@ export const checkAuthTimeout = (expirationTime) => {
     };
 };
 
-export const logout = (localStorage) => {
+export const logout = () => {
     return {
         type: AUTH_ACTIONS.AUTH_INITIATE_LOGOUT,
-        storage: localStorage,
     };
 };
 

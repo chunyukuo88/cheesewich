@@ -6,7 +6,14 @@ import { findByTestAttr } from '../../../utils/testUtils';
 
 Enzyme.configure({ adapter: new EnzymeAdapter()});
 
-
+const props = {
+    purchasable: true,
+    price: 1,
+    isAuth: false,
+    disabled: false,
+    addIngredient: jest.fn(),
+    removeIngredient: jest.fn(),
+};
 
 describe('UserControls.jsx', ()=>{
     describe('UserControls()', ()=>{
@@ -26,19 +33,14 @@ describe('UserControls.jsx', ()=>{
     });
     describe('WHEN: Given an addIngredient function and an array of ingredients,', ()=>{
        test('THEN: It can add that ingredient.', ()=>{
-            //TODO: Simulate click, then assert that the amount of an ingredient has increased.
+            //TODO:
+           // Simulate click, then assert that the amount of
+           // an ingredient has increased.
        });
     });
     describe('WHEN: The user is authenticated,', ()=>{
         test('THEN: The button label says "Place order!",', ()=>{
-            const props = {
-                purchasable: true,
-                price: 1,
-                isAuth: true,
-                disabled: false,
-                addIngredient: jest.fn(),
-                removeIngredient: jest.fn(),
-            };
+            props.isAuth = true;
             const wrapper = render(<UserControls {...props}/>);
             const result = findByTestAttr(wrapper, 'user-controls-button').text();
             const expectedResult = 'Place order!';
@@ -47,14 +49,7 @@ describe('UserControls.jsx', ()=>{
     });
     describe('WHEN: The user is NOT authenticated,', ()=>{
         test('THEN: The button label says "Sign Up to Order",', ()=>{
-            const props = {
-                purchasable: true,
-                price: 1,
-                isAuth: false,
-                disabled: false,
-                addIngredient: jest.fn(),
-                removeIngredient: jest.fn(),
-            };
+            props.isAuth = false;
             const wrapper = render(<UserControls {...props}/>);
             const result = findByTestAttr(wrapper, 'user-controls-button').text();
             const expectedResult = 'Sign Up to Order';
