@@ -25,7 +25,7 @@ describe('reducer()', ()=>{
                 token: null,
                 userId: null,
                 error: null,
-                loading: true,
+                loading: true, //
                 authRedirectPath: '/',
             };
             expect(result).toEqual(expectedResult);
@@ -72,7 +72,6 @@ describe('reducer()', ()=>{
         test('THEN: The state is update accordingly.', ()=>{
             const action = {
                 type: AUTH_ACTIONS.AUTH_LOGOUT,
-                userId: 234,
             };
             const result = reducer(initialState, action);
             const expectedResult = {
