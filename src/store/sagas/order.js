@@ -2,14 +2,12 @@ import axios from '../../axios-orders';
 import { put } from 'redux-saga/effects';
 import * as actions from '../actions/order';
 
-
-
 export function* fetchOrdersSaga(action){
+    const { token, userId } = action;
     yield put(actions.fetchOrdersStart());
-    //The `orderBy` and `equalTo` query parameters are specific to this particular back end:
-    const queryParams = yield `?auth=${action.token}&orderBy="userId"&equalTo="${action.userId}"`;
+    const url = `/orders.json?auth=${token}&orderBy="userId"&equalTo="${userId}"`;
     try{
-        const response = yield axios.get( `/orders.json${queryParams}` );
+        const response = yield axios.get(url);
         const fetchedOrders = yield [];
         for (const key in response.data) {
             fetchedOrders.push({

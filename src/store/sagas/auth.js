@@ -3,6 +3,8 @@ import axios from 'axios';
 import urls from '../../urls';
 import * as actions from '../actions/auth';
 
+const { authSignIn, authSignUp } = urls;
+
 export function* authCheckStateSaga(){
     const token = yield localStorage.getItem('token');
     if (!token) {
@@ -49,7 +51,6 @@ export function* logoutSaga() {
     yield put(actions.logoutDidOccur());
 };
 
-
 const buildAuthData = (email, password) => {
     return {
         email: email,
@@ -58,4 +59,4 @@ const buildAuthData = (email, password) => {
     };
 };
 
-const getAuthUrl = (isSignup) => (isSignup) ? urls.authSignIn : urls.authSignUp;
+const getAuthUrl = (isSignup) => (isSignup) ? authSignIn : authSignUp;
